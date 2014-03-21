@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sinoptic UA</string>
+    <string name="action_refresh">Оновити</string>
+    <string name="dialog_downld_page_msg">Завантаження даних&#8230;</string>
+    <string name="dialog_title_setting">Вибір міста:</string>
+    <string name="setting_title">Налаштування місцезнаходження</string>
+    <string name="apply">Ок</string>
+    <string name="cancel">Вихід</string>
+    <string name="repeat_click_on_back">Натисніть ще раз для виходу.</string>
+    <string name="info_last_select_town">Остан. вибір:</string>
+    <string name="err_incorrect_city_name">некоректний введення!</string>
+    <string name="now_temp_on_street">Зараз на вулиці</string>
+    <string name="no_connections">Немає з\'єднання!</string>
+    <string name="last_update_date">Останне оновлн.</string>
+    <string name="enter_town_name_hint">Введіть назву</string>
+    <string name="cant_get_current_location">Не вдалося отримати ваше поточне місце розташування!</string>
+
+</resources>

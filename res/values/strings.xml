@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Sinoptic UA</string>
+    <string name="action_refresh">Обновить</string>
+    <string name="info">Погода в Краматорске!</string>
+    <string name="dialog_downld_page_msg">Загрузка данных&#8230;</string>
+    <string name="dialog_title_setting">Выбор города:</string>
+    <string name="setting_title">Настройки местоположения</string>
+    <string name="apply">Применить</string>
+    <string name="cancel">Отмена</string>
+    <string name="repeat_click_on_back">Нажмите еще раз для выхода.</string>
+    <string name="info_last_select_town">Последн. выбор:</string>
+    <string name="err_incorrect_city_name">Некорректный ввод!</string>
+    <string name="now_temp_on_street">Сейчас на улице</string>
+    <string name="no_connections">Нет соединения!</string>
+    <string name="last_update_date">Последнее обнвл.</string>
+    <string name="enter_town_name_hint">Введите город</string>
+    <string name="cant_get_current_location">Не удалось получить ваше текущее местоположение!</string>
+
+</resources>
