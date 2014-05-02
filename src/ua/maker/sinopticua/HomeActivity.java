@@ -8,6 +8,7 @@ import java.util.Locale;
 
 import ua.maker.sinopticua.adapters.TownAdapter;
 import ua.maker.sinopticua.adapters.TownAdapter.onClearItemListener;
+import ua.maker.sinopticua.adapters.TownCompliteAdapter;
 import ua.maker.sinopticua.adapters.WeatherAdapter;
 import ua.maker.sinopticua.constants.App;
 import ua.maker.sinopticua.structs.ItemTown;
@@ -42,8 +43,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.AutoCompleteTextView.Validator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -63,9 +64,9 @@ public class HomeActivity extends FragmentActivity{
 	public String URL;
 	public String cityName = "краматорск";
 	
-	private List<String> listCity;
 	private List<ItemTown> listAutoCompliteTown;
-	private ArrayAdapter<String> adapterAutoComplite;
+	private TownCompliteAdapter compliteAdapter;
+	
 	private ArrayList<ItemWeather> listItemsWeather;
 	private WeatherAdapter adapter;
 	private TownAdapter adapterTown;
@@ -82,6 +83,7 @@ public class HomeActivity extends FragmentActivity{
 	private Button btnOkSettingDialog;
 	private boolean isFirst = true;
 	
+	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("D"),
 							 dateFullFirmat = new SimpleDateFormat("dd/MMM/yyyy kk:mm");
 	
@@ -107,8 +109,9 @@ public class HomeActivity extends FragmentActivity{
 		pref = getSharedPreferences(App.PREF_APP, 0);
 		
 		listItemsWeather = new ArrayList<ItemWeather>();
-		listCity = new ArrayList<String>();
 		listAutoCompliteTown = new ArrayList<ItemTown>();
+		
+		compliteAdapter = new TownCompliteAdapter(this, listAutoCompliteTown);
 		adapter = new WeatherAdapter(this, listItemsWeather, Tools.getImageFetcher(HomeActivity.this));
 		lvWeathers.setAdapter(adapter);
 		lvWeathers.setOnItemClickListener(itemWeatherClickListener);
@@ -141,9 +144,13 @@ public class HomeActivity extends FragmentActivity{
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				if(loadTownTask != null){
+					loadTownTask.cancel(true);
+				}
 				dialog.cancel();
-				if(isFirst)
+				if(isFirst){
 					finish();
+				}
 			}
 		});
 		
@@ -156,11 +163,26 @@ public class HomeActivity extends FragmentActivity{
 			cityName = pref.getString(App.PREF_SITY_NAME, "");
 		}
 		
-		adapterAutoComplite = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, listCity);
 		etUrl.addTextChangedListener(textChangeListener);
 		etUrl.setOnItemClickListener(itemComplitListener);
-		etUrl.setAdapter(adapterAutoComplite);
+		etUrl.setAdapter(compliteAdapter);
+		etUrl.setValidator(validatorTown);
 	}
+	
+	private Validator validatorTown = new Validator() {
+		
+		@Override
+		public boolean isValid(CharSequence text) {
+			
+			return false;
+		}
+		
+		@Override
+		public CharSequence fixText(CharSequence invalidText) {
+			
+			return null;
+		}
+	};
 	
 	private OnClickListener clickGetLocationListener = new OnClickListener() {
 		
@@ -341,11 +363,9 @@ public class HomeActivity extends FragmentActivity{
 			super.onPostExecute(result);
 			Log.i(TAG, "LoadTownsTask - onPostExecute()");
 			listAutoCompliteTown = result;
-			adapterAutoComplite.clear();
-			for(int i = 0; i < result.size(); i++){
-				adapterAutoComplite.add(result.get(i).getNameTown()+", "+result.get(i).getDetailLocation());
-			}
-			adapterAutoComplite.notifyDataSetChanged();
+			compliteAdapter.clear();
+			compliteAdapter.addAll(result);
+			compliteAdapter.notifyDataSetChanged();
 		}
 		
 	}

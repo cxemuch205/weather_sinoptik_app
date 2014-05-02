@@ -45,45 +45,47 @@ public final class R {
         public static final int white_cube=0x7f020012;
     }
     public static final class id {
-        public static final int action_refresh=0x7f0a001d;
-        public static final int action_setting=0x7f0a001e;
-        public static final int autoCompleteTextView_city=0x7f0a0012;
+        public static final int action_refresh=0x7f0a001e;
+        public static final int action_setting=0x7f0a001f;
+        public static final int autoCompleteTextView_city=0x7f0a0013;
         public static final int imageView1=0x7f0a0006;
-        public static final int iv_clear=0x7f0a000a;
-        public static final int iv_update=0x7f0a001b;
-        public static final int iv_weather=0x7f0a0010;
-        public static final int ll_start_get_location=0x7f0a0014;
+        public static final int iv_clear=0x7f0a000b;
+        public static final int iv_update=0x7f0a001c;
+        public static final int iv_weather=0x7f0a0011;
+        public static final int ll_start_get_location=0x7f0a0015;
         public static final int ll_werning_wind=0x7f0a0003;
-        public static final int ll_widget=0x7f0a0017;
-        public static final int lv_list_last_towns=0x7f0a0016;
+        public static final int ll_widget=0x7f0a0018;
+        public static final int lv_list_last_towns=0x7f0a0017;
         public static final int lv_weathers=0x7f0a0005;
-        public static final int pb_load_location=0x7f0a0013;
-        public static final int pb_widget=0x7f0a001a;
+        public static final int pb_load_location=0x7f0a0014;
+        public static final int pb_widget=0x7f0a001b;
         public static final int tv_date_full=0x7f0a0007;
-        public static final int tv_day=0x7f0a000b;
+        public static final int tv_day=0x7f0a000c;
         public static final int tv_day_name=0x7f0a0008;
-        public static final int tv_info_last_towns=0x7f0a0015;
-        public static final int tv_info_last_update=0x7f0a001c;
+        public static final int tv_detail_location=0x7f0a000a;
+        public static final int tv_info_last_towns=0x7f0a0016;
+        public static final int tv_info_last_update=0x7f0a001d;
         public static final int tv_last_update=0x7f0a0000;
-        public static final int tv_month=0x7f0a000c;
-        public static final int tv_name_day=0x7f0a000d;
+        public static final int tv_month=0x7f0a000d;
+        public static final int tv_name_day=0x7f0a000e;
         public static final int tv_name_sity=0x7f0a0001;
         public static final int tv_name_town=0x7f0a0009;
-        public static final int tv_name_weather=0x7f0a0011;
+        public static final int tv_name_weather=0x7f0a0012;
         public static final int tv_now_temp=0x7f0a0002;
-        public static final int tv_now_weather=0x7f0a0019;
-        public static final int tv_temp_max=0x7f0a000f;
-        public static final int tv_temp_min=0x7f0a000e;
-        public static final int tv_town_name=0x7f0a0018;
+        public static final int tv_now_weather=0x7f0a001a;
+        public static final int tv_temp_max=0x7f0a0010;
+        public static final int tv_temp_min=0x7f0a000f;
+        public static final int tv_town_name=0x7f0a0019;
         public static final int tv_werning_wind=0x7f0a0004;
     }
     public static final class layout {
         public static final int activity_home=0x7f030000;
         public static final int detail_weather_layout=0x7f030001;
-        public static final int item_town_layout=0x7f030002;
-        public static final int item_weather_layout=0x7f030003;
-        public static final int setting_dialog_layout=0x7f030004;
-        public static final int widget_3x2_layout=0x7f030005;
+        public static final int item_town_complite_layout=0x7f030002;
+        public static final int item_town_layout=0x7f030003;
+        public static final int item_weather_layout=0x7f030004;
+        public static final int setting_dialog_layout=0x7f030005;
+        public static final int widget_3x2_layout=0x7f030006;
     }
     public static final class menu {
         public static final int home=0x7f090000;
