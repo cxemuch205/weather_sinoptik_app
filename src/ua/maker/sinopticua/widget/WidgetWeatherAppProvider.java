@@ -149,7 +149,16 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 		@Override
 		protected WeatherStruct doInBackground(String... urls) {
 			Log.i(TAG, "START TASK - " + Uri.decode(urls[0]));
-			String response = Tools.getWebPage(urls[0]);
+			String response;
+			boolean isGet = false;
+			do {
+				response = Tools.getWebPage(urls[0]);
+				if(response != null){
+					if(response.length() != 0){
+						isGet = true;
+					}
+				}
+			} while (isGet == false);
 			Log.i(TAG, "Response length: " + response.length());
 			DataParser parser = DataParser.getInstance();
 			return parser.parserHTML(response);
@@ -157,40 +166,46 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 
 		@Override
 		protected void onPostExecute(WeatherStruct response) {
-			ItemWeather weather = response.getWeatherMondey();
-			Log.i(TAG, "onPostExecute()");
-			String dateUpdate = dateFormat.format(new Date());
-			pref.edit().putString(App.PREF_LAST_WIDGET_UPDATE, dateUpdate).commit();
-			view.setViewVisibility(R.id.pb_widget, ProgressBar.GONE);
-			view.setViewVisibility(R.id.iv_update, ImageView.VISIBLE);
-			view.setTextViewText(R.id.tv_town_name, Html.fromHtml(response.getTownName()));
-			view.setTextViewText(R.id.tv_info_last_update, dateUpdate);
-			view.setTextViewText(R.id.tv_day, String.valueOf(weather.getDay()));
-			view.setTextViewText(R.id.tv_month, weather.getMonth());
-			view.setTextViewText(R.id.tv_name_day, weather.getDayName());
-			view.setTextViewText(R.id.tv_now_weather, Html.fromHtml(response.getWeatherToday()));
-			view.setTextViewText(R.id.tv_temp_min,
-					Html.fromHtml(weather.getMinTemp()));
-			view.setTextViewText(R.id.tv_temp_max,
-					Html.fromHtml(weather.getMaxTemp()));
-			view.setTextViewText(R.id.tv_name_weather, weather.getWeatherName());
-			String urlImage = weather.getUrlImage();
-			URL imageURL;
-			try {
-				imageURL = new URL(urlImage);
-				new LoadImage().execute(imageURL);
-			} catch (Exception e) {}
-			
-			if (response.getWerningWind()) {
-				view.setViewVisibility(R.id.ll_werning_wind,
-						LinearLayout.VISIBLE);
-				view.setTextViewText(R.id.tv_werning_wind,
-						response.getWindDescription());
-			} else {
-				view.setViewVisibility(R.id.ll_werning_wind, LinearLayout.GONE);
-			}
+			if(response != null){
+				ItemWeather weather = response.getWeatherMondey();
+				Log.i(TAG, "onPostExecute()");
+				String dateUpdate = dateFormat.format(new Date());
+				pref.edit().putString(App.PREF_LAST_WIDGET_UPDATE, dateUpdate).commit();
+				view.setViewVisibility(R.id.pb_widget, ProgressBar.GONE);
+				view.setViewVisibility(R.id.iv_update, ImageView.VISIBLE);
+				view.setTextViewText(R.id.tv_town_name, Html.fromHtml(response.getTownName()));
+				view.setTextViewText(R.id.tv_info_last_update, dateUpdate);
+				view.setTextViewText(R.id.tv_day, String.valueOf(weather.getDay()));
+				view.setTextViewText(R.id.tv_month, weather.getMonth());
+				view.setTextViewText(R.id.tv_name_day, weather.getDayName());
+				view.setTextViewText(R.id.tv_now_weather, Html.fromHtml(response.getWeatherToday()));
+				view.setTextViewText(R.id.tv_temp_min,
+						Html.fromHtml(weather.getMinTemp()));
+				view.setTextViewText(R.id.tv_temp_max,
+						Html.fromHtml(weather.getMaxTemp()));
+				view.setTextViewText(R.id.tv_name_weather, weather.getWeatherName());
+				String urlImage = weather.getUrlImage();
+				URL imageURL;
+				try {
+					imageURL = new URL(urlImage);
+					new LoadImage().execute(imageURL);
+				} catch (Exception e) {}
+				
+				if (response.getWerningWind()) {
+					view.setViewVisibility(R.id.ll_werning_wind,
+							LinearLayout.VISIBLE);
+					view.setTextViewText(R.id.tv_werning_wind,
+							response.getWindDescription());
+				} else {
+					view.setViewVisibility(R.id.ll_werning_wind, LinearLayout.GONE);
+				}
 
-			appWidgetManager.updateAppWidget(thisWidget, view);
+				appWidgetManager.updateAppWidget(thisWidget, view);
+			} else {
+				view.setViewVisibility(R.id.pb_widget, ProgressBar.GONE);
+				view.setViewVisibility(R.id.iv_update, ImageView.VISIBLE);
+				appWidgetManager.updateAppWidget(thisWidget, view);
+			}
 		}
 	}
 	

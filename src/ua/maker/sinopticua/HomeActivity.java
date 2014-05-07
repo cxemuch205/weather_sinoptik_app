@@ -1,5 +1,6 @@
 package ua.maker.sinopticua;
 
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +33,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.AsyncTask.Status;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.Html;
@@ -44,7 +46,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
-import android.widget.AutoCompleteTextView.Validator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -65,9 +66,11 @@ public class HomeActivity extends FragmentActivity{
 	public String cityName = "краматорск";
 	
 	private List<ItemTown> listAutoCompliteTown;
+	private WeakReference<LoadTownsTask> asyncTaskLoadTownWeakRef;
 	private TownCompliteAdapter compliteAdapter;
 	
 	private ArrayList<ItemWeather> listItemsWeather;
+	private WeatherStruct currentWeather;
 	private WeatherAdapter adapter;
 	private TownAdapter adapterTown;
 	private List<ItemTown> listTown;
@@ -166,23 +169,9 @@ public class HomeActivity extends FragmentActivity{
 		etUrl.addTextChangedListener(textChangeListener);
 		etUrl.setOnItemClickListener(itemComplitListener);
 		etUrl.setAdapter(compliteAdapter);
-		etUrl.setValidator(validatorTown);
+		
+		Log.i(TAG, "isTaskPendingOrRunning: " + isTaskPendingOrRunning());
 	}
-	
-	private Validator validatorTown = new Validator() {
-		
-		@Override
-		public boolean isValid(CharSequence text) {
-			
-			return false;
-		}
-		
-		@Override
-		public CharSequence fixText(CharSequence invalidText) {
-			
-			return null;
-		}
-	};
 	
 	private OnClickListener clickGetLocationListener = new OnClickListener() {
 		
@@ -289,11 +278,11 @@ public class HomeActivity extends FragmentActivity{
 		if(listItemsWeather.size() > 0){
 			outState.putParcelableArrayList(App.SAVE_LIST_WEATHER, listItemsWeather);
 			outState.putString(App.SAVE_NOW_WEATHER, tvNow.getText().toString());
-			outState.putString(App.SAVE_CITY_NAME, tvTown.getText().toString());
+			outState.putString(App.SAVE_CITY_NAME, currentWeather.getTownName());
 			if(llWerningWind.getVisibility() == LinearLayout.VISIBLE)
 				outState.putString(App.SAVE_WERNING_WIND, tvWind.getText().toString());
 		}
-		Log.i(TAG, "onSaveInstanceState()");
+		Log.i(TAG, "onSaveInstanceState()"); 
 	}
 	
 	@Override
@@ -317,21 +306,28 @@ public class HomeActivity extends FragmentActivity{
 		Log.i(TAG, "onRestoreInstanceState()");
 	}
 	
-	private void updateListAuto(String nameTown) {
-		cityName = nameTown;
-		if(loadTownTask != null){
-			loadTownTask.cancel(false);
-		}
-		loadTownTask = new LoadTownsTask();
-		loadTownTask.execute(new String[]{cityName});
+	private boolean isTaskPendingOrRunning(){
+		return this.asyncTaskLoadTownWeakRef != null &&
+				this.asyncTaskLoadTownWeakRef.get() != null &&
+				!this.asyncTaskLoadTownWeakRef.get().getStatus().equals(Status.FINISHED);
 	}
 	
-	class LoadTownsTask extends AsyncTask<String, Integer, List<ItemTown>>{
+	private void updateListAuto(String nameTown) {
+		Log.i(TAG, "isTaskPendingOrRunning: " + isTaskPendingOrRunning());
+		cityName = nameTown;
+		if(!isTaskPendingOrRunning()){
+			LoadTownsTask townLoadTask = new LoadTownsTask(this);
+			asyncTaskLoadTownWeakRef = new WeakReference<HomeActivity.LoadTownsTask>(townLoadTask);
+			townLoadTask.execute(cityName);
+		}
+	}
+	
+	static class LoadTownsTask extends AsyncTask<String, Integer, List<ItemTown>>{
 		
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			
+		private WeakReference<HomeActivity> activityWeakRef;
+		
+		public LoadTownsTask(HomeActivity activity){
+			this.activityWeakRef = new WeakReference<HomeActivity>(activity);
 		}
 
 		@Override
@@ -361,13 +357,14 @@ public class HomeActivity extends FragmentActivity{
 		@Override
 		protected void onPostExecute(List<ItemTown> result) {
 			super.onPostExecute(result);
-			Log.i(TAG, "LoadTownsTask - onPostExecute()");
-			listAutoCompliteTown = result;
-			compliteAdapter.clear();
-			compliteAdapter.addAll(result);
-			compliteAdapter.notifyDataSetChanged();
-		}
-		
+			if(this.activityWeakRef.get() != null){
+				Log.i(TAG, "LoadTownsTask - onPostExecute()");
+				activityWeakRef.get().listAutoCompliteTown = result;
+				activityWeakRef.get().compliteAdapter.clear();
+				activityWeakRef.get().compliteAdapter.addAll(result);
+				activityWeakRef.get().compliteAdapter.notifyDataSetChanged();
+			}
+		}		
 	}
 	
 	private onClearItemListener clearItemListener = new onClearItemListener() {
@@ -582,6 +579,7 @@ public class HomeActivity extends FragmentActivity{
 	
 	public void setInfoWeather(WeatherStruct info){
 		if(Tools.isCorrectDataWeather(info)){
+			currentWeather = info;
 			if(info.getWeatherMondey().getDateFull().length() > 0){
 				tvLastDateUpdate.setText(getString(R.string.last_update_date)+" "+info.getWeatherMondey().getDateFull());
 			} else {
