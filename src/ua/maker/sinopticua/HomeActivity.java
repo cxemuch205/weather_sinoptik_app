@@ -21,7 +21,6 @@ import ua.maker.sinopticua.utils.Tools;
 import ua.maker.sinopticua.utils.UserDB;
 import ua.maker.sinopticua.utils.DataParser;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -31,9 +30,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
+import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.os.AsyncTask.Status;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.Html;
@@ -54,7 +54,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("DefaultLocale")
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class HomeActivity extends FragmentActivity{
 
 	private TextView tvNow, tvTown, tvWind, tvLastSelectInfo, tvLastDateUpdate;
@@ -68,6 +67,7 @@ public class HomeActivity extends FragmentActivity{
 	private List<ItemTown> listAutoCompliteTown;
 	private WeakReference<LoadTownsTask> asyncTaskLoadTownWeakRef;
 	private TownCompliteAdapter compliteAdapter;
+	private WeakReference<HttpTask> asyncTaskLoadWeatherData;
 	
 	private ArrayList<ItemWeather> listItemsWeather;
 	private WeatherStruct currentWeather;
@@ -77,7 +77,6 @@ public class HomeActivity extends FragmentActivity{
 	private UserDB db;
 	
 	private SharedPreferences pref;
-	private HttpTask task;
 	private LoadTownsTask loadTownTask;
 	private ProgressDialog pd;
 	private ProgressBar pbLoadLocation;
@@ -93,10 +92,10 @@ public class HomeActivity extends FragmentActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.action_white_drawable));
-		getActionBar().setIcon(R.drawable.sinoptic_logo);
-		getActionBar().setTitle("");
 		setContentView(R.layout.activity_home);
+		if(VERSION.SDK_INT >= 11){
+			initActionBar();
+		}
 		Log.i(TAG, "onCreate()");
 		if(Locale.getDefault().getLanguage().equals(App.LANG_UA)){
 			URL = App.DEFAULT_URL_UA;
@@ -158,6 +157,7 @@ public class HomeActivity extends FragmentActivity{
 		});
 		
 		settingDialog = settingDialogBuilder.create();
+		settingDialog.setCanceledOnTouchOutside(false);
 		if(pref.contains(App.PREF_SITY_URL)){
 			URL = pref.getString(App.PREF_SITY_URL, URL);
 		}
@@ -170,9 +170,19 @@ public class HomeActivity extends FragmentActivity{
 		etUrl.setOnItemClickListener(itemComplitListener);
 		etUrl.setAdapter(compliteAdapter);
 		
+		pd = new ProgressDialog(HomeActivity.this);
+        pd.setMessage(getString(R.string.dialog_downld_page_msg));
+		
 		Log.i(TAG, "isTaskPendingOrRunning: " + isTaskPendingOrRunning());
 	}
 	
+	@SuppressLint("NewApi")
+	private void initActionBar() {
+		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.action_white_drawable));
+		getActionBar().setIcon(R.drawable.sinoptic_logo);
+		getActionBar().setTitle("");
+	}
+
 	private OnClickListener clickGetLocationListener = new OnClickListener() {
 		
 		@Override
@@ -229,7 +239,7 @@ public class HomeActivity extends FragmentActivity{
 			super.onPostExecute(result);
 			pbLoadLocation.setVisibility(ProgressBar.GONE);
 			llGetLocation.setVisibility(LinearLayout.VISIBLE);
-			etUrl.setText(String.valueOf(result.getNameTown()));
+			etUrl.setText(result.getNameTown());
 			cityName = result.getNameTown().substring(0, 3);
 			updateListAuto(cityName);
 			etUrl.setSelection(etUrl.getText().toString().length()-2, etUrl.getText().toString().length());
@@ -288,19 +298,25 @@ public class HomeActivity extends FragmentActivity{
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {		
 		super.onRestoreInstanceState(savedInstanceState);
-		if(!savedInstanceState.isEmpty()){
-			listItemsWeather = savedInstanceState.getParcelableArrayList(App.SAVE_LIST_WEATHER);
-			if(adapter.isEmpty()){
-				adapter.addAll(listItemsWeather);
-				adapter.notifyDataSetChanged();
-			}
-			tvNow.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_NOW_WEATHER)));
-			tvTown.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_CITY_NAME)));
-			if(savedInstanceState.containsKey(App.SAVE_WERNING_WIND)){
-				llWerningWind.setVisibility(LinearLayout.VISIBLE);
-				tvWind.setText(savedInstanceState.getString(App.SAVE_WERNING_WIND));
-			}else{
-				llWerningWind.setVisibility(LinearLayout.GONE);
+		if(!savedInstanceState.isEmpty() & !isLoadWeatherPendingOrRunning()){
+			ArrayList<ItemWeather> restore = savedInstanceState.getParcelableArrayList(App.SAVE_LIST_WEATHER);
+			if(restore != null){
+				listItemsWeather.clear();
+				for(ItemWeather item : restore){
+					listItemsWeather.add(item);
+				}
+				if(adapter.isEmpty()){
+					adapter.addAll(listItemsWeather);
+					adapter.notifyDataSetChanged();
+				}
+				tvNow.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_NOW_WEATHER)));
+				tvTown.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_CITY_NAME)));
+				if(savedInstanceState.containsKey(App.SAVE_WERNING_WIND)){
+					llWerningWind.setVisibility(LinearLayout.VISIBLE);
+					tvWind.setText(savedInstanceState.getString(App.SAVE_WERNING_WIND));
+				}else{
+					llWerningWind.setVisibility(LinearLayout.GONE);
+				}
 			}
 		}
 		Log.i(TAG, "onRestoreInstanceState()");
@@ -312,14 +328,18 @@ public class HomeActivity extends FragmentActivity{
 				!this.asyncTaskLoadTownWeakRef.get().getStatus().equals(Status.FINISHED);
 	}
 	
+	private boolean isLoadWeatherPendingOrRunning(){
+		return this.asyncTaskLoadWeatherData != null &&
+				this.asyncTaskLoadWeatherData.get() != null &&
+				!this.asyncTaskLoadWeatherData.get().getStatus().equals(Status.FINISHED);
+	}
+	
 	private void updateListAuto(String nameTown) {
 		Log.i(TAG, "isTaskPendingOrRunning: " + isTaskPendingOrRunning());
 		cityName = nameTown;
-		if(!isTaskPendingOrRunning()){
-			LoadTownsTask townLoadTask = new LoadTownsTask(this);
-			asyncTaskLoadTownWeakRef = new WeakReference<HomeActivity.LoadTownsTask>(townLoadTask);
-			townLoadTask.execute(cityName);
-		}
+		LoadTownsTask townLoadTask = new LoadTownsTask(this);
+		asyncTaskLoadTownWeakRef = new WeakReference<HomeActivity.LoadTownsTask>(townLoadTask);
+		townLoadTask.execute(cityName);
 	}
 	
 	static class LoadTownsTask extends AsyncTask<String, Integer, List<ItemTown>>{
@@ -347,8 +367,8 @@ public class HomeActivity extends FragmentActivity{
 			Log.i(TAG, "URL request for city list: " + builderRequest.build().toString());
 			String response = Tools.getWebPage(builderRequest.build().toString());
 			
-			if(BuildConfig.DEBUG)
-				Tools.logToFile(response, "log_load_town");
+			//if(BuildConfig.DEBUG)
+			//	Tools.logToFile(response, "log_load_town");
 			
 			DataParser parser = DataParser.getInstance();
 			return parser.parserTowns(response);
@@ -419,8 +439,14 @@ public class HomeActivity extends FragmentActivity{
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
 			if(count > 0 & settingDialog.isShowing()){
-				cityName = etUrl.getText().toString();
-				updateListAuto(cityName);
+				new Handler().postDelayed(new Runnable() {
+					
+					@Override
+					public void run() {
+						cityName = etUrl.getText().toString();
+						updateListAuto(cityName);
+					}
+				}, 100);
 			}
 			if(btnOkSettingDialog == null){
 				btnOkSettingDialog = settingDialog.getButton(DialogInterface.BUTTON_POSITIVE);
@@ -444,7 +470,7 @@ public class HomeActivity extends FragmentActivity{
 
 		@Override
 		public void onClick(DialogInterface dialog, int index) {
-			if(etUrl.length() > 0){
+			if(etUrl.getText().toString().length() > 0){
 				if(checkConnection(HomeActivity.this))
 				{
 					Tools.hideKeyboard(getParent());
@@ -462,7 +488,7 @@ public class HomeActivity extends FragmentActivity{
 						urlBuild.authority(App.SITE_AUTHORITY_RU);
 					}
 					Log.i(TAG, "GET URL: "+urlBuild.build().toString());
-					String newUrl = urlBuild.build().toString();//"http://sinoptik.ua/"+Uri.encode("погода-")+Uri.encode(text);
+					String newUrl = urlBuild.build().toString();
 					if(!URL.equals(newUrl)){
 						URL = newUrl;
 						refreshWeather(URL);
@@ -493,20 +519,11 @@ public class HomeActivity extends FragmentActivity{
 			return false;
 		}
 	}
-	
-	@Override
-	public Object onRetainCustomNonConfigurationInstance() {
-		if(task !=null)
-			task.unlink();
-		return task;
-	}
 
 	private void refreshWeather(String url){
-		Log.d(TAG, "refreshWeather");
-		task = (HttpTask) getLastCustomNonConfigurationInstance();
-		if(task == null){
-			task = new HttpTask();
-			task.link(HomeActivity.this);
+		if(!isLoadWeatherPendingOrRunning()){
+			HttpTask task = new HttpTask(HomeActivity.this);
+			asyncTaskLoadWeatherData = new WeakReference<HomeActivity.HttpTask>(task);
 			task.execute(url);
 		}
 	}
@@ -523,26 +540,15 @@ public class HomeActivity extends FragmentActivity{
 
 	static class HttpTask extends AsyncTask<String, Integer, WeatherStruct> {
 		
-		HomeActivity activity;
+		private WeakReference<HomeActivity> activityWeakRef;
 		
-		public void link(HomeActivity act){
-			activity = act;
-		}
-		
-		public void unlink(){
-			activity = null;
-		}
-
-	    @Override
-	    protected void onPreExecute() {
-	        super.onPreExecute();
-	        activity.pd = new ProgressDialog(activity);
-	        activity.pd.setMessage(activity.getString(R.string.dialog_downld_page_msg));
-	        activity.pd.show();
-	        if(activity.etUrl.isShown()){
-	        	activity.etUrl.dismissDropDown();
+		public HttpTask(HomeActivity act){
+			activityWeakRef = new WeakReference<HomeActivity>(act);
+			activityWeakRef.get().pd.show();
+	        if(activityWeakRef.get().etUrl.isShown()){
+	        	activityWeakRef.get().etUrl.dismissDropDown();
 	        }
-	    }
+		}
 
 	    @Override
 	    protected WeatherStruct doInBackground(String... urls) {
@@ -556,25 +562,21 @@ public class HomeActivity extends FragmentActivity{
 
 	    @Override
 	    protected void onPostExecute(WeatherStruct response) {
-	        try {
-	        	activity.pref.edit().putString(App.PREF_LAST_DATE_UPDATE_FULL,
-	        			activity.dateFullFirmat.format(new Date())).commit();
-	        	if(activity.pd != null) activity.pd.dismiss();
-	        	activity.pref.edit().putString(App.PREF_SITY_URL, activity.URL).commit();
-	        	activity.pref.edit().putString(App.PREF_SITY_NAME, activity.cityName).commit();
-	        	activity.setInfoWeather(response);
-	        	if(activity.isFirst){
-	        		activity.pref.edit().putBoolean(App.PREF_is_FIRST_START, false).commit();
-	        		activity.isFirst = false;
-	        	}
-			} catch (Exception e) {}
+	    	if(activityWeakRef.get() != null){
+	    		try {
+		        	activityWeakRef.get().pref.edit().putString(App.PREF_LAST_DATE_UPDATE_FULL,
+		        			activityWeakRef.get().dateFullFirmat.format(new Date())).commit();
+		        	if(activityWeakRef.get().pd != null) activityWeakRef.get().pd.dismiss();
+		        	activityWeakRef.get().pref.edit().putString(App.PREF_SITY_URL, activityWeakRef.get().URL).commit();
+		        	activityWeakRef.get().pref.edit().putString(App.PREF_SITY_NAME, activityWeakRef.get().cityName).commit();
+		        	activityWeakRef.get().setInfoWeather(response);
+		        	if(activityWeakRef.get().isFirst){
+		        		activityWeakRef.get().pref.edit().putBoolean(App.PREF_is_FIRST_START, false).commit();
+		        		activityWeakRef.get().isFirst = false;
+		        	}
+				} catch (Exception e) {}
+	    	}
 	    }
-
-	    @Override
-	    protected void onProgressUpdate(Integer... values) {
-	        super.onProgressUpdate(values);
-	    }
-
 	}
 	
 	public void setInfoWeather(WeatherStruct info){
@@ -627,17 +629,17 @@ public class HomeActivity extends FragmentActivity{
 			{
 				if(listItemsWeather != null & listItemsWeather.size() == 0)
 					refreshWeather(URL);
-			}
-			else
-			{
+			} else {
 				setInfoWeather(db.getCacheWeather());
 				if(!checkConnection(this))
 					Toast.makeText(this, getString(R.string.no_connections), Toast.LENGTH_SHORT).show();
 			}
 		}else{
-			settingDialog.show();
-			btnOkSettingDialog = settingDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-			btnOkSettingDialog.setVisibility(Button.GONE);
+			if(settingDialog != null){
+				settingDialog.show();
+				btnOkSettingDialog = settingDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+				btnOkSettingDialog.setVisibility(Button.GONE);
+			}
 		}
 		Log.i(TAG, "onStart()");
 	}
@@ -646,11 +648,11 @@ public class HomeActivity extends FragmentActivity{
 	protected void onResume() {
 		super.onResume();
 		Log.i(TAG, "onResume()");
-		if(adapter.isEmpty()){
+		/*if(adapter.isEmpty()){
 			Log.i(TAG, "onResume - setAdapter");
 			adapter = new WeatherAdapter(HomeActivity.this, listItemsWeather, Tools.getImageFetcher(HomeActivity.this));
 			lvWeathers.setAdapter(adapter);
-		}
+		}*/
 	}
 
 	@Override

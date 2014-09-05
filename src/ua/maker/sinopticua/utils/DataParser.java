@@ -43,9 +43,15 @@ public class DataParser {
 			
 			// GET NAME SITY
 			if(result.substring(i, (i+36)).equals("<div class=\"cityName cityNameShort\">")){
-				for(int j = (i+46); j < (result.length()-100); j++){
-					if(result.substring(j, (j+14)).equals("</strong></h1>")){
-						String town = result.substring((i+46), (j+9));
+				for(int j = (i+36); j < (result.length()-100); j++){
+					if(result.substring(j, (j+9)).equals("</strong>")){
+						String town = result.substring((i+42), (j+9));
+						for(int rem = 0; rem < town.length(); rem++){
+							if(town.substring(rem, rem+1).contains("П")){
+								town = town.substring(rem, rem+6) + " " + town.substring(rem+11, town.length());
+								break;
+							}
+						}
 						Log.i(TAG, "TOWN || " + town);
 						wRes.setTownName(town);
 						break;
