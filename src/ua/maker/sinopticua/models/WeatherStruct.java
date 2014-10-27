@@ -1,4 +1,4 @@
-package ua.maker.sinopticua.structs;
+package ua.maker.sinopticua.models;
 
 import java.util.ArrayList;
 import java.util.List;

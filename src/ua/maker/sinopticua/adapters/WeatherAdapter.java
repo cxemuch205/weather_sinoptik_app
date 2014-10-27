@@ -3,7 +3,7 @@ package ua.maker.sinopticua.adapters;
 import java.util.List;
 
 import ua.maker.sinopticua.R;
-import ua.maker.sinopticua.structs.ItemWeather;
+import ua.maker.sinopticua.models.ItemWeather;
 import ua.maker.sinopticua.utils.ImageFetcher;
 import android.app.Activity;
 import android.content.Context;
@@ -52,23 +52,25 @@ public class WeatherAdapter extends ArrayAdapter<ItemWeather> {
 		} else {
 			holder = (ViewHolder)view.getTag();
 		}
+
+        view.setBackgroundResource(R.drawable.back_item_weather);
 		
 		ItemWeather item = data.get(position);
 		
-		holder.tvDay.setText(Html.fromHtml(String.valueOf(item.getDay())));
-		holder.tvNameDay.setText(String.valueOf(item.getDayName()));
-		holder.tvMonth.setText(Html.fromHtml(item.getMonth()));
-		holder.tvTempMin.setText(Html.fromHtml(item.getMinTemp()));
-		holder.tvTempMax.setText(Html.fromHtml(item.getMaxTemp()));
-		holder.tvNameWeather.setText(Html.fromHtml(item.getWeatherName()));
-		if(item.isFreeDay()){
+		holder.tvDay.setText(Html.fromHtml(String.valueOf(item.day)));
+		holder.tvNameDay.setText(String.valueOf(item.dayName));
+		holder.tvMonth.setText(Html.fromHtml(item.month));
+		holder.tvTempMin.setText(Html.fromHtml(item.minTemp));
+		holder.tvTempMax.setText(Html.fromHtml(item.maxTemp));
+		holder.tvNameWeather.setText(Html.fromHtml(item.weatherName));
+		if(item.isFreeDay){
 			holder.tvDay.setTextColor(Color.RED);
 			holder.tvMonth.setTextColor(Color.RED);
 		}else{
 			holder.tvDay.setTextColor(Color.BLACK);
 			holder.tvMonth.setTextColor(Color.BLACK);
 		}
-		String url = item.getUrlImage();
+		String url = item.urlImage;
          
         if((url == null) || (!Patterns.WEB_URL.matcher(url).matches()))
         {

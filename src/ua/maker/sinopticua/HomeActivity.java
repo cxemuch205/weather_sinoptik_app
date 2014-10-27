@@ -12,10 +12,9 @@ import ua.maker.sinopticua.adapters.TownAdapter.onClearItemListener;
 import ua.maker.sinopticua.adapters.TownCompleteAdapter;
 import ua.maker.sinopticua.adapters.WeatherAdapter;
 import ua.maker.sinopticua.constants.App;
-import ua.maker.sinopticua.interfaces.OnLoadPageAdapter;
-import ua.maker.sinopticua.structs.ItemTown;
-import ua.maker.sinopticua.structs.ItemWeather;
-import ua.maker.sinopticua.structs.WeatherStruct;
+import ua.maker.sinopticua.models.ItemTown;
+import ua.maker.sinopticua.models.ItemWeather;
+import ua.maker.sinopticua.models.WeatherStruct;
 import ua.maker.sinopticua.utils.GPSTracker;
 import ua.maker.sinopticua.utils.OnDialogClickListener;
 import ua.maker.sinopticua.utils.Tools;
@@ -26,6 +25,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -99,7 +99,7 @@ public class HomeActivity extends FragmentActivity{
 		}
         pd = new ProgressDialog(HomeActivity.this);
         pd.setMessage(getString(R.string.dialog_downld_page_msg));
-        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        pd.setCanceledOnTouchOutside(false);
 		Log.i(TAG, "onCreate()");
 		if(Locale.getDefault().getLanguage().equals(App.LANG_UA)){
 			URL = App.DEFAULT_URL_UA;
@@ -163,8 +163,7 @@ public class HomeActivity extends FragmentActivity{
 		settingDialog = settingDialogBuilder.create();
 		settingDialog.setCanceledOnTouchOutside(false);
 		if(pref.contains(App.PREF_SITY_URL)){
-            //TODO:TESTING and add empty URL for start
-			URL = "";//pref.getString(App.PREF_SITY_URL, URL);
+			URL = pref.getString(App.PREF_SITY_URL, URL);
 		}
 		
 		if(pref.contains(App.PREF_SITY_NAME)){
@@ -231,7 +230,7 @@ public class HomeActivity extends FragmentActivity{
 			}
 			
 			Log.i(TAG, "LoadLocation URL: " + builderUrl.build().toString());
-			String response = Tools.getWebPage(builderUrl.build().toString(), null);
+			String response = Tools.getWebPage(builderUrl.build().toString());
 			DataParser parser = DataParser.getInstance();
 			return parser.parserGetLocation(response);
 		}
@@ -296,11 +295,11 @@ public class HomeActivity extends FragmentActivity{
 	protected void onSaveInstanceState(Bundle outState) {		
 		super.onSaveInstanceState(outState);
 		if(listItemsWeather.size() > 0){
-			outState.putParcelableArrayList(App.SAVE_LIST_WEATHER, listItemsWeather);
+			outState.putSerializable(App.SAVE_LIST_WEATHER, listItemsWeather);
 			outState.putString(App.SAVE_NOW_WEATHER, tvNow.getText().toString());
 			outState.putString(App.SAVE_CITY_NAME, currentWeather.getTownName());
 			if(llWerningWind.getVisibility() == LinearLayout.VISIBLE)
-				outState.putString(App.SAVE_WERNING_WIND, tvWind.getText().toString());
+				outState.putString(App.SAVE_WARNING_WIND, tvWind.getText().toString());
 		}
 		Log.i(TAG, "onSaveInstanceState()"); 
 	}
@@ -309,7 +308,7 @@ public class HomeActivity extends FragmentActivity{
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {		
 		super.onRestoreInstanceState(savedInstanceState);
 		if(!savedInstanceState.isEmpty() & !isLoadWeatherPendingOrRunning()){
-			ArrayList<ItemWeather> restore = savedInstanceState.getParcelableArrayList(App.SAVE_LIST_WEATHER);
+			ArrayList<ItemWeather> restore = (ArrayList<ItemWeather>)savedInstanceState.getSerializable(App.SAVE_LIST_WEATHER);
 			if(restore != null){
 				listItemsWeather.clear();
 				for(ItemWeather item : restore){
@@ -321,9 +320,9 @@ public class HomeActivity extends FragmentActivity{
 				}
 				tvNow.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_NOW_WEATHER)));
 				tvTown.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_CITY_NAME)));
-				if(savedInstanceState.containsKey(App.SAVE_WERNING_WIND)){
+				if(savedInstanceState.containsKey(App.SAVE_WARNING_WIND)){
 					llWerningWind.setVisibility(LinearLayout.VISIBLE);
-					tvWind.setText(savedInstanceState.getString(App.SAVE_WERNING_WIND));
+					tvWind.setText(savedInstanceState.getString(App.SAVE_WARNING_WIND));
 				}else{
 					llWerningWind.setVisibility(LinearLayout.GONE);
 				}
@@ -375,7 +374,7 @@ public class HomeActivity extends FragmentActivity{
 				builderRequest.authority(App.SITE_AUTHORITY_RU);
 			}
 			Log.i(TAG, "URL request for city list: " + builderRequest.build().toString());
-			String response = Tools.getWebPage(builderRequest.build().toString(), null);
+			String response = Tools.getWebPage(builderRequest.build().toString());
 			
 			//if(BuildConfig.DEBUG)
 			//	Tools.logToFile(response, "log_load_town");
@@ -415,15 +414,11 @@ public class HomeActivity extends FragmentActivity{
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
-//			Intent startDetail = new Intent(HomeActivity.this, WeatherDetailActivity.class);
-//			ItemWeather weather = listItemsWeather.get(position);
-//			startDetail.putExtra(App.SAVE_ITEM_WEATHER, new String[]{
-//					weather.getUrlDetail(), 
-//					String.valueOf(weather.getDay()),
-//					weather.getDayName(),
-//					weather.getMonth()});
-//			startActivity(startDetail);
-//			overridePendingTransition(R.anim.open_item_weather_anim, android.R.anim.fade_out);
+			Intent startDetail = new Intent(HomeActivity.this, WeatherDetailActivity.class);
+			ItemWeather weather = listItemsWeather.get(position);
+            startDetail.putExtra(App.SAVE_ITEM_WEATHER, weather);
+            startActivity(startDetail);
+			overridePendingTransition(R.anim.open_item_weather_anim, android.R.anim.fade_out);
 		}
 	};
 	
@@ -564,27 +559,12 @@ public class HomeActivity extends FragmentActivity{
 	    @Override
 	    protected WeatherStruct doInBackground(String... urls) {
 	    	Log.i(TAG, "START TASK - " + Uri.decode(urls[0]));
-	        String response = Tools.getWebPage(urls[0], new OnLoadPageAdapter() {
-                @Override
-                public void onProgress(int progress, int count) {
-                    super.onProgress(progress, count);
-                    publishProgress(progress, count);
-                }
-            });
+	        String response = Tools.getWebPage(urls[0]);
 	        if(BuildConfig.DEBUG)
 	        	Tools.logToFile(response, "log_http_task");	        
 	        DataParser parser = DataParser.getInstance();
 	        return parser.parserHTML(response);
 	    }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-            int progress = values[0];
-            int count = values[1];
-            activityWeakRef.get().pd.setMax(count);
-            activityWeakRef.get().pd.setProgress(progress);
-        }
 
         @Override
 	    protected void onPostExecute(WeatherStruct response) {
@@ -608,8 +588,9 @@ public class HomeActivity extends FragmentActivity{
 	public void setInfoWeather(WeatherStruct info){
 		if(Tools.isCorrectDataWeather(info)){
 			currentWeather = info;
-			if(info.getWeatherMondey().getDateFull().length() > 0){
-				tvLastDateUpdate.setText(getString(R.string.last_update_date)+" "+info.getWeatherMondey().getDateFull());
+			if(info.getWeatherMondey().dateFull != null
+                    && info.getWeatherMondey().dateFull.length() > 0){
+				tvLastDateUpdate.setText(getString(R.string.last_update_date)+" "+info.getWeatherMondey().dateFull);
 			} else {
 				String date = pref.getString(App.PREF_LAST_DATE_UPDATE_FULL, dateFullFirmat.format(new Date()));
 				tvLastDateUpdate.setText(getString(R.string.last_update_date)+" "+date);

@@ -23,7 +23,7 @@ public class App {
 	public static final String SAVE_NOW_WEATHER = "save_now_weather";
 	public static final String SAVE_CITY_NAME = "save_city_name";
 	public static final String SAVE_ITEM_WEATHER = "save_item_weather";
-	public static final String SAVE_WERNING_WIND = "save_werning_wind";
+	public static final String SAVE_WARNING_WIND = "save_warning_wind";
 	
 	public static final String LANG_RU = "ru";
 	public static final String LANG_UA = "uk";

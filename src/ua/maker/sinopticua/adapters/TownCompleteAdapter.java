@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.maker.sinopticua.R;
-import ua.maker.sinopticua.structs.ItemTown;
+import ua.maker.sinopticua.models.ItemTown;
 
 import android.app.Activity;
 import android.content.Context;

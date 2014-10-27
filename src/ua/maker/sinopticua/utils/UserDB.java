@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import ua.maker.sinopticua.structs.ItemTown;
-import ua.maker.sinopticua.structs.ItemWeather;
-import ua.maker.sinopticua.structs.WeatherStruct;
+import ua.maker.sinopticua.models.ItemTown;
+import ua.maker.sinopticua.models.ItemWeather;
+import ua.maker.sinopticua.models.WeatherStruct;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -176,13 +175,13 @@ public class UserDB extends SQLiteOpenHelper {
 				ContentValues cv = new ContentValues();
 				
 				cv.put(FIELD_DATE_FULL, dateFormat.format(new Date()));
-				cv.put(FIELD_DATE_DAY, item.getDay());
-				cv.put(FIELD_DATE_MONTH, item.getMonth());
-				cv.put(FIELD_DATE_DAY_NAME, item.getDayName());
-				cv.put(FIELD_TEMP_MIN, item.getMinTemp());
-				cv.put(FIELD_TEMP_MAX, item.getMaxTemp());
-				cv.put(FIELD_WEATHER_DESCRIPTIONS, item.getWeatherName());
-				cv.put(FIELD_WEATHER_IMG_URL, item.getUrlImage());
+				cv.put(FIELD_DATE_DAY, item.day);
+				cv.put(FIELD_DATE_MONTH, item.month);
+				cv.put(FIELD_DATE_DAY_NAME, item.dayName);
+				cv.put(FIELD_TEMP_MIN, item.minTemp);
+				cv.put(FIELD_TEMP_MAX, item.maxTemp);
+				cv.put(FIELD_WEATHER_DESCRIPTIONS, item.weatherName);
+				cv.put(FIELD_WEATHER_IMG_URL, item.urlImage);
 				cv.put(FIELD_NOW_WEATHER, data.getWeatherToday());
 				cv.put(FIELD_TOWN, data.getTownName());
 				cv.put(FIELD_WERNING_WIND, String.valueOf(data.getWerningWind()));
@@ -231,23 +230,23 @@ public class UserDB extends SQLiteOpenHelper {
 					String weatherImgUrl = c.getString(weatherImgUrlIndex);
 					String nowWeather = c.getString(nowWeatherIndex);
 					String town = c.getString(townIndex);
-					boolean wernWind = Boolean.parseBoolean(c.getString(werningWindIndex));
+					boolean warnWind = Boolean.parseBoolean(c.getString(werningWindIndex));
 					String windDEscr = c.getString(windDescrIndex);
 					
 					ItemWeather item = new ItemWeather();
-					item.setDateFull(dateFull);
-					item.setDay(dateDay);
-					item.setMonth(dateMonth);
-					item.setDayName(dateDayName);
-					item.setMinTemp(tempMin);
-					item.setMaxTemp(tempMax);
-					item.setWeatherName(weatherDesc);
-					item.setUrlImage(weatherImgUrl);
+					item.dateFull = dateFull;
+					item.day = dateDay;
+					item.month = dateMonth;
+					item.dayName = dateDayName;
+					item.minTemp = tempMin;
+					item.maxTemp=tempMax;
+					item.weatherName = weatherDesc;
+					item.urlImage=weatherImgUrl;
 					
 					data.add(item);
 					result.setWeatherToday(nowWeather);
 					result.setTownName(town);
-					result.setWerningWind(wernWind);
+					result.setWerningWind(warnWind);
 					result.setWindDescription(windDEscr);
 				} while (c.moveToNext());
 			}

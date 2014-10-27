@@ -7,9 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ua.maker.sinopticua.structs.ItemTown;
-import ua.maker.sinopticua.structs.ItemWeather;
-import ua.maker.sinopticua.structs.WeatherStruct;
+import ua.maker.sinopticua.models.ItemTown;
+import ua.maker.sinopticua.models.ItemWeather;
+import ua.maker.sinopticua.models.WeatherStruct;
 import android.util.Log;
 
 public class DataParser {
@@ -81,13 +81,13 @@ public class DataParser {
 											if(detailUrlCount == 0){
 												String urlDetail = result.substring((q+8), qa);
 												Log.i(TAG, "URL detail: " + urlDetail);
-												itemWeater.setUrlDetail(urlDetail);
+												itemWeater.urlDetail = urlDetail;
 											}
 											for(int qb = (qa+2); qb < (qa+22); qb++){
 												if(result.substring(qb, (qb+8)).equals("</a></p>")){
 													String nameDay = result.substring((qa+2), qb);
 													Log.i(TAG, "Day name: " + nameDay);
-													itemWeater.setDayName(nameDay);
+													itemWeater.dayName = nameDay;
 													detailUrlCount = 1;
 													detailUrl = true;
 												}
@@ -103,10 +103,10 @@ public class DataParser {
 								& dayCount == 0) ){
 							//Log.d(TAG, "process 3");
 							if(result.substring(j, (j+25)).equals("<p class=\"date dateFree\">")){
-								itemWeater.setFreeDay(true);
+								itemWeater.isFreeDay = true;
 							}
 							else{
-								itemWeater.setFreeDay(false);
+								itemWeater.isFreeDay = false;
 							}
 							for(int t = (j+17); t < (result.length()-100); t++){
 								//////Log.d(TAG, "process 4");
@@ -118,7 +118,7 @@ public class DataParser {
 									} catch (Exception e) {
 										dd = Integer.parseInt(result.substring((j+25), t));
 									}
-									itemWeater.setDay(dd);
+									itemWeater.day = dd;
 									Log.i(TAG, "MONDAY DAY " + dd);
 									dayCount = 1;
 									D = true;
@@ -131,7 +131,7 @@ public class DataParser {
 							for(int t = (j+17); t < (result.length()-100); t++){
 								if(result.substring(t, (t+4)).equals("</p>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMonth(m);
+									itemWeater.month = m;
 									Log.i(TAG, "MONDAY MONTH " + m);
 									monthCount = 1;
 									M = true;
@@ -145,7 +145,7 @@ public class DataParser {
 								//Log.d(TAG, "process 6");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMinTemp(m);
+									itemWeater.minTemp = m;
 									Log.i(TAG, "MONDAY MINT " + m);
 									minTCount = 1;
 									MI = true;
@@ -159,7 +159,7 @@ public class DataParser {
 								//Log.d(TAG, "process 7");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMaxTemp(m);
+									itemWeater.maxTemp = m;
 									Log.i(TAG, "MONDAY MAXT " + m);
 									maxTCount = 1;
 									MA = true;
@@ -175,7 +175,7 @@ public class DataParser {
 										if(result.substring(p, (p+14)).equals("\"><img class=\"")){
 											String nameWea = result.substring((t+9), p);
 											Log.i(TAG, "Name weather: " + nameWea);
-											itemWeater.setWeatherName(nameWea);
+											itemWeater.weatherName = nameWea;
 										}
 									}
 								}
@@ -184,7 +184,7 @@ public class DataParser {
 								//Log.d(TAG, "process 8");
 								if(result.substring(t, (t+5)).equals("\" alt")){
 									String urlI = result.substring((j+29), t);
-									itemWeater.setUrlImage(urlI);
+									itemWeater.urlImage = urlI;
 									Log.i(TAG, "MONDAY urlImage " + urlI);
 									imgUrlCount = 1;
 									imgUrl = true;
@@ -220,13 +220,13 @@ public class DataParser {
 											if(detailUrlCount == 1){
 												String urlDetail = result.substring((q+8), qa);
 												Log.i(TAG, "URL detail: " + urlDetail);
-												itemWeater.setUrlDetail(urlDetail);
+												itemWeater.urlDetail = urlDetail;
 											}
 											for(int qb = (qa+2); qb < (qa+22); qb++){
 												if(result.substring(qb, (qb+8)).equals("</a></p>")){
 													String nameDay = result.substring((qa+2), qb);
 													Log.i(TAG, "Day name: " + nameDay);
-													itemWeater.setDayName(nameDay);
+													itemWeater.dayName = nameDay;
 													detailUrlCount = 2;
 													detailUrl = true;
 												}
@@ -242,10 +242,10 @@ public class DataParser {
 								& dayCount == 1) ){
 							//Log.d(TAG, "process 3");
 							if(result.substring(j, (j+25)).equals("<p class=\"date dateFree\">")){
-								itemWeater.setFreeDay(true);
+								itemWeater.isFreeDay = true;
 							}
 							else{
-								itemWeater.setFreeDay(false);
+								itemWeater.isFreeDay = false;
 							}
 							for(int t = (j+17); t < (result.length()-100); t++){
 								////Log.d(TAG, "process 4");
@@ -257,7 +257,7 @@ public class DataParser {
 									} catch (Exception e) {
 										dd = Integer.parseInt(result.substring((j+25), t));
 									}
-									itemWeater.setDay(dd);
+									itemWeater.day = dd;
 									Log.i(TAG, "MONDAY DAY " + dd);
 									dayCount = 2;
 									D = true;
@@ -271,7 +271,7 @@ public class DataParser {
 								////Log.d(TAG, "process 5");
 								if(result.substring(t, (t+4)).equals("</p>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMonth(m);
+									itemWeater.month = m;
 									Log.i(TAG, "MONDAY MONTH " + m);
 									monthCount = 2;
 									M = true;
@@ -285,7 +285,7 @@ public class DataParser {
 								//Log.d(TAG, "process 6");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMinTemp(m);
+									itemWeater.minTemp = m;
 									Log.i(TAG, "MONDAY MINT " + m);
 									minTCount = 2;
 									MI = true;
@@ -299,7 +299,7 @@ public class DataParser {
 								//Log.d(TAG, "process 7");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMaxTemp(m);
+									itemWeater.maxTemp = m;
 									Log.i(TAG, "MONDAY MAXT " + m);
 									maxTCount = 2;
 									MA = true;
@@ -315,7 +315,7 @@ public class DataParser {
 										if(result.substring(p, (p+14)).equals("\"><img class=\"")){
 											String nameWea = result.substring((t+9), p);
 											Log.i(TAG, "Name weather: " + nameWea);
-											itemWeater.setWeatherName(nameWea);
+											itemWeater.weatherName = nameWea;
 										}
 									}
 								}
@@ -324,7 +324,7 @@ public class DataParser {
 								//Log.d(TAG, "process 8");
 								if(result.substring(t, (t+5)).equals("\" alt")){
 									String urlI = result.substring((j+29), t);
-									itemWeater.setUrlImage(urlI);
+									itemWeater.urlImage = urlI;
 									Log.i(TAG, "MONDAY urlImage " + urlI);
 									imgUrlCount = 2;
 									imgUrl = true;
@@ -360,13 +360,13 @@ public class DataParser {
 												if(detailUrlCount == 2){
 													String urlDetail = result.substring((q+8), qa);
 													Log.i(TAG, "URL detail: " + urlDetail);
-													itemWeater.setUrlDetail(urlDetail);
+													itemWeater.urlDetail = urlDetail;
 												}
 												for(int qb = (qa+2); qb < (qa+22); qb++){
 													if(result.substring(qb, (qb+8)).equals("</a></p>")){
 														String nameDay = result.substring((qa+2), qb);
 														Log.i(TAG, "Day name: " + nameDay);
-														itemWeater.setDayName(nameDay);
+														itemWeater.dayName = nameDay;
 														detailUrlCount = 3;
 														detailUrl = true;
 													}
@@ -382,10 +382,10 @@ public class DataParser {
 								& dayCount == 2) ){
 							//Log.d(TAG, "process 3");
 							if(result.substring(j, (j+25)).equals("<p class=\"date dateFree\">")){
-								itemWeater.setFreeDay(true);
+								itemWeater.isFreeDay = true;
 							}
 							else{
-								itemWeater.setFreeDay(false);
+								itemWeater.isFreeDay = false;
 							}
 							for(int t = (j+17); t < (result.length()-100); t++){
 								////Log.d(TAG, "process 4");
@@ -397,7 +397,7 @@ public class DataParser {
 									} catch (Exception e) {
 										dd = Integer.parseInt(result.substring((j+25), t));
 									}
-									itemWeater.setDay(dd);
+									itemWeater.day = dd;
 									Log.i(TAG, "MONDAY DAY " + dd);
 									dayCount = 3;
 									D = true;
@@ -411,7 +411,7 @@ public class DataParser {
 								//Log.d(TAG, "process 5");
 								if(result.substring(t, (t+4)).equals("</p>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMonth(m);
+									itemWeater.month = m;
 									Log.i(TAG, "MONDAY MONTH " + m);
 									monthCount = 3;
 									M = true;
@@ -425,7 +425,7 @@ public class DataParser {
 								//Log.d(TAG, "process 6");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMinTemp(m);
+									itemWeater.minTemp = m;
 									Log.i(TAG, "MONDAY MINT " + m);
 									minTCount = 3;
 									MI = true;
@@ -439,7 +439,7 @@ public class DataParser {
 								//Log.d(TAG, "process 7");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMaxTemp(m);
+									itemWeater.maxTemp = m;
 									Log.i(TAG, "MONDAY MAXT " + m);
 									maxTCount = 3;
 									MA = true;
@@ -455,7 +455,7 @@ public class DataParser {
 										if(result.substring(p, (p+14)).equals("\"><img class=\"")){
 											String nameWea = result.substring((t+9), p);
 											Log.i(TAG, "Name weather: " + nameWea);
-											itemWeater.setWeatherName(nameWea);
+											itemWeater.weatherName = nameWea;
 										}
 									}
 								}
@@ -464,7 +464,7 @@ public class DataParser {
 								//Log.d(TAG, "process 8");
 								if(result.substring(t, (t+5)).equals("\" alt")){
 									String urlI = result.substring((j+29), t);
-									itemWeater.setUrlImage(urlI);
+									itemWeater.urlImage = urlI;
 									Log.i(TAG, "MONDAY urlImage " + urlI);
 									imgUrlCount = 3;
 									imgUrl = true;
@@ -500,13 +500,13 @@ public class DataParser {
 												if(detailUrlCount == 3){
 													String urlDetail = result.substring((q+8), qa);
 													Log.i(TAG, "URL detail: " + urlDetail);
-													itemWeater.setUrlDetail(urlDetail);
+													itemWeater.urlDetail = urlDetail;
 												}
 												for(int qb = (qa+2); qb < (qa+22); qb++){
 													if(result.substring(qb, (qb+8)).equals("</a></p>")){
 														String nameDay = result.substring((qa+2), qb);
 														Log.i(TAG, "Day name: " + nameDay);
-														itemWeater.setDayName(nameDay);
+														itemWeater.dayName = nameDay;
 														detailUrlCount = 4;
 														detailUrl = true;
 													}
@@ -522,22 +522,22 @@ public class DataParser {
 								& dayCount == 3) ){
 							//Log.d(TAG, "process 3");
 							if(result.substring(j, (j+25)).equals("<p class=\"date dateFree\">")){
-								itemWeater.setFreeDay(true);
+								itemWeater.isFreeDay = true;
 							}
 							else{
-								itemWeater.setFreeDay(false);
+								itemWeater.isFreeDay = false;
 							}
 							for(int t = (j+17); t < (result.length()-100); t++){
 								////Log.d(TAG, "process 4");
 								if(result.substring(t, (t+4)).equals("</p>")){
 									String n = result.substring((j+17), t);
-									int dd = 0;
+									int dd;
 									try {
 										dd = Integer.parseInt(n);
 									} catch (Exception e) {
 										dd = Integer.parseInt(result.substring((j+25), t));
 									}
-									itemWeater.setDay(dd);
+									itemWeater.day = dd;
 									Log.i(TAG, "MONDAY DAY " + dd);
 									dayCount = 4;
 									D = true;
@@ -551,7 +551,7 @@ public class DataParser {
 								//Log.d(TAG, "process 5");
 								if(result.substring(t, (t+4)).equals("</p>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMonth(m);
+									itemWeater.month = m;
 									Log.i(TAG, "MONDAY MONTH " + m);
 									monthCount = 4;
 									M = true;
@@ -565,7 +565,7 @@ public class DataParser {
 								//Log.d(TAG, "process 6");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMinTemp(m);
+									itemWeater.minTemp = m;
 									Log.i(TAG, "MONDAY MINT " + m);
 									minTCount = 4;
 									MI = true;
@@ -579,7 +579,7 @@ public class DataParser {
 								//Log.d(TAG, "process 7");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMaxTemp(m);
+									itemWeater.maxTemp = m;
 									Log.i(TAG, "MONDAY MAXT " + m);
 									maxTCount = 4;
 									MA = true;
@@ -595,7 +595,7 @@ public class DataParser {
 										if(result.substring(p, (p+14)).equals("\"><img class=\"")){
 											String nameWea = result.substring((t+9), p);
 											Log.i(TAG, "Name weather: " + nameWea);
-											itemWeater.setWeatherName(nameWea);
+											itemWeater.weatherName = nameWea;
 										}
 									}
 								}
@@ -604,7 +604,7 @@ public class DataParser {
 								//Log.d(TAG, "process 8");
 								if(result.substring(t, (t+5)).equals("\" alt")){
 									String urlI = result.substring((j+29), t);
-									itemWeater.setUrlImage(urlI);
+									itemWeater.urlImage = urlI;
 									Log.i(TAG, "MONDAY urlImage " + urlI);
 									imgUrlCount = 4;
 									imgUrl = true;
@@ -640,13 +640,13 @@ public class DataParser {
 												if(detailUrlCount == 4){
 													String urlDetail = result.substring((q+8), qa);
 													Log.i(TAG, "URL detail: " + urlDetail);
-													itemWeater.setUrlDetail(urlDetail);
+													itemWeater.urlDetail = urlDetail;
 												}
 												for(int qb = (qa+2); qb < (qa+22); qb++){
 													if(result.substring(qb, (qb+8)).equals("</a></p>")){
 														String nameDay = result.substring((qa+2), qb);
 														Log.i(TAG, "Day name: " + nameDay);
-														itemWeater.setDayName(nameDay);
+														itemWeater.dayName = nameDay;
 														detailUrlCount = 5;
 														detailUrl = true;
 													}
@@ -662,10 +662,10 @@ public class DataParser {
 								& dayCount == 4) ){
 							//Log.d(TAG, "process 3");
 							if(result.substring(j, (j+25)).equals("<p class=\"date dateFree\">")){
-								itemWeater.setFreeDay(true);
+								itemWeater.isFreeDay = true;
 							}
 							else{
-								itemWeater.setFreeDay(false);
+								itemWeater.isFreeDay = false;
 							}
 							for(int t = (j+17); t < (result.length()-100); t++){
 								////Log.d(TAG, "process 4");
@@ -677,7 +677,7 @@ public class DataParser {
 									} catch (Exception e) {
 										dd = Integer.parseInt(result.substring((j+25), t));
 									}
-									itemWeater.setDay(dd);
+									itemWeater.day = dd;
 									Log.i(TAG, "MONDAY DAY " + dd);
 									dayCount = 5;
 									D = true;
@@ -691,7 +691,7 @@ public class DataParser {
 								//Log.d(TAG, "process 5");
 								if(result.substring(t, (t+4)).equals("</p>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMonth(m);
+									itemWeater.month = m;
 									Log.i(TAG, "MONDAY MONTH " + m);
 									monthCount = 5;
 									M = true;
@@ -705,7 +705,7 @@ public class DataParser {
 								//Log.d(TAG, "process 6");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMinTemp(m);
+									itemWeater.minTemp = m;
 									Log.i(TAG, "MONDAY MINT " + m);
 									minTCount = 5;
 									MI = true;
@@ -719,7 +719,7 @@ public class DataParser {
 								//Log.d(TAG, "process 7");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMaxTemp(m);
+									itemWeater.maxTemp = m;
 									Log.i(TAG, "MONDAY MAXT " + m);
 									maxTCount = 5;
 									MA = true;
@@ -735,7 +735,7 @@ public class DataParser {
 										if(result.substring(p, (p+14)).equals("\"><img class=\"")){
 											String nameWea = result.substring((t+9), p);
 											Log.i(TAG, "Name weather: " + nameWea);
-											itemWeater.setWeatherName(nameWea);
+											itemWeater.weatherName = nameWea;
 										}
 									}
 								}
@@ -744,7 +744,7 @@ public class DataParser {
 								//Log.d(TAG, "process 8");
 								if(result.substring(t, (t+5)).equals("\" alt")){
 									String urlI = result.substring((j+29), t);
-									itemWeater.setUrlImage(urlI);
+									itemWeater.urlImage = urlI;
 									Log.i(TAG, "MONDAY urlImage " + urlI);
 									imgUrlCount = 5;
 									imgUrl = true;
@@ -780,13 +780,13 @@ public class DataParser {
 												if(detailUrlCount == 5){
 													String urlDetail = result.substring((q+8), qa);
 													Log.i(TAG, "URL detail: " + urlDetail);
-													itemWeater.setUrlDetail(urlDetail);
+													itemWeater.urlDetail = urlDetail;
 												}
 												for(int qb = (qa+2); qb < (qa+22); qb++){
 													if(result.substring(qb, (qb+8)).equals("</a></p>")){
 														String nameDay = result.substring((qa+2), qb);
 														Log.i(TAG, "Day name: " + nameDay);
-														itemWeater.setDayName(nameDay);
+														itemWeater.dayName = nameDay;
 														detailUrlCount = 6;
 														detailUrl = true;
 													}
@@ -802,10 +802,10 @@ public class DataParser {
 								& dayCount == 5) ){
 							//Log.d(TAG, "process 3");
 							if(result.substring(j, (j+25)).equals("<p class=\"date dateFree\">")){
-								itemWeater.setFreeDay(true);
+								itemWeater.isFreeDay = true;
 							}
 							else{
-								itemWeater.setFreeDay(false);
+								itemWeater.isFreeDay = false;
 							}
 							for(int t = (j+17); t < (result.length()-100); t++){
 								////Log.d(TAG, "process 4");
@@ -817,7 +817,7 @@ public class DataParser {
 									} catch (Exception e) {
 										dd = Integer.parseInt(result.substring((j+25), t));
 									}
-									itemWeater.setDay(dd);
+									itemWeater.day = dd;
 									Log.i(TAG, "MONDAY DAY " + dd);
 									dayCount = 6;
 									D = true;
@@ -831,7 +831,7 @@ public class DataParser {
 								//Log.d(TAG, "process 5");
 								if(result.substring(t, (t+4)).equals("</p>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMonth(m);
+									itemWeater.month = m;
 									Log.i(TAG, "MONDAY MONTH " + m);
 									monthCount = 6;
 									M = true;
@@ -845,7 +845,7 @@ public class DataParser {
 								//Log.d(TAG, "process 6");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMinTemp(m);
+									itemWeater.minTemp = m;
 									Log.i(TAG, "MONDAY MINT " + m);
 									minTCount = 6;
 									MI = true;
@@ -859,7 +859,7 @@ public class DataParser {
 								//Log.d(TAG, "process 7");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMaxTemp(m);
+									itemWeater.maxTemp = m;
 									Log.i(TAG, "MONDAY MAXT " + m);
 									maxTCount = 6;
 									MA = true;
@@ -875,7 +875,7 @@ public class DataParser {
 										if(result.substring(p, (p+14)).equals("\"><img class=\"")){
 											String nameWea = result.substring((t+9), p);
 											Log.i(TAG, "Name weather: " + nameWea);
-											itemWeater.setWeatherName(nameWea);
+											itemWeater.weatherName = nameWea;
 										}
 									}
 								}
@@ -884,7 +884,7 @@ public class DataParser {
 								//Log.d(TAG, "process 8");
 								if(result.substring(t, (t+5)).equals("\" alt")){
 									String urlI = result.substring((j+29), t);
-									itemWeater.setUrlImage(urlI);
+									itemWeater.urlImage = urlI;
 									Log.i(TAG, "MONDAY urlImage " + urlI);
 									imgUrlCount = 6;
 									imgUrl = true;
@@ -920,13 +920,13 @@ public class DataParser {
 												if(detailUrlCount == 6){
 													String urlDetail = result.substring((q+8), qa);
 													Log.i(TAG, "URL detail: " + urlDetail);
-													itemWeater.setUrlDetail(urlDetail);
+													itemWeater.urlDetail = urlDetail;
 												}
 												for(int qb = (qa+2); qb < (qa+22); qb++){
 													if(result.substring(qb, (qb+8)).equals("</a></p>")){
 														String nameDay = result.substring((qa+2), qb);
 														Log.i(TAG, "Day name: " + nameDay);
-														itemWeater.setDayName(nameDay);
+														itemWeater.dayName = nameDay;
 														detailUrlCount = 7;
 														detailUrl = true;
 													}
@@ -942,10 +942,10 @@ public class DataParser {
 								& dayCount == 6) ){
 							//Log.d(TAG, "process 3");
 							if(result.substring(j, (j+25)).equals("<p class=\"date dateFree\">")){
-								itemWeater.setFreeDay(true);
+								itemWeater.isFreeDay = true;
 							}
 							else{
-								itemWeater.setFreeDay(false);
+								itemWeater.isFreeDay = false;
 							}
 							for(int t = (j+17); t < (result.length()-100); t++){
 								////Log.d(TAG, "process 4");
@@ -957,7 +957,7 @@ public class DataParser {
 									} catch (Exception e) {
 										dd = Integer.parseInt(result.substring((j+25), t));
 									}
-									itemWeater.setDay(dd);
+									itemWeater.day = dd;
 									Log.i(TAG, "MONDAY DAY " + dd);
 									dayCount = 7;
 									D = true;
@@ -971,7 +971,7 @@ public class DataParser {
 								//Log.d(TAG, "process 5");
 								if(result.substring(t, (t+4)).equals("</p>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMonth(m);
+									itemWeater.month = m;
 									Log.i(TAG, "MONDAY MONTH " + m);
 									monthCount = 7;
 									M = true;
@@ -985,7 +985,7 @@ public class DataParser {
 								//Log.d(TAG, "process 6");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMinTemp(m);
+									itemWeater.minTemp = m;
 									Log.i(TAG, "MONDAY MINT " + m);
 									minTCount = 7;
 									MI = true;
@@ -999,7 +999,7 @@ public class DataParser {
 								//Log.d(TAG, "process 7");
 								if(result.substring(t, (t+6)).equals("</div>")){
 									String m = result.substring((j+17), t);
-									itemWeater.setMaxTemp(m);
+									itemWeater.maxTemp = m;
 									Log.i(TAG, "MONDAY MAXT " + m);
 									maxTCount = 7;
 									MA = true;
@@ -1015,7 +1015,7 @@ public class DataParser {
 										if(result.substring(p, (p+14)).equals("\"><img class=\"")){
 											String nameWea = result.substring((t+9), p);
 											Log.i(TAG, "Name weather: " + nameWea);
-											itemWeater.setWeatherName(nameWea);
+											itemWeater.weatherName = nameWea;
 										}
 									}
 								}
@@ -1024,7 +1024,7 @@ public class DataParser {
 								//Log.d(TAG, "process 8");
 								if(result.substring(t, (t+5)).equals("\" alt")){
 									String urlI = result.substring((j+29), t);
-									itemWeater.setUrlImage(urlI);
+									itemWeater.urlImage = urlI;
 									Log.i(TAG, "MONDAY urlImage " + urlI);
 									imgUrlCount = 7;
 									imgUrl = true;
@@ -1126,5 +1126,4 @@ public class DataParser {
 		}
 		return result;
 	}
-
 }

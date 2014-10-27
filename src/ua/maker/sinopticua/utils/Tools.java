@@ -2,8 +2,6 @@ package ua.maker.sinopticua.utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,9 +20,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import ua.maker.sinopticua.interfaces.OnLoadPageAdapter;
-import ua.maker.sinopticua.interfaces.OnLoadPageListener;
-import ua.maker.sinopticua.structs.WeatherStruct;
+import ua.maker.sinopticua.models.WeatherStruct;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
@@ -36,7 +32,7 @@ public class Tools {
 	private static final String TAG = "Tools";
 	
 	public static void logToFile(String textData, String nameFile){
-		File file = new File("/sdcard/", nameFile+".txt");
+		File file = new File("/sdcard/", nameFile+"_sinoptik_ua.txt");
 		file.getParentFile().mkdirs();
 		Writer out = null;
 		try {
@@ -57,9 +53,7 @@ public class Tools {
 		}
 	}
 	
-	public static String getWebPage(String url, OnLoadPageAdapter loadPageListener) {
-        if(loadPageListener != null)
-            loadPageListener.onStartLoad();
+	public static String getWebPage(String url) {
 	    HttpClient httpClient = new DefaultHttpClient();
 	    HttpGet httpGet = new HttpGet();
 
@@ -86,8 +80,6 @@ public class Tools {
 
                 while ((line = reader.read()) != -1) {
                     stringBuffer.append((char)line);
-                    if(loadPageListener != null)
-                        loadPageListener.onProgress(stringBuffer.length(), max);
                 }
 
                 response = stringBuffer.toString();
@@ -107,30 +99,8 @@ public class Tools {
 	            Log.e(TAG, "HttpActivity.getPage() IOException error lors de la fermeture des flux", e);
 	        }
 	    }
-        if(loadPageListener != null)
-            loadPageListener.onEndLoad();
 	    return response;
 	}
-
-    public static byte[] getBytes(InputStream is) throws IOException {
-
-        int len;
-        int size = 1024;
-        byte[] buf;
-
-        if (is instanceof ByteArrayInputStream) {
-            size = is.available();
-            buf = new byte[size];
-            len = is.read(buf, 0, size);
-        } else {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            buf = new byte[size];
-            while ((len = is.read(buf, 0, size)) != -1)
-                bos.write(buf, 0, len);
-            buf = bos.toByteArray();
-        }
-        return buf;
-    }
 	
 	public static ImageFetcher getImageFetcher(FragmentActivity activity) {
         ImageFetcher fetcher = new ImageFetcher(activity);
@@ -157,46 +127,46 @@ public class Tools {
 	}
 
 	public static boolean isCorrectDataWeather(WeatherStruct info) {
-		if(info.getWeatherMondey().getMaxTemp().length() == 0
-				| info.getWeatherMondey().getMinTemp().length() == 0
-				| info.getWeatherMondey().getMonth().length() == 0
-				| info.getWeatherMondey().getWeatherName().length() == 0){
+		if(info.getWeatherMondey().maxTemp.length() == 0
+				| info.getWeatherMondey().minTemp.length() == 0
+				| info.getWeatherMondey().month.length() == 0
+				| info.getWeatherMondey().weatherName.length() == 0){
 			return false;
 		}
-		if(info.getWeatherTuesday().getMaxTemp().length() == 0
-				| info.getWeatherTuesday().getMinTemp().length() == 0
-				| info.getWeatherTuesday().getMonth().length() == 0
-				| info.getWeatherTuesday().getWeatherName().length() == 0){
+		if(info.getWeatherTuesday().maxTemp.length() == 0
+				| info.getWeatherTuesday().minTemp.length() == 0
+				| info.getWeatherTuesday().month.length() == 0
+				| info.getWeatherTuesday().weatherName.length() == 0){
 			return false;
 		}
-		if(info.getWeatherWednesday().getMaxTemp().length() == 0
-				| info.getWeatherWednesday().getMinTemp().length() == 0
-				| info.getWeatherWednesday().getMonth().length() == 0
-				| info.getWeatherWednesday().getWeatherName().length() == 0){
+		if(info.getWeatherWednesday().maxTemp.length() == 0
+				| info.getWeatherWednesday().minTemp.length() == 0
+				| info.getWeatherWednesday().month.length() == 0
+				| info.getWeatherWednesday().weatherName.length() == 0){
 			return false;
 		}
-		if(info.getWeatherThursday().getMaxTemp().length() == 0
-				| info.getWeatherThursday().getMinTemp().length() == 0
-				| info.getWeatherThursday().getMonth().length() == 0
-				| info.getWeatherThursday().getWeatherName().length() == 0){
+		if(info.getWeatherThursday().maxTemp.length() == 0
+				| info.getWeatherThursday().minTemp.length() == 0
+				| info.getWeatherThursday().month.length() == 0
+				| info.getWeatherThursday().weatherName.length() == 0){
 			return false;
 		}
-		if(info.getWeatherFriday().getMaxTemp().length() == 0
-				| info.getWeatherFriday().getMinTemp().length() == 0
-				| info.getWeatherFriday().getMonth().length() == 0
-				| info.getWeatherFriday().getWeatherName().length() == 0){
+		if(info.getWeatherFriday().maxTemp.length() == 0
+				| info.getWeatherFriday().minTemp.length() == 0
+				| info.getWeatherFriday().month.length() == 0
+				| info.getWeatherFriday().weatherName.length() == 0){
 			return false;
 		}
-		if(info.getWeatherSaturday().getMaxTemp().length() == 0
-				| info.getWeatherSaturday().getMinTemp().length() == 0
-				| info.getWeatherSaturday().getMonth().length() == 0
-				| info.getWeatherSaturday().getWeatherName().length() == 0){
+		if(info.getWeatherSaturday().maxTemp.length() == 0
+				| info.getWeatherSaturday().minTemp.length() == 0
+				| info.getWeatherSaturday().month.length() == 0
+				| info.getWeatherSaturday().weatherName.length() == 0){
 			return false;
 		}
-		if(info.getWeatherSundey().getMaxTemp().length() == 0
-				| info.getWeatherSundey().getMinTemp().length() == 0
-				| info.getWeatherSundey().getMonth().length() == 0
-				| info.getWeatherSundey().getWeatherName().length() == 0){
+		if(info.getWeatherSundey().maxTemp.length() == 0
+				| info.getWeatherSundey().minTemp.length() == 0
+				| info.getWeatherSundey().month.length() == 0
+				| info.getWeatherSundey().weatherName.length() == 0){
 			return false;
 		}
 		return true;

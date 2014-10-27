@@ -11,8 +11,8 @@ import java.util.TimerTask;
 import ua.maker.sinopticua.HomeActivity;
 import ua.maker.sinopticua.R;
 import ua.maker.sinopticua.constants.App;
-import ua.maker.sinopticua.structs.ItemWeather;
-import ua.maker.sinopticua.structs.WeatherStruct;
+import ua.maker.sinopticua.models.ItemWeather;
+import ua.maker.sinopticua.models.WeatherStruct;
 import ua.maker.sinopticua.utils.Tools;
 import ua.maker.sinopticua.utils.DataParser;
 import android.app.PendingIntent;
@@ -152,7 +152,7 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 			String response;
 			boolean isGet = false;
 			do {
-				response = Tools.getWebPage(urls[0], null);
+				response = Tools.getWebPage(urls[0]);
 				if(response != null){
 					if(response.length() != 0){
 						isGet = true;
@@ -175,16 +175,16 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 				view.setViewVisibility(R.id.iv_update, ImageView.VISIBLE);
 				view.setTextViewText(R.id.tv_town_name, Html.fromHtml(response.getTownName()));
 				view.setTextViewText(R.id.tv_info_last_update, dateUpdate);
-				view.setTextViewText(R.id.tv_day, String.valueOf(weather.getDay()));
-				view.setTextViewText(R.id.tv_month, weather.getMonth());
-				view.setTextViewText(R.id.tv_name_day, weather.getDayName());
+				view.setTextViewText(R.id.tv_day, String.valueOf(weather.day));
+				view.setTextViewText(R.id.tv_month, weather.month);
+				view.setTextViewText(R.id.tv_name_day, weather.dayName);
 				view.setTextViewText(R.id.tv_now_weather, Html.fromHtml(response.getWeatherToday()));
 				view.setTextViewText(R.id.tv_temp_min,
-						Html.fromHtml(weather.getMinTemp()));
+						Html.fromHtml(weather.minTemp));
 				view.setTextViewText(R.id.tv_temp_max,
-						Html.fromHtml(weather.getMaxTemp()));
-				view.setTextViewText(R.id.tv_name_weather, weather.getWeatherName());
-				String urlImage = weather.getUrlImage();
+						Html.fromHtml(weather.maxTemp));
+				view.setTextViewText(R.id.tv_name_weather, weather.weatherName);
+				String urlImage = weather.urlImage;
 				URL imageURL;
 				try {
 					imageURL = new URL(urlImage);
