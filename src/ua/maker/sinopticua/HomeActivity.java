@@ -169,7 +169,7 @@ public class HomeActivity extends FragmentActivity{
 		}
 		
 		etUrl.addTextChangedListener(textChangeListener);
-		etUrl.setOnItemClickListener(itemCompliteListener);
+		etUrl.setOnItemClickListener(itemCompleteListener);
 		etUrl.setAdapter(compliteAdapter);
 		
 		pd = new ProgressDialog(HomeActivity.this);
@@ -248,7 +248,7 @@ public class HomeActivity extends FragmentActivity{
 		}
 	}
 	
-	private OnItemClickListener itemCompliteListener = new OnItemClickListener() {
+	private OnItemClickListener itemCompleteListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
@@ -262,20 +262,20 @@ public class HomeActivity extends FragmentActivity{
 				urlBuild.authority(App.SITE_AUTHORITY_RU);
 			}
 
-            ItemTown town = listAutoCompliteTown.get(position);
+            final ItemTown town = listAutoCompliteTown.get(position);
 
             urlBuild.appendPath(town.getUrlEndTown());
 			
-			String newURL = urlBuild.build().toString();//App.SITE_URL_RU+Uri.encode(listAutoCompliteTown.get(position).getUrlEndTown());
+			final String newURL = urlBuild.build().toString();//App.SITE_URL_RU+Uri.encode(listAutoCompliteTown.get(position).getUrlEndTown());
 			
 			Log.i(TAG, "URL: " + newURL);
-			if(!URL.equals(newURL)){
-				updateListLastTown(town.getNameTown());
-				URL = newURL;
-				refreshWeather(URL);
-				etUrl.setText("");
-				updateInfosTvTown();
-			}
+            if(!URL.equals(newURL)){
+                updateListLastTown(tvTown.getText().toString());
+                URL = newURL;
+                refreshWeather(URL);
+                etUrl.setText("");
+                updateInfosTvTown();
+            }
 		}
 	};
 	
@@ -429,7 +429,7 @@ public class HomeActivity extends FragmentActivity{
 				long id) {
 			settingDialog.dismiss();
 			ItemTown town = listTown.get(position);
-			updateListLastTown(town.getNameTown());
+			updateListLastTown(tvTown.getText().toString());
 			if(!URL.equals(town.getUrlTown())){
 				URL = town.getUrlTown();
 				refreshWeather(URL);
@@ -485,14 +485,15 @@ public class HomeActivity extends FragmentActivity{
 					updateListLastTown(tvTown.getText().toString());
 					
 					Uri.Builder urlBuild = new Uri.Builder();
-					urlBuild.scheme("http")
-						.appendPath("погода-"+text);
 					if(Locale.getDefault().getLanguage().equals(App.LANG_UA)){
 						urlBuild.authority(App.SITE_AUTHORITY_UA);
 					} else {
 						urlBuild.authority(App.SITE_AUTHORITY_RU);
 					}
+                    urlBuild.scheme("http")
+                            .appendPath("погода-"+text);
 					Log.i(TAG, "GET URL: "+urlBuild.build().toString());
+
 					String newUrl = urlBuild.build().toString();
 					if(!URL.equals(newUrl)){
 						URL = newUrl;
@@ -503,7 +504,7 @@ public class HomeActivity extends FragmentActivity{
 				}
 				else
 				{
-					Toast.makeText(HomeActivity.this, "No connetions", Toast.LENGTH_SHORT).show();
+					Toast.makeText(HomeActivity.this, "No connections", Toast.LENGTH_SHORT).show();
 				}
 			}
 		}
