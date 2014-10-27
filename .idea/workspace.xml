@@ -35,32 +35,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: ua.maker.sinopticua" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable/back_item_weather.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/cardview_v7_21_0_0.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable/back_view_weather.9.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/interfaces/OnLoadPageAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/interfaces/OnLoadPageListener.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/structs/ItemTown.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/models/ItemTown.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/structs/ItemWeather.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/models/ItemWeather.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/structs/WeatherStruct.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/models/WeatherStruct.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/constants/App.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/constants/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/Tools.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/Tools.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/TownAdapter.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/TownAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/TownCompleteAdapter.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/TownCompleteAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/UserDB.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/UserDB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/WeatherAdapter.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/WeatherAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/detail_weather_layout.xml" afterPath="$PROJECT_DIR$/res/layout/detail_weather_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/item_weather_layout.xml" afterPath="$PROJECT_DIR$/res/layout/item_weather_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_20_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_20_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/weather_sinoptik_app.iml" afterPath="$PROJECT_DIR$/weather_sinoptik_app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="" />
     <ignored path="weather_sinoptik_app.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -137,8 +112,8 @@
       <file leaf-file-name="DataParser.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8307873" vertical-offset="19579" max-vertical-offset="20430">
-              <caret line="1127" column="5" selection-start-line="1127" selection-start-column="5" selection-end-line="1127" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.59811985" vertical-offset="19579" max-vertical-offset="20430">
+              <caret line="1116" column="63" selection-start-line="1116" selection-start-column="63" selection-end-line="1116" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#36398#36408#0" expanded="true" />
@@ -153,6 +128,10 @@
     <FindUsagesManager>
       <setting name="OPEN_NEW_TAB" value="true" />
     </FindUsagesManager>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="$USER_HOME$/_keys/debug.keystore" />
+    <option name="KEY_ALIAS" value="debug" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -1053,7 +1032,7 @@
     <property name="android.project.structure.last.selected" value="SDK Location" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/_keys/debug.keystore" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="HT29BW304697" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="AndroidTV_v3" />
     <property name="OverrideImplement.combined" value="true" />
@@ -1680,8 +1659,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8307873" vertical-offset="19579" max-vertical-offset="20430">
-          <caret line="1127" column="5" selection-start-line="1127" selection-start-column="5" selection-end-line="1127" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.59811985" vertical-offset="19579" max-vertical-offset="20430">
+          <caret line="1116" column="63" selection-start-line="1116" selection-start-column="63" selection-end-line="1116" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#36398#36408#0" expanded="true" />
