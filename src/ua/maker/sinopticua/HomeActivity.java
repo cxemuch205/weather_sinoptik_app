@@ -97,6 +97,9 @@ public class HomeActivity extends FragmentActivity{
 		if(VERSION.SDK_INT >= 11){
 			initActionBar();
 		}
+        pd = new ProgressDialog(HomeActivity.this);
+        pd.setMessage(getString(R.string.dialog_downld_page_msg));
+        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		Log.i(TAG, "onCreate()");
 		if(Locale.getDefault().getLanguage().equals(App.LANG_UA)){
 			URL = App.DEFAULT_URL_UA;
@@ -172,10 +175,6 @@ public class HomeActivity extends FragmentActivity{
 		etUrl.setOnItemClickListener(itemCompleteListener);
 		etUrl.setAdapter(compliteAdapter);
 		
-		pd = new ProgressDialog(HomeActivity.this);
-        pd.setMessage(getString(R.string.dialog_downld_page_msg));
-        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		
 		Log.i(TAG, "isTaskPendingOrRunning: " + isTaskPendingOrRunning());
 	}
 	
@@ -242,11 +241,15 @@ public class HomeActivity extends FragmentActivity{
 			super.onPostExecute(result);
 			pbLoadLocation.setVisibility(ProgressBar.GONE);
 			llGetLocation.setVisibility(LinearLayout.VISIBLE);
-			etUrl.setText(result.getNameTown());
-			cityName = result.getNameTown().substring(0, 3);
-			updateListAuto(cityName);
-			etUrl.setSelection(etUrl.getText().toString().length()-2, etUrl.getText().toString().length());
-		}
+            if (result != null) {
+                etUrl.setText(result.getNameTown());
+                cityName = result.getNameTown().substring(0, 3);
+                updateListAuto(cityName);
+                etUrl.setSelection(etUrl.getText().toString().length() - 2, etUrl.getText().toString().length());
+            } else {
+                Toast.makeText(HomeActivity.this, getString(R.string.location_not_found), Toast.LENGTH_SHORT).show();
+            }
+        }
 	}
 	
 	private OnItemClickListener itemCompleteListener = new OnItemClickListener() {
@@ -254,7 +257,6 @@ public class HomeActivity extends FragmentActivity{
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
-			settingDialog.dismiss();
 			Uri.Builder urlBuild = new Uri.Builder();
 			urlBuild.scheme("http");
 			if(Locale.getDefault().getLanguage().equals(App.LANG_UA)){
@@ -278,6 +280,7 @@ public class HomeActivity extends FragmentActivity{
                 etUrl.setText("");
                 updateInfosTvTown();
             }
+            settingDialog.dismiss();
 		}
 	};
 	
@@ -506,7 +509,7 @@ public class HomeActivity extends FragmentActivity{
 				}
 				else
 				{
-					Toast.makeText(HomeActivity.this, "No connections", Toast.LENGTH_SHORT).show();
+					Toast.makeText(HomeActivity.this, getString(R.string.no_connections), Toast.LENGTH_SHORT).show();
 				}
 			}
 		}

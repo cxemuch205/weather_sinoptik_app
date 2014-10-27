@@ -1122,6 +1122,7 @@ public class DataParser {
 			result.setNameTown(townName);
 		} catch (JSONException e) {
 			e.printStackTrace();
+            return null;
 		}
 		return result;
 	}

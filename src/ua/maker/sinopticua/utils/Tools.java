@@ -1,6 +1,9 @@
 package ua.maker.sinopticua.utils;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -69,23 +73,25 @@ public class Tools {
 	        httpGet.setURI(uri);
 
 	        HttpResponse httpResponse = httpClient.execute(httpGet);
-	        int statutCode = httpResponse.getStatusLine().getStatusCode();
-	        int length = (int) httpResponse.getEntity().getContentLength();
-	        
-	        inputStream = httpResponse.getEntity().getContent();
-	        Reader reader = new InputStreamReader(inputStream, "UTF-8");
+	        int statusCode = httpResponse.getStatusLine().getStatusCode();
 
-	        int inChar;
-	        StringBuffer stringBuffer = new StringBuffer();
+            if (statusCode == HttpURLConnection.HTTP_OK) {
+                inputStream = httpResponse.getEntity().getContent();
+                Reader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
-	        while ((inChar = reader.read()) != -1) {
-	            stringBuffer.append((char) inChar);
-                if(loadPageListener != null)
-                    loadPageListener.onProgress(stringBuffer.length(), length);
-	        }
+                int max = 16544;
 
-	        response = stringBuffer.toString();
+                int line;
+                StringBuffer stringBuffer = new StringBuffer();
 
+                while ((line = reader.read()) != -1) {
+                    stringBuffer.append((char)line);
+                    if(loadPageListener != null)
+                        loadPageListener.onProgress(stringBuffer.length(), max);
+                }
+
+                response = stringBuffer.toString();
+            }
 	    } catch (ClientProtocolException e) {
 	        Log.e(TAG, "HttpActivity.getPage() ClientProtocolException error", e);
 	    } catch (IOException e) {
@@ -105,6 +111,26 @@ public class Tools {
             loadPageListener.onEndLoad();
 	    return response;
 	}
+
+    public static byte[] getBytes(InputStream is) throws IOException {
+
+        int len;
+        int size = 1024;
+        byte[] buf;
+
+        if (is instanceof ByteArrayInputStream) {
+            size = is.available();
+            buf = new byte[size];
+            len = is.read(buf, 0, size);
+        } else {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            buf = new byte[size];
+            while ((len = is.read(buf, 0, size)) != -1)
+                bos.write(buf, 0, len);
+            buf = bos.toByteArray();
+        }
+        return buf;
+    }
 	
 	public static ImageFetcher getImageFetcher(FragmentActivity activity) {
         ImageFetcher fetcher = new ImageFetcher(activity);
