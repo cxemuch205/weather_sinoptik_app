@@ -174,6 +174,7 @@ public class HomeActivity extends FragmentActivity{
 		
 		pd = new ProgressDialog(HomeActivity.this);
         pd.setMessage(getString(R.string.dialog_downld_page_msg));
+        pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		
 		Log.i(TAG, "isTaskPendingOrRunning: " + isTaskPendingOrRunning());
 	}
@@ -269,7 +270,8 @@ public class HomeActivity extends FragmentActivity{
 			final String newURL = urlBuild.build().toString();//App.SITE_URL_RU+Uri.encode(listAutoCompliteTown.get(position).getUrlEndTown());
 			
 			Log.i(TAG, "URL: " + newURL);
-            if(!URL.equals(newURL)){
+            if(!URL.equals(newURL)
+                    || (URL.equals(newURL) && adapter.getCount() == 0)){
                 updateListLastTown(tvTown.getText().toString());
                 URL = newURL;
                 refreshWeather(URL);

@@ -70,14 +70,14 @@
       <file leaf-file-name="HomeActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26909518" vertical-offset="7997" max-vertical-offset="12582">
-              <caret line="484" column="66" selection-start-line="484" selection-start-column="66" selection-end-line="484" selection-end-column="66" />
+            <state vertical-scroll-proportion="0.63924795" vertical-offset="2552" max-vertical-offset="12618">
+              <caret line="176" column="59" selection-start-line="176" selection-start-column="59" selection-end-line="176" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#9036#10001#0" expanded="true" />
-                <element signature="e#9997#9998#0" expanded="true" />
-                <element signature="e#19084#19342#0" expanded="true" />
-                <element signature="e#19327#19328#0" expanded="true" />
+                <element signature="e#9098#10134#0" expanded="true" />
+                <element signature="e#10130#10131#0" expanded="true" />
+                <element signature="e#19217#19475#0" expanded="true" />
+                <element signature="e#19460#19461#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1056,15 +1056,27 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java</url>
-          <line>255</line>
+          <line>256</line>
           <properties />
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java</url>
+          <line>531</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java</url>
+          <line>163</line>
+          <properties />
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="5" />
+      <option name="time" value="7" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -1211,16 +1223,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/constants/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="158" max-vertical-offset="666">
+          <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26909518" vertical-offset="7997" max-vertical-offset="12582">
-          <caret line="484" column="66" selection-start-line="484" selection-start-column="66" selection-end-line="484" selection-end-column="66" />
+        <state vertical-scroll-proportion="0.63924795" vertical-offset="2552" max-vertical-offset="12618">
+          <caret line="176" column="59" selection-start-line="176" selection-start-column="59" selection-end-line="176" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9036#10001#0" expanded="true" />
-            <element signature="e#9997#9998#0" expanded="true" />
-            <element signature="e#19084#19342#0" expanded="true" />
-            <element signature="e#19327#19328#0" expanded="true" />
+            <element signature="e#9098#10134#0" expanded="true" />
+            <element signature="e#10130#10131#0" expanded="true" />
+            <element signature="e#19217#19475#0" expanded="true" />
+            <element signature="e#19460#19461#0" expanded="true" />
           </folding>
         </state>
       </provider>
