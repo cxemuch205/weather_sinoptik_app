@@ -152,7 +152,7 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 			String response;
 			boolean isGet = false;
 			do {
-				response = Tools.getWebPage(urls[0]);
+				response = Tools.getWebPage(urls[0], null);
 				if(response != null){
 					if(response.length() != 0){
 						isGet = true;

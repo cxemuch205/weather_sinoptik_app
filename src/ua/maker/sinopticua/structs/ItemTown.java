@@ -52,4 +52,9 @@ public class ItemTown {
 	public void setDetailLocation(String detailLocation) {
 		this.detailLocation = detailLocation;
 	}
+
+    @Override
+    public String toString() {
+        return nameTown;
+    }
 }

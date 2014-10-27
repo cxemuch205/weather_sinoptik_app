@@ -9,9 +9,10 @@ import java.util.Locale;
 
 import ua.maker.sinopticua.adapters.TownAdapter;
 import ua.maker.sinopticua.adapters.TownAdapter.onClearItemListener;
-import ua.maker.sinopticua.adapters.TownCompliteAdapter;
+import ua.maker.sinopticua.adapters.TownCompleteAdapter;
 import ua.maker.sinopticua.adapters.WeatherAdapter;
 import ua.maker.sinopticua.constants.App;
+import ua.maker.sinopticua.interfaces.OnLoadPageAdapter;
 import ua.maker.sinopticua.structs.ItemTown;
 import ua.maker.sinopticua.structs.ItemWeather;
 import ua.maker.sinopticua.structs.WeatherStruct;
@@ -66,7 +67,7 @@ public class HomeActivity extends FragmentActivity{
 	
 	private List<ItemTown> listAutoCompliteTown;
 	private WeakReference<LoadTownsTask> asyncTaskLoadTownWeakRef;
-	private TownCompliteAdapter compliteAdapter;
+	private TownCompleteAdapter compliteAdapter;
 	private WeakReference<HttpTask> asyncTaskLoadWeatherData;
 	
 	private ArrayList<ItemWeather> listItemsWeather;
@@ -113,7 +114,7 @@ public class HomeActivity extends FragmentActivity{
 		listItemsWeather = new ArrayList<ItemWeather>();
 		listAutoCompliteTown = new ArrayList<ItemTown>();
 		
-		compliteAdapter = new TownCompliteAdapter(this, listAutoCompliteTown);
+		compliteAdapter = new TownCompleteAdapter(this, listAutoCompliteTown);
 		adapter = new WeatherAdapter(this, listItemsWeather, Tools.getImageFetcher(HomeActivity.this));
 		lvWeathers.setAdapter(adapter);
 		lvWeathers.setOnItemClickListener(itemWeatherClickListener);
@@ -159,7 +160,8 @@ public class HomeActivity extends FragmentActivity{
 		settingDialog = settingDialogBuilder.create();
 		settingDialog.setCanceledOnTouchOutside(false);
 		if(pref.contains(App.PREF_SITY_URL)){
-			URL = pref.getString(App.PREF_SITY_URL, URL);
+            //TODO:TESTING and add empty URL for start
+			URL = "";//pref.getString(App.PREF_SITY_URL, URL);
 		}
 		
 		if(pref.contains(App.PREF_SITY_NAME)){
@@ -167,7 +169,7 @@ public class HomeActivity extends FragmentActivity{
 		}
 		
 		etUrl.addTextChangedListener(textChangeListener);
-		etUrl.setOnItemClickListener(itemComplitListener);
+		etUrl.setOnItemClickListener(itemCompliteListener);
 		etUrl.setAdapter(compliteAdapter);
 		
 		pd = new ProgressDialog(HomeActivity.this);
@@ -229,7 +231,7 @@ public class HomeActivity extends FragmentActivity{
 			}
 			
 			Log.i(TAG, "LoadLocation URL: " + builderUrl.build().toString());
-			String response = Tools.getWebPage(builderUrl.build().toString());
+			String response = Tools.getWebPage(builderUrl.build().toString(), null);
 			DataParser parser = DataParser.getInstance();
 			return parser.parserGetLocation(response);
 		}
@@ -246,26 +248,29 @@ public class HomeActivity extends FragmentActivity{
 		}
 	}
 	
-	private OnItemClickListener itemComplitListener = new OnItemClickListener() {
+	private OnItemClickListener itemCompliteListener = new OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
 			settingDialog.dismiss();
 			Uri.Builder urlBuild = new Uri.Builder();
-			urlBuild.scheme("http")
-				.appendPath(listAutoCompliteTown.get(position).getUrlEndTown());
+			urlBuild.scheme("http");
 			if(Locale.getDefault().getLanguage().equals(App.LANG_UA)){
 				urlBuild.authority(App.SITE_AUTHORITY_UA);
 			} else {
 				urlBuild.authority(App.SITE_AUTHORITY_RU);
 			}
+
+            ItemTown town = listAutoCompliteTown.get(position);
+
+            urlBuild.appendPath(town.getUrlEndTown());
 			
 			String newURL = urlBuild.build().toString();//App.SITE_URL_RU+Uri.encode(listAutoCompliteTown.get(position).getUrlEndTown());
 			
 			Log.i(TAG, "URL: " + newURL);
 			if(!URL.equals(newURL)){
-				updateListLastTown(tvTown.getText().toString());
+				updateListLastTown(town.getNameTown());
 				URL = newURL;
 				refreshWeather(URL);
 				etUrl.setText("");
@@ -365,7 +370,7 @@ public class HomeActivity extends FragmentActivity{
 				builderRequest.authority(App.SITE_AUTHORITY_RU);
 			}
 			Log.i(TAG, "URL request for city list: " + builderRequest.build().toString());
-			String response = Tools.getWebPage(builderRequest.build().toString());
+			String response = Tools.getWebPage(builderRequest.build().toString(), null);
 			
 			//if(BuildConfig.DEBUG)
 			//	Tools.logToFile(response, "log_load_town");
@@ -424,7 +429,7 @@ public class HomeActivity extends FragmentActivity{
 				long id) {
 			settingDialog.dismiss();
 			ItemTown town = listTown.get(position);
-			updateListLastTown(tvTown.getText().toString());
+			updateListLastTown(town.getNameTown());
 			if(!URL.equals(town.getUrlTown())){
 				URL = town.getUrlTown();
 				refreshWeather(URL);
@@ -553,14 +558,29 @@ public class HomeActivity extends FragmentActivity{
 	    @Override
 	    protected WeatherStruct doInBackground(String... urls) {
 	    	Log.i(TAG, "START TASK - " + Uri.decode(urls[0]));
-	        String response = Tools.getWebPage(urls[0]);
+	        String response = Tools.getWebPage(urls[0], new OnLoadPageAdapter() {
+                @Override
+                public void onProgress(int progress, int count) {
+                    super.onProgress(progress, count);
+                    publishProgress(progress, count);
+                }
+            });
 	        if(BuildConfig.DEBUG)
 	        	Tools.logToFile(response, "log_http_task");	        
 	        DataParser parser = DataParser.getInstance();
 	        return parser.parserHTML(response);
 	    }
 
-	    @Override
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            int progress = values[0];
+            int count = values[1];
+            activityWeakRef.get().pd.setMax(count);
+            activityWeakRef.get().pd.setProgress(progress);
+        }
+
+        @Override
 	    protected void onPostExecute(WeatherStruct response) {
 	    	if(activityWeakRef.get() != null){
 	    		try {
@@ -688,7 +708,7 @@ public class HomeActivity extends FragmentActivity{
 	@Override
 	public void onBackPressed() {
 		if (this.lastBackPressTime < System.currentTimeMillis() - TIME_TO_BACK) {
-			toast = Toast.makeText(this,  R.string.repeat_click_on_back, TIME_TO_BACK);
+			toast = Toast.makeText(this,  R.string.repeat_click_on_back, Toast.LENGTH_SHORT);
 		    toast.show();
 		    this.lastBackPressTime = System.currentTimeMillis();
 		} else {

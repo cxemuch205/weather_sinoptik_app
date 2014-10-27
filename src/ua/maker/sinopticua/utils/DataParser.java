@@ -1117,7 +1117,7 @@ public class DataParser {
 			JSONArray data = objectAll.getJSONArray("results");
 			JSONObject townJson = data.getJSONObject(1);
 			JSONArray addressComp = townJson.getJSONArray("address_components");
-			JSONObject townNameJson = addressComp.getJSONObject(1);
+			JSONObject townNameJson = addressComp.getJSONObject(2);
 			String townName = townNameJson.getString("long_name");
 			result.setNameTown(townName);
 		} catch (JSONException e) {

@@ -18,6 +18,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import ua.maker.sinopticua.interfaces.OnLoadPageAdapter;
+import ua.maker.sinopticua.interfaces.OnLoadPageListener;
 import ua.maker.sinopticua.structs.WeatherStruct;
 import android.app.Activity;
 import android.content.Context;
@@ -51,8 +53,9 @@ public class Tools {
 		}
 	}
 	
-	public static String getWebPage(String adresse) {
-
+	public static String getWebPage(String url, OnLoadPageAdapter loadPageListener) {
+        if(loadPageListener != null)
+            loadPageListener.onStartLoad();
 	    HttpClient httpClient = new DefaultHttpClient();
 	    HttpGet httpGet = new HttpGet();
 
@@ -62,7 +65,7 @@ public class Tools {
 
 	    try {
 
-	        URI uri = new URI(adresse);
+	        URI uri = new URI(url);
 	        httpGet.setURI(uri);
 
 	        HttpResponse httpResponse = httpClient.execute(httpGet);
@@ -77,6 +80,8 @@ public class Tools {
 
 	        while ((inChar = reader.read()) != -1) {
 	            stringBuffer.append((char) inChar);
+                if(loadPageListener != null)
+                    loadPageListener.onProgress(stringBuffer.length(), length);
 	        }
 
 	        response = stringBuffer.toString();
@@ -96,7 +101,8 @@ public class Tools {
 	            Log.e(TAG, "HttpActivity.getPage() IOException error lors de la fermeture des flux", e);
 	        }
 	    }
-
+        if(loadPageListener != null)
+            loadPageListener.onEndLoad();
 	    return response;
 	}
 	
