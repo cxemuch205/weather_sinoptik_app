@@ -15,6 +15,8 @@ import ua.maker.sinopticua.models.ItemWeather;
 import ua.maker.sinopticua.models.WeatherStruct;
 import ua.maker.sinopticua.utils.Tools;
 import ua.maker.sinopticua.utils.DataParser;
+
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -28,10 +30,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 
 public class WidgetWeatherAppProvider extends AppWidgetProvider {
 
@@ -56,9 +62,11 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 		Log.i(TAG, "onUpdate()");
 		this.appWidgetManager = appWidgetManager;
 		this.mContext = context;
-		view = new RemoteViews(context.getPackageName(),
-				R.layout.widget_3x2_layout);
-		thisWidget = new ComponentName(context, WidgetWeatherAppProvider.class);
+
+        view = new RemoteViews(context.getPackageName(),
+                R.layout.widget_3x2_layout);
+
+        thisWidget = new ComponentName(context, WidgetWeatherAppProvider.class);
 		pref = context.getSharedPreferences(App.PREF_APP, Context.MODE_PRIVATE);
 		
 		timerWidget.schedule(new TimerTask() {
@@ -83,10 +91,8 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 		for (int i = 0; i < appWidgetIds.length; i++) {
 	        int appWidgetId = appWidgetIds[i];
 
-	        Intent intent = new Intent(context, HomeActivity.class),
-	        		intentUpdate = new Intent(context, WidgetWeatherAppProvider.class);
-	        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0),
-	        		pendingIntentUpdate = PendingIntent.getActivity(context, 1, intentUpdate, 0);
+	        Intent intent = new Intent(context, HomeActivity.class);
+	        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 	        view.setOnClickPendingIntent(R.id.ll_widget, pendingIntent);
 	        view.setOnClickPendingIntent(R.id.iv_update, getPendingSelfIntent(context, ACTION_UPDATE));
 	        appWidgetManager.updateAppWidget(appWidgetId, view);
@@ -120,7 +126,7 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 			refreshWeather(url);
 		}
 	}
-	
+
 	protected PendingIntent getPendingSelfIntent(Context context, String action) {
         Intent intent = new Intent(context, getClass());
         intent.setAction(action);
