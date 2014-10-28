@@ -18,5 +18,6 @@
     <string name="enter_town_name_hint">Введите город</string>
     <string name="cant_get_current_location">Не удалось получить ваше текущее местоположение!</string>
     <string name="location_not_found">Местоположение не определено!</string>
+    <string name="no_correct_name_town">Не корректный ввод!</string>
 
 </resources>

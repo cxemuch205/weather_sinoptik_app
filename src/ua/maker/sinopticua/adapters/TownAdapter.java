@@ -3,7 +3,10 @@ package ua.maker.sinopticua.adapters;
 import java.util.List;
 
 import ua.maker.sinopticua.R;
+import ua.maker.sinopticua.constants.App;
 import ua.maker.sinopticua.models.ItemTown;
+import ua.maker.sinopticua.utils.Tools;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -47,8 +50,10 @@ public class TownAdapter extends ArrayAdapter<ItemTown>{
 			holder = new ViewHolder();
 			holder.tvNameTown = (TextView)view.findViewById(R.id.tv_name_town);
 			holder.ivClear = (ImageView)view.findViewById(R.id.iv_clear);
-			
-			view.setTag(holder);
+
+            initTypefaces(holder);
+
+            view.setTag(holder);
 		} else {
 			holder = (ViewHolder) view.getTag();
 		}
@@ -71,8 +76,12 @@ public class TownAdapter extends ArrayAdapter<ItemTown>{
 		
 		return view;
 	}
-	
-	static class ViewHolder{
+
+    private void initTypefaces(ViewHolder holder) {
+        holder.tvNameTown.setTypeface(Tools.getFont(mContext, App.MTypeface.ROBOTO_LIGHT));
+    }
+
+    static class ViewHolder{
 		TextView tvNameTown;
 		ImageView ivClear;
 	}

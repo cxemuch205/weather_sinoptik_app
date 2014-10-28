@@ -3,8 +3,11 @@ package ua.maker.sinopticua.adapters;
 import java.util.List;
 
 import ua.maker.sinopticua.R;
+import ua.maker.sinopticua.constants.App;
 import ua.maker.sinopticua.models.ItemWeather;
-import ua.maker.sinopticua.utils.ImageFetcher;
+import ua.maker.sinopticua.utils.ImageCache;
+import ua.maker.sinopticua.utils.Tools;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -21,13 +24,11 @@ public class WeatherAdapter extends ArrayAdapter<ItemWeather> {
 
 	private Context mContext;
 	private List<ItemWeather> data;
-	private ImageFetcher imageFether;
 
-	public WeatherAdapter(Context context, List<ItemWeather> data, ImageFetcher imageFether) {
+	public WeatherAdapter(Context context, List<ItemWeather> data) {
 		super(context, R.layout.item_weather_layout, data);
 		this.mContext = context;
 		this.data = data;
-		this.imageFether = imageFether;
 	}
 
 	@Override
@@ -47,8 +48,10 @@ public class WeatherAdapter extends ArrayAdapter<ItemWeather> {
 			holder.tvTempMax = (TextView)view.findViewById(R.id.tv_temp_max);
 			holder.tvNameWeather = (TextView)view.findViewById(R.id.tv_name_weather);
 			holder.ivWeatherImage = (ImageView)view.findViewById(R.id.iv_weather);
-			
-			view.setTag(holder);			
+
+            initTypefaces(holder);
+
+            view.setTag(holder);
 		} else {
 			holder = (ViewHolder)view.getTag();
 		}
@@ -71,18 +74,21 @@ public class WeatherAdapter extends ArrayAdapter<ItemWeather> {
 			holder.tvMonth.setTextColor(Color.BLACK);
 		}
 		String url = item.urlImage;
-         
-        if((url == null) || (!Patterns.WEB_URL.matcher(url).matches()))
-        {
-        	url = "";
-        }
-        
-        imageFether.loadThumbnailImage(url, holder.ivWeatherImage, R.drawable.white_cube);
+        ImageCache.download(url, holder.ivWeatherImage);
 
 		return view;
 	}
 
-	static class ViewHolder {
+    private void initTypefaces(ViewHolder holder) {
+        holder.tvDay.setTypeface(Tools.getFont(mContext, App.MTypeface.ROBOTO_MEDIUM));
+        holder.tvMonth.setTypeface(Tools.getFont(mContext, App.MTypeface.ROBOTO_MEDIUM));
+        holder.tvNameDay.setTypeface(Tools.getFont(mContext, App.MTypeface.ROBOTO_LIGHT));
+        holder.tvTempMin.setTypeface(Tools.getFont(mContext, App.MTypeface.ROBOTO_LIGHT));
+        holder.tvTempMax.setTypeface(Tools.getFont(mContext, App.MTypeface.ROBOTO_LIGHT));
+        holder.tvNameWeather.setTypeface(Tools.getFont(mContext, App.MTypeface.ROBOTO_THIN));
+    }
+
+    static class ViewHolder {
 		TextView tvDay;
 		TextView tvNameDay;
 		TextView tvMonth;

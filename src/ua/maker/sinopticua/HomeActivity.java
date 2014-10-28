@@ -16,7 +16,6 @@ import ua.maker.sinopticua.models.ItemTown;
 import ua.maker.sinopticua.models.ItemWeather;
 import ua.maker.sinopticua.models.WeatherStruct;
 import ua.maker.sinopticua.utils.GPSTracker;
-import ua.maker.sinopticua.utils.OnDialogClickListener;
 import ua.maker.sinopticua.utils.Tools;
 import ua.maker.sinopticua.utils.UserDB;
 import ua.maker.sinopticua.utils.DataParser;
@@ -40,6 +39,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -97,9 +97,7 @@ public class HomeActivity extends FragmentActivity{
 		if(VERSION.SDK_INT >= 11){
 			initActionBar();
 		}
-        pd = new ProgressDialog(HomeActivity.this);
-        pd.setMessage(getString(R.string.dialog_downld_page_msg));
-        pd.setCanceledOnTouchOutside(false);
+
 		Log.i(TAG, "onCreate()");
 		if(Locale.getDefault().getLanguage().equals(App.LANG_UA)){
 			URL = App.DEFAULT_URL_UA;
@@ -118,7 +116,7 @@ public class HomeActivity extends FragmentActivity{
 		listAutoCompliteTown = new ArrayList<ItemTown>();
 		
 		compliteAdapter = new TownCompleteAdapter(this, listAutoCompliteTown);
-		adapter = new WeatherAdapter(this, listItemsWeather, Tools.getImageFetcher(HomeActivity.this));
+		adapter = new WeatherAdapter(this, listItemsWeather);
 		lvWeathers.setAdapter(adapter);
 		lvWeathers.setOnItemClickListener(itemWeatherClickListener);
 		
@@ -127,41 +125,7 @@ public class HomeActivity extends FragmentActivity{
 		listTown = db.getListTowns();
 		adapterTown = new TownAdapter(HomeActivity.this, listTown);
 		adapterTown.setClearItemListener(clearItemListener);
-		
-		settingDialogBuilder = new AlertDialog.Builder(this);
-		settingDialogBuilder.setTitle(R.string.dialog_title_setting);
-		
-		View viewDialog = getLayoutInflater().inflate(R.layout.setting_dialog_layout, null);
-		etUrl = (AutoCompleteTextView)viewDialog.findViewById(R.id.autoCompleteTextView_city);
-		llGetLocation = (LinearLayout)viewDialog.findViewById(R.id.ll_start_get_location);
-		pbLoadLocation = (ProgressBar)viewDialog.findViewById(R.id.pb_load_location);
-		tvLastSelectInfo = (TextView)viewDialog.findViewById(R.id.tv_info_last_towns);
-		lvTown = (ListView)viewDialog.findViewById(R.id.lv_list_last_towns);
-		lvTown.setAdapter(adapterTown);
-		lvTown.setOnItemClickListener(itemTownClickListener);
-		
-		llGetLocation.setOnClickListener(clickGetLocationListener);
-		
-		updateInfosTvTown();
-		
-		settingDialogBuilder.setView(viewDialog);
-		settingDialogBuilder.setPositiveButton(R.string.apply, clickBtnListener);
-		settingDialogBuilder.setNegativeButton(R.string.cancel, new OnDialogClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if(loadTownTask != null){
-					loadTownTask.cancel(true);
-				}
-				dialog.cancel();
-				if(isFirst){
-					finish();
-				}
-			}
-		});
-		
-		settingDialog = settingDialogBuilder.create();
-		settingDialog.setCanceledOnTouchOutside(false);
+
 		if(pref.contains(App.PREF_SITY_URL)){
 			URL = pref.getString(App.PREF_SITY_URL, URL);
 		}
@@ -170,14 +134,20 @@ public class HomeActivity extends FragmentActivity{
 			cityName = pref.getString(App.PREF_SITY_NAME, "");
 		}
 		
-		etUrl.addTextChangedListener(textChangeListener);
-		etUrl.setOnItemClickListener(itemCompleteListener);
-		etUrl.setAdapter(compliteAdapter);
-		
 		Log.i(TAG, "isTaskPendingOrRunning: " + isTaskPendingOrRunning());
 	}
-	
-	@SuppressLint("NewApi")
+
+    private void initTypefaces() {
+        tvLastDateUpdate.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
+        tvLastSelectInfo.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
+        tvNow.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_THIN));
+        tvTown.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
+        etUrl.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
+        tvWind.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_MEDIUM));
+
+    }
+
+    @SuppressLint("NewApi")
 	private void initActionBar() {
 		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.action_white_drawable));
 		getActionBar().setIcon(R.drawable.sinoptic_logo);
@@ -471,7 +441,7 @@ public class HomeActivity extends FragmentActivity{
 		public void afterTextChanged(Editable s) {}
 	};
 	
-	private OnDialogClickListener clickBtnListener = new OnDialogClickListener() {
+	private DialogInterface.OnClickListener clickBtnListener = new DialogInterface.OnClickListener() {
 
 		@Override
 		public void onClick(DialogInterface dialog, int index) {
@@ -550,7 +520,14 @@ public class HomeActivity extends FragmentActivity{
 		
 		public HttpTask(HomeActivity act){
 			activityWeakRef = new WeakReference<HomeActivity>(act);
-			activityWeakRef.get().pd.show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        activityWeakRef.get().pd.show();
+                    } catch (Exception e) {}
+                }
+            }, 50);
 	        if(activityWeakRef.get().etUrl.isShown()){
 	        	activityWeakRef.get().etUrl.dismissDropDown();
 	        }
@@ -568,7 +545,7 @@ public class HomeActivity extends FragmentActivity{
 
         @Override
 	    protected void onPostExecute(WeatherStruct response) {
-	    	if(activityWeakRef.get() != null){
+	    	if(activityWeakRef.get() != null && response != null){
 	    		try {
 		        	activityWeakRef.get().pref.edit().putString(App.PREF_LAST_DATE_UPDATE_FULL,
 		        			activityWeakRef.get().dateFullFirmat.format(new Date())).commit();
@@ -581,8 +558,13 @@ public class HomeActivity extends FragmentActivity{
 		        		activityWeakRef.get().isFirst = false;
 		        	}
 				} catch (Exception e) {}
-	    	}
-	    }
+	    	} else if (activityWeakRef.get() != null) {
+                if(activityWeakRef.get().pd != null) activityWeakRef.get().pd.dismiss();
+                Toast toast = Toast.makeText(activityWeakRef.get(), activityWeakRef.get().getString(R.string.no_correct_name_town), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+        }
 	}
 	
 	public void setInfoWeather(WeatherStruct info){
@@ -655,6 +637,50 @@ public class HomeActivity extends FragmentActivity{
 	protected void onResume() {
 		super.onResume();
 		Log.i(TAG, "onResume()");
+        pd = new ProgressDialog(this);
+        pd.setMessage(getString(R.string.dialog_downld_page_msg));
+        pd.setCanceledOnTouchOutside(false);
+
+        settingDialogBuilder = new AlertDialog.Builder(this);
+        settingDialogBuilder.setTitle(R.string.dialog_title_setting);
+
+        View viewDialog = getLayoutInflater().inflate(R.layout.setting_dialog_layout, null);
+        etUrl = (AutoCompleteTextView)viewDialog.findViewById(R.id.autoCompleteTextView_city);
+        llGetLocation = (LinearLayout)viewDialog.findViewById(R.id.ll_start_get_location);
+        pbLoadLocation = (ProgressBar)viewDialog.findViewById(R.id.pb_load_location);
+        tvLastSelectInfo = (TextView)viewDialog.findViewById(R.id.tv_info_last_towns);
+        lvTown = (ListView)viewDialog.findViewById(R.id.lv_list_last_towns);
+        lvTown.setAdapter(adapterTown);
+        lvTown.setOnItemClickListener(itemTownClickListener);
+
+        llGetLocation.setOnClickListener(clickGetLocationListener);
+
+        updateInfosTvTown();
+
+        settingDialogBuilder.setView(viewDialog);
+        settingDialogBuilder.setPositiveButton(R.string.apply, clickBtnListener);
+        settingDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(loadTownTask != null){
+                    loadTownTask.cancel(true);
+                }
+                dialog.cancel();
+                if(isFirst){
+                    finish();
+                }
+            }
+        });
+
+        settingDialog = settingDialogBuilder.create();
+        settingDialog.setCanceledOnTouchOutside(false);
+
+        etUrl.addTextChangedListener(textChangeListener);
+        etUrl.setOnItemClickListener(itemCompleteListener);
+        etUrl.setAdapter(compliteAdapter);
+
+        initTypefaces();
 		/*if(adapter.isEmpty()){
 			Log.i(TAG, "onResume - setAdapter");
 			adapter = new WeatherAdapter(HomeActivity.this, listItemsWeather, Tools.getImageFetcher(HomeActivity.this));

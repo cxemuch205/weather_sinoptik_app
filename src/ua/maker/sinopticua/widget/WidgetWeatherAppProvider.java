@@ -177,7 +177,8 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 				Log.i(TAG, "onPostExecute()");
 				String dateUpdate = dateFormat.format(new Date());
 				pref.edit().putString(App.PREF_LAST_WIDGET_UPDATE, dateUpdate).commit();
-				view.setViewVisibility(R.id.pb_widget, ProgressBar.GONE);
+
+                view.setViewVisibility(R.id.pb_widget, ProgressBar.GONE);
 				view.setViewVisibility(R.id.iv_update, ImageView.VISIBLE);
 				view.setTextViewText(R.id.tv_town_name, Html.fromHtml(response.getTownName()));
 				view.setTextViewText(R.id.tv_info_last_update, dateUpdate);

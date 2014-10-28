@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ua.maker.sinopticua.R;
+import ua.maker.sinopticua.constants.App;
 import ua.maker.sinopticua.models.ItemTown;
+import ua.maker.sinopticua.utils.Tools;
 
 import android.app.Activity;
 import android.content.Context;
@@ -66,6 +68,8 @@ public class TownCompleteAdapter extends ArrayAdapter<ItemTown> implements Filte
             holder.tvName = (TextView) view.findViewById(R.id.tv_name_town);
             holder.tvDetail = (TextView) view.findViewById(R.id.tv_detail_location);
 
+            initTypefaces(holder);
+
             view.setTag(holder);
 
         } else {
@@ -77,6 +81,11 @@ public class TownCompleteAdapter extends ArrayAdapter<ItemTown> implements Filte
         holder.tvDetail.setText(item.getDetailLocation());
 
         return view;
+    }
+
+    private void initTypefaces(ViewHolder holder) {
+        holder.tvName.setTypeface(Tools.getFont(context, App.MTypeface.ROBOTO_MEDIUM));
+        holder.tvDetail.setTypeface(Tools.getFont(context, App.MTypeface.ROBOTO_LIGHT));
     }
 
     @Override

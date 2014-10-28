@@ -28,4 +28,10 @@ public class App {
 	public static final String LANG_RU = "ru";
 	public static final String LANG_UA = "uk";
 
+    public interface MTypeface {
+        public static final String ROBOTO_LIGHT = "Roboto-Light";
+        public static final String ROBOTO_MEDIUM = "Roboto-Medium";
+        public static final String ROBOTO_THIN = "Roboto-Thin";
+    }
+
 }
