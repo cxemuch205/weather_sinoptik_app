@@ -24,7 +24,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="4dp"
-                android:paddingRight="4dp"
                 android:paddingBottom="4dp">
 
                 <LinearLayout
@@ -55,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1.5"
                     android:gravity="center"
-                    android:background="#2200ff03"
+                    android:background="@drawable/back_name_day"
                     android:text="Small Text"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 

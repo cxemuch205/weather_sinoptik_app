@@ -119,6 +119,7 @@
             android:orientation="horizontal"
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
+            android:gravity="center_vertical"
             android:paddingTop="4dp"
             android:visibility="visible" >
 
@@ -126,7 +127,8 @@
                 android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:scaleType="fitCenter"
+                android:padding="8dp"
                 android:src="@drawable/ico_wind_speed" />
 
             <TextView
@@ -161,7 +163,8 @@
                     android:id="@+id/iv_weather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp" />
+                    android:scaleType="fitCenter"
+                    android:padding="4dp"  />
             </LinearLayout>
 
             <TextView

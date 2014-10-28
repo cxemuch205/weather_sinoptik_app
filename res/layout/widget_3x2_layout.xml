@@ -126,7 +126,8 @@
                     android:id="@+id/iv_weather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp" />
+                    android:scaleType="fitCenter"
+                    android:padding="4dp" />
             </LinearLayout>
 
             <TextView
@@ -144,6 +145,7 @@
         android:layout_height="52dp"
         android:background="@drawable/back_werning_new"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:paddingTop="4dp"
@@ -153,7 +155,8 @@
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:scaleType="fitCenter"
+            android:padding="8dp"
             android:src="@drawable/ico_wind_speed" />
 
         <TextView
