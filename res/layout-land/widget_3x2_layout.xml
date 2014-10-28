@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_widget"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/back_widget"
     android:orientation="vertical"
     android:paddingLeft="8dp"
@@ -60,13 +60,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:background="@drawable/back_now_on_street"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -76,7 +74,7 @@
                 android:id="@+id/tv_now_weather"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:paddingLeft="4dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="#000" />

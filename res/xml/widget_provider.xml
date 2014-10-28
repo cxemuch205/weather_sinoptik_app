@@ -4,6 +4,6 @@
     android:minHeight="92dp"
     android:minWidth="142dp"
     android:updatePeriodMillis="4000"
-    android:previewImage="@drawable/sinoptic_logo"
+    android:previewImage="@drawable/widget_sinoptik"
     android:widgetCategory="keyguard|home_screen"
     android:resizeMode="vertical|horizontal"/>
