@@ -604,36 +604,6 @@ public class HomeActivity extends FragmentActivity{
 	}
 	
 	@Override
-	protected void onStart() {
-		super.onStart();
-		if(pref.contains(App.PREF_SITY_URL)){
-			URL = pref.getString(App.PREF_SITY_URL, URL);
-		}
-		isFirst = pref.getBoolean(App.PREF_is_FIRST_START, true);
-		if(isFirst == false){
-			String nowDate = dateFormat.format(new Date());
-			String prefDate = pref.getString(App.PREF_LAST_DATE_UPDATE, "");
-			
-			if(checkConnection(this) & (!nowDate.equals(prefDate) | prefDate.length() == 0))
-			{
-				if(listItemsWeather != null & listItemsWeather.size() == 0)
-					refreshWeather(URL);
-			} else {
-				setInfoWeather(db.getCacheWeather());
-				if(!checkConnection(this))
-					Toast.makeText(this, getString(R.string.no_connections), Toast.LENGTH_SHORT).show();
-			}
-		}else{
-			if(settingDialog != null){
-				settingDialog.show();
-				btnOkSettingDialog = settingDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-				btnOkSettingDialog.setVisibility(Button.GONE);
-			}
-		}
-		Log.i(TAG, "onStart()");
-	}
-	
-	@Override
 	protected void onResume() {
 		super.onResume();
 		Log.i(TAG, "onResume()");
@@ -681,6 +651,30 @@ public class HomeActivity extends FragmentActivity{
         etUrl.setAdapter(compliteAdapter);
 
         initTypefaces();
+        if(pref.contains(App.PREF_SITY_URL)){
+            URL = pref.getString(App.PREF_SITY_URL, URL);
+        }
+        isFirst = pref.getBoolean(App.PREF_is_FIRST_START, true);
+        if(isFirst == false){
+            String nowDate = dateFormat.format(new Date());
+            String prefDate = pref.getString(App.PREF_LAST_DATE_UPDATE, "");
+
+            if(checkConnection(this) & (!nowDate.equals(prefDate) | prefDate.length() == 0))
+            {
+                if(listItemsWeather != null & listItemsWeather.size() == 0)
+                    refreshWeather(URL);
+            } else {
+                setInfoWeather(db.getCacheWeather());
+                if(!checkConnection(this))
+                    Toast.makeText(this, getString(R.string.no_connections), Toast.LENGTH_SHORT).show();
+            }
+        }else{
+            if(settingDialog != null){
+                settingDialog.show();
+                btnOkSettingDialog = settingDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                btnOkSettingDialog.setVisibility(Button.GONE);
+            }
+        }
 		/*if(adapter.isEmpty()){
 			Log.i(TAG, "onResume - setAdapter");
 			adapter = new WeatherAdapter(HomeActivity.this, listItemsWeather, Tools.getImageFetcher(HomeActivity.this));
