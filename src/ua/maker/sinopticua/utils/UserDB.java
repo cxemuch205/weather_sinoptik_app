@@ -35,6 +35,7 @@ public class UserDB extends SQLiteOpenHelper {
 	public static final String FIELD_TEMP_MIN = "temp_min";
 	public static final String FIELD_TEMP_MAX = "temp_max";
 	public static final String FIELD_WEATHER_DESCRIPTIONS = "weather_description";
+	public static final String FIELD_WEATHER_DESCRIPTIONS_URL = "weather_description_url";
 	public static final String FIELD_WEATHER_IMG_URL = "img_weather_url";
 	public static final String FIELD_NOW_WEATHER = "now_weather";
 	public static final String FIELD_TOWN = "town_name";
@@ -57,6 +58,7 @@ public class UserDB extends SQLiteOpenHelper {
 			+	FIELD_NOW_WEATHER + " TEXT, "
 			+	FIELD_TOWN + " TEXT, "
 			+	FIELD_WEATHER_DESCRIPTIONS + " TEXT, "
+			+	FIELD_WEATHER_DESCRIPTIONS_URL + " TEXT, "
 			+	FIELD_WERNING_WIND + " TEXT, "
 			+	FIELD_WIND_DESCRIPTION + " TEXT, "
 			+	FIELD_WEATHER_IMG_URL + " TEXT);";
@@ -181,6 +183,7 @@ public class UserDB extends SQLiteOpenHelper {
 				cv.put(FIELD_TEMP_MIN, item.minTemp);
 				cv.put(FIELD_TEMP_MAX, item.maxTemp);
 				cv.put(FIELD_WEATHER_DESCRIPTIONS, item.weatherName);
+				cv.put(FIELD_WEATHER_DESCRIPTIONS_URL, item.urlDetail);
 				cv.put(FIELD_WEATHER_IMG_URL, item.urlImage);
 				cv.put(FIELD_NOW_WEATHER, data.getWeatherToday());
 				cv.put(FIELD_TOWN, data.getTownName());
@@ -214,6 +217,7 @@ public class UserDB extends SQLiteOpenHelper {
 				int tempMinIndex = c.getColumnIndex(FIELD_TEMP_MIN);
 				int tempMaxIndex = c.getColumnIndex(FIELD_TEMP_MAX);
 				int weatherDescIndex = c.getColumnIndex(FIELD_WEATHER_DESCRIPTIONS);
+				int weatherDescUrlIndex = c.getColumnIndex(FIELD_WEATHER_DESCRIPTIONS_URL);
 				int weatherImgUrlIndex = c.getColumnIndex(FIELD_WEATHER_IMG_URL);
 				int nowWeatherIndex = c.getColumnIndex(FIELD_NOW_WEATHER);
 				int townIndex = c.getColumnIndex(FIELD_TOWN);
@@ -227,6 +231,7 @@ public class UserDB extends SQLiteOpenHelper {
 					String tempMin = c.getString(tempMinIndex);
 					String tempMax = c.getString(tempMaxIndex);
 					String weatherDesc = c.getString(weatherDescIndex);
+					String weatherDescUrl = c.getString(weatherDescUrlIndex);
 					String weatherImgUrl = c.getString(weatherImgUrlIndex);
 					String nowWeather = c.getString(nowWeatherIndex);
 					String town = c.getString(townIndex);
@@ -241,6 +246,7 @@ public class UserDB extends SQLiteOpenHelper {
 					item.minTemp = tempMin;
 					item.maxTemp=tempMax;
 					item.weatherName = weatherDesc;
+					item.urlDetail = weatherDescUrl;
 					item.urlImage=weatherImgUrl;
 					
 					data.add(item);
