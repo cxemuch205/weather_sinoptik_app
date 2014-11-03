@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 
@@ -166,22 +167,41 @@ public class ThermometerView extends View {
 
     private int calculateTemperature(int height) {
         posXMin = height;
-        float different = maxTemp / minTemp;
+        float different;
+        if(maxTemp > minTemp)
+            different = maxTemp / minTemp;
+        else
+            different = minTemp / maxTemp;
+
         int h2 = height / 2;
-        if(different > 1f)
-            h2 = height - Math.round(h2 / different); // is zero temp
+        if (different > 1f) {
+            if(maxTemp > minTemp)
+                h2 = height - Math.round(h2 / different); // is zero temp
+            else
+                h2 = Math.round((float)height / different) - Math.round(h2 / different); // is zero temp
+        }
 
         posXZero = h2 + posXMax;
 
         if(curTemp < (minTemp * (-1))){
             return height - posXMax;
         }
+        if (curTemp > maxTemp) {
+            return 0;
+        }
 
         if (curTemp >= 0) {
             h2 = h2 - Math.round((curTemp * ((float)h2 / maxTemp)));
         } else {
             if (different > 1f) {
-                float v = ((float)h2 / Math.abs(minTemp+maxTemp));
+                float v;
+                if(maxTemp > minTemp)
+                    v = ((float)h2 / Math.abs(minTemp+maxTemp));
+                else {
+                    v = (((float)posXMin - posXZero) / Math.abs(minTemp));
+                    Log.i("RES", "v: " + v + " h2: " + h2 + " height: " + height);
+                }
+
                 int v2 = Math.round(curTemp * v);
                 h2 = h2 - v2;
             } else {

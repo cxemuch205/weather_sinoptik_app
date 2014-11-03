@@ -25,7 +25,7 @@ public class TestMainActivity extends ActionBarActivity {
         thermometerView2 = (ThermometerView) findViewById(R.id.v_thermometer2);
         thermometerView2.updateTemperature(0, 40, 40);
         thermometerView3 = (ThermometerView) findViewById(R.id.v_thermometer3);
-        thermometerView3.updateTemperature(40, 40, 30);
+        thermometerView3.updateTemperature(0, 20, 40);
 
         sbTemp = (SeekBar) findViewById(R.id.sb_temp);
         final TextView tvProgress = (TextView) findViewById(R.id.tv_progress);
