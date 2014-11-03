@@ -19,7 +19,5 @@
     <string name="cant_get_current_location">Не удалось получить ваше текущее местоположение!</string>
     <string name="location_not_found">Местоположение не определено!</string>
     <string name="no_correct_name_town">Не корректный ввод!</string>
-    <color name="red">#ff0000</color>
-    <color name="blue">#ff9497ff</color>
 
 </resources>
