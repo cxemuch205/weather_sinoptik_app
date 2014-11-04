@@ -4,30 +4,71 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context=".HomeActivity" >
 
-    <TextView
-        android:id="@+id/tv_last_update"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/gradient_weather_default">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_gravity="left|bottom"
+            android:src="@drawable/weather_good_default"
+            android:scaleType="fitStart"
+            android:paddingTop="32dp" />
+
+        <TextView
+            android:id="@+id/tv_last_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_gravity="left|top" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|center_vertical">
+
+            <view
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                class="ua.setcom.widgets.view.ThermometerView"
+                android:id="@+id/view"
+                android:paddingRight="8dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/tv_now_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:paddingTop="8dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="+17"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/view"
+                android:layout_toStartOf="@+id/view"
+                android:gravity="center" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tv_name_sity"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/tv_now_temp"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:background="@drawable/back_now_on_street"
-        android:paddingTop="8dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Погода в Киеве"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/view"
+        android:layout_toStartOf="@+id/view"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/ll_werning_wind"
@@ -35,10 +76,11 @@
         android:layout_height="wrap_content"
         android:background="@drawable/back_werning_new"
         android:orientation="horizontal"
-        android:visibility="gone"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:paddingTop="8dp" >
+        android:paddingTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -65,7 +107,9 @@
         android:divider="#00000000"
         android:paddingTop="2dp"
         android:scrollbars="none"
-        android:smoothScrollbar="false" >
+        android:smoothScrollbar="false"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
     </ListView>
 
 </LinearLayout>

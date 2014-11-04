@@ -14,16 +14,56 @@ import android.view.View;
  */
 public class ThermometerView extends View {
 
+    public static final String TAG = "ThermometerView";
+
     private float maxTemp = 40f;
     private float minTemp = 25f;
     private float curTemp = 0f;
 
     private int STROKE_WIDTH = 4;
 
-    private static final int MIN_WIDTH = 100;
+    private static final int MIN_WIDTH = 150;
     private static final int MIN_HEIGHT = 300;
 
     private Paint mPaintBar, mPaintCircle;
+    private boolean showSubPoint = false;
+    private int colorMercury = Color.RED;
+    private int colorBackThermometer = Color.WHITE;
+    private int colorLinesPoint = Color.BLACK;
+
+    public int getColorMercury() {
+        return colorMercury;
+    }
+
+    public void setColorMercury(int colorMercury) {
+        this.colorMercury = colorMercury;
+    }
+
+    public int getColorBackThermometer() {
+        return colorBackThermometer;
+    }
+
+    public void setColorBackThermometer(int colorBackThermometer) {
+        this.colorBackThermometer = colorBackThermometer;
+    }
+
+    public int getColorLinesPoint() {
+        return colorLinesPoint;
+    }
+
+    public void setColorLinesPoint(int colorLinesPoint) {
+        this.colorLinesPoint = colorLinesPoint;
+    }
+
+    public int getColorText() {
+        return colorText;
+    }
+
+    public void setColorText(int colorText) {
+        this.colorText = colorText;
+    }
+
+    private int colorText = Color.BLACK;
 
     public ThermometerView(Context context) {
         super(context);
@@ -47,6 +87,14 @@ public class ThermometerView extends View {
         mPaintBar.setStyle(Paint.Style.STROKE);
         mPaintCircle = new Paint();
         mPaintCircle.setStyle(Paint.Style.FILL);
+    }
+
+    public void setShowSubPoint(boolean show) {
+        this.showSubPoint = show;
+    }
+
+    public boolean isShowSubPoint() {
+        return showSubPoint;
     }
 
     public void setStrokeThermometerWidth(int width) {
@@ -101,63 +149,79 @@ public class ThermometerView extends View {
         drawLineValue(canvas);
     }
 
-    private int posXMax, posXMin, posXZero;
+    private int posYMax, posYMin, posYZero;
 
     private void drawLineValue(Canvas canvas) {
         Paint paintLine = new Paint();
         paintLine.setStrokeWidth(2);
-        paintLine.setColor(Color.BLACK);
+        paintLine.setColor(colorLinesPoint);
 
         Paint paintText = new Paint();
         paintText.setStrokeWidth(1);
-        paintText.setColor(Color.BLACK);
+        paintText.setColor(colorText);
+        paintText.setTextSize(15);
+        Paint paintSubText = new Paint(paintText);
+        paintSubText.setTextSize(12);
 
         int width = getWidth();
         int height = getHeight();
-        int radius;
+        int center;
 
         if (width > height) {
-            radius = height / 3;
+            center = height / 2;
         } else {
-            radius = width / 3;
+            center = width / 2;
         }
 
-        int startX = width - radius;
-        int stopX = width - (radius / 2);
+        int startX = width - center;
+        int stopX = width - Math.round((float) center / 1.8f);
+        int stopXsub = width - Math.round((float) center / 1.4f);
 
         //Max temp line
-        canvas.drawLine(startX, posXMax, stopX, posXMax, paintLine);
-        canvas.drawText(String.valueOf(maxTemp), stopX, posXMax, paintText);
+        canvas.drawLine(startX, posYMax, stopX, posYMax, paintLine);
+        canvas.drawText(String.valueOf(maxTemp), stopX, posYMax, paintText);
+        if (showSubPoint) {
+            int middlePosMax = posYZero - posYMax;
+            middlePosMax = posYMax + (middlePosMax / 2);
+            canvas.drawLine(startX, middlePosMax, stopXsub, middlePosMax, paintLine);
+            canvas.drawText(String.valueOf(maxTemp/2), stopXsub, middlePosMax, paintSubText);
+        }
         //Min temp line
-        canvas.drawLine(startX, posXMin, stopX, posXMin, paintLine);
-        canvas.drawText(String.valueOf(minTemp), stopX, posXMin, paintText);
+        canvas.drawLine(startX, posYMin, stopX, posYMin, paintLine);
+        canvas.drawText("-"+String.valueOf(minTemp), stopX, posYMin, paintText);
+        if (showSubPoint) {
+            int middlePosMin = posYMin - posYZero;
+            middlePosMin = posYMin - (middlePosMin / 2);
+            canvas.drawLine(startX, middlePosMin, stopXsub, middlePosMin, paintLine);
+            canvas.drawText("-"+String.valueOf(minTemp/2), stopXsub, middlePosMin, paintSubText);
+        }
         //Zero temp line
-        canvas.drawLine(startX, posXZero, stopX, posXZero, paintLine);
-        canvas.drawText(String.valueOf(0), stopX, posXZero, paintText);
+        canvas.drawLine(startX, posYZero, stopX, posYZero, paintLine);
+        canvas.drawText(String.valueOf(0), stopX, posYZero, paintText);
     }
 
     private void drawTemperatureValue(Canvas canvas) {
-        mPaintBar.setColor(Color.RED);
+        mPaintBar.setColor(colorMercury);
         int stroke = STROKE_WIDTH*2;
         mPaintBar.setStrokeWidth(stroke);
 
         int width = getWidth();
         int height = getHeight();
-        int radius;
+        int center;
 
         if (width > height) {
-            radius = height / 3;
+            center = height / 2;
         } else {
-            radius = width / 3;
+            center = width / 2;
         }
 
-        int stopX = width - radius;//width - radius;//(int)(((float)width / 100f) * 20f);
-        int stopY = height - radius;//(int)(((float)height / 100f) * 10f);
+        int stopX = width - center;
+        int stopY = height - center;
         int startX = stopX;
         int h = height - (int)(((float)height / 100f) * 10f);
         h = height - h;
-        posXMax = h;
-        int startY = calculateTemperature(height - radius - h);//height - stopY;
+        posYMax = h;
+        int startY = calculateTemperature(height - center - h);
         startY += h;
 
         canvas.drawLine(startX, startY, stopX, stopY, mPaintBar);
@@ -166,7 +230,7 @@ public class ThermometerView extends View {
     }
 
     private int calculateTemperature(int height) {
-        posXMin = height;
+        posYMin = height;
         float different;
         if(maxTemp > minTemp)
             different = maxTemp / minTemp;
@@ -181,12 +245,14 @@ public class ThermometerView extends View {
                 h2 = Math.round((float)height / different) - Math.round(h2 / different); // is zero temp
         }
 
-        posXZero = h2 + posXMax;
+        posYZero = h2 + posYMax;
 
-        if(curTemp < (minTemp * (-1))){
-            return height - posXMax;
+        if(curTemp < (minTemp * (-1))) {
+            Log.e(TAG, String.format("CURRENT TEMPERATURE[%d] < MIN TEMPERATURE[%d]", curTemp, minTemp));
+            return height - posYMax;
         }
         if (curTemp > maxTemp) {
+            Log.e(TAG, String.format("CURRENT TEMPERATURE[%d] > MAX TEMPERATURE[%d]", curTemp, maxTemp));
             return 0;
         }
 
@@ -198,14 +264,13 @@ public class ThermometerView extends View {
                 if(maxTemp > minTemp)
                     v = ((float)h2 / Math.abs(minTemp+maxTemp));
                 else {
-                    v = (((float)posXMin - posXZero) / Math.abs(minTemp));
-                    Log.i("RES", "v: " + v + " h2: " + h2 + " height: " + height);
+                    v = (((float)posYMin - posYZero) / Math.abs(minTemp));
                 }
 
                 int v2 = Math.round(curTemp * v);
                 h2 = h2 - v2;
             } else {
-                float v = ((float) (h2 - posXMax) / minTemp);
+                float v = ((float) (h2 - posYMax) / minTemp);
                 int v2 = Math.round(curTemp * v);
                 h2 = h2 - v2;
             }
@@ -214,47 +279,49 @@ public class ThermometerView extends View {
     }
 
     private void drawBackBarThermometer(Canvas canvas) {
-        mPaintBar.setColor(Color.WHITE);
-        mPaintCircle.setColor(Color.WHITE);
+        mPaintBar.setColor(colorBackThermometer);
+        mPaintCircle.setColor(colorBackThermometer);
         int stroke = STROKE_WIDTH*6;
         mPaintBar.setStrokeWidth(stroke);
 
         int width = getWidth();
         int height = getHeight();
-        int radius;
+        int center;
 
         if (width > height) {
-            radius = height / 3;
+            center = height / 2;
         } else {
-            radius = width / 3;
+            center = width / 2;
         }
 
-        int stopX = width - radius;
-        int stopY = height - (int)(((float)height / 100f) * 10f);
+        int stopX = width - center;
+        int stopY = height - (int)(((float)height / 100f) * 25f);
         int startX = stopX;
-        int startY = height - stopY;
+        int startY = height - (height - (int)(((float)height / 100f) * 10f));
 
         canvas.drawCircle(stopX, startY, (stroke / 2), mPaintCircle);
         canvas.drawLine(startX, startY, stopX, stopY, mPaintBar);
     }
 
     private void drawBaseThermometerCircle(Canvas canvas) {
-        mPaintCircle.setColor(Color.RED);
+        mPaintCircle.setColor(colorMercury);
         int width = getWidth();
         int height = getHeight();
-        int radius, radiusBack;
+        int radius, radiusBack, center;
 
         if (width > height) {
-            radius = height / 5;
-            radiusBack = height / 3;
+            radius = height / 7;
+            radiusBack = height / 5;
+            center = height / 2;
         } else {
-            radius = width / 5;
-            radiusBack = width / 3;
+            radius = width / 7;
+            radiusBack = width / 5;
+            center = width / 2;
         }
         mPaintCircle.setAntiAlias(true);
         Paint paintC = new Paint(mPaintCircle);
-        paintC.setColor(Color.WHITE);
-        canvas.drawCircle(width - (radiusBack), height - (radiusBack), radiusBack, paintC);
-        canvas.drawCircle(width - (radiusBack), height - (radiusBack), radius, mPaintCircle);
+        paintC.setColor(colorBackThermometer);
+        canvas.drawCircle(width - (center), height - (center), radiusBack, paintC);
+        canvas.drawCircle(width - (center), height - (center), radius, mPaintCircle);
     }
 }

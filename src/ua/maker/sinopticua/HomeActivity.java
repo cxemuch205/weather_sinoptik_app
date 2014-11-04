@@ -20,6 +20,7 @@ import ua.maker.sinopticua.utils.Tools;
 import ua.maker.sinopticua.utils.UserDB;
 import ua.maker.sinopticua.utils.DataParser;
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -149,9 +150,11 @@ public class HomeActivity extends FragmentActivity{
 
     @SuppressLint("NewApi")
 	private void initActionBar() {
-		getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.action_white_drawable));
-		getActionBar().setIcon(R.drawable.sinoptic_logo);
-		getActionBar().setTitle("");
+        ActionBar actionBar = getActionBar();
+		//actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_white_drawable));
+        //actionBar.setIcon(R.drawable.sinoptic_logo);
+        actionBar.setDisplayShowHomeEnabled(false);
+        actionBar.setTitle("");
 	}
 
 	private OnClickListener clickGetLocationListener = new OnClickListener() {
@@ -289,7 +292,8 @@ public class HomeActivity extends FragmentActivity{
 					adapter.notifyDataSetChanged();
 				}
 				tvNow.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_NOW_WEATHER)));
-				tvTown.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_CITY_NAME)));
+                getActionBar().setTitle(Html.fromHtml(savedInstanceState.getString(App.SAVE_CITY_NAME)));
+				//tvTown.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_CITY_NAME)));
 				if(savedInstanceState.containsKey(App.SAVE_WARNING_WIND)){
 					llWerningWind.setVisibility(LinearLayout.VISIBLE);
 					tvWind.setText(savedInstanceState.getString(App.SAVE_WARNING_WIND));
@@ -577,8 +581,9 @@ public class HomeActivity extends FragmentActivity{
 				String date = pref.getString(App.PREF_LAST_DATE_UPDATE_FULL, dateFullFirmat.format(new Date()));
 				tvLastDateUpdate.setText(getString(R.string.last_update_date)+" "+date);
 			}
-			tvNow.setText(getString(R.string.now_temp_on_street)+ " " + Html.fromHtml(info.getWeatherToday()));
-			tvTown.setText(Html.fromHtml(info.getTownName()));
+			tvNow.setText(/*getString(R.string.now_temp_on_street)+ " " + */Html.fromHtml(info.getWeatherToday()));
+            getActionBar().setTitle(Html.fromHtml(info.getTownName()));
+            //tvTown.setText(Html.fromHtml(info.getTownName()));
 			if(info.getWerningWind()){
 				llWerningWind.setVisibility(LinearLayout.VISIBLE);
 				tvWind.setText(info.getWindDescription());
