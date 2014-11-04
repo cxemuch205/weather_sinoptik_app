@@ -165,6 +165,7 @@ public class HomeActivity extends FragmentActivity{
         ActionBar actionBar = getActionBar();
 		//actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_white_drawable));
         //actionBar.setIcon(R.drawable.sinoptic_logo);
+        actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setTitle("");
 	}
@@ -725,11 +726,12 @@ public class HomeActivity extends FragmentActivity{
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_setting:
-			settingDialog.show();
-			break;
-		}
-		return super.onOptionsItemSelected(item);
+            case android.R.id.home:
+            case R.id.action_setting:
+                settingDialog.show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
 	}
 	
 	private Toast toast;
