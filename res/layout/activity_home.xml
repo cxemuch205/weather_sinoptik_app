@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical"
-    tools:context=".HomeActivity" >
+    tools:context=".HomeActivity">
 
     <FrameLayout
         android:layout_width="fill_parent"
@@ -23,9 +23,11 @@
         <TextView
             android:id="@+id/tv_last_update"
             android:layout_width="match_parent"
+            android:paddingLeft="16dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:layout_gravity="left|top" />
+            android:layout_gravity="left|top"
+            android:textSize="12dp"
+            android:textColor="#ffc9c9c9" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -36,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 class="ua.setcom.widgets.view.ThermometerView"
-                android:id="@+id/view"
+                android:id="@+id/v_thermometer"
                 android:paddingRight="8dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
@@ -49,10 +51,10 @@
                 android:paddingTop="8dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="+17"
+                android:layout_toStartOf="@+id/v_thermometer"
+                android:gravity="center"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/view"
-                android:layout_toStartOf="@+id/view"
-                android:gravity="center" />
+                android:layout_toLeftOf="@+id/v_thermometer" />
 
         </RelativeLayout>
 
@@ -78,9 +80,11 @@
         android:orientation="horizontal"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
+        android:visibility="gone"
         android:paddingTop="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -108,8 +112,8 @@
         android:paddingTop="2dp"
         android:scrollbars="none"
         android:smoothScrollbar="false"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
-    </ListView>
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"></ListView>
 
 </LinearLayout>

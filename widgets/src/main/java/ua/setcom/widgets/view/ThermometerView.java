@@ -30,40 +30,9 @@ public class ThermometerView extends View {
     private int colorMercury = Color.RED;
     private int colorBackThermometer = Color.WHITE;
     private int colorLinesPoint = Color.BLACK;
-
-    public int getColorMercury() {
-        return colorMercury;
-    }
-
-    public void setColorMercury(int colorMercury) {
-        this.colorMercury = colorMercury;
-    }
-
-    public int getColorBackThermometer() {
-        return colorBackThermometer;
-    }
-
-    public void setColorBackThermometer(int colorBackThermometer) {
-        this.colorBackThermometer = colorBackThermometer;
-    }
-
-    public int getColorLinesPoint() {
-        return colorLinesPoint;
-    }
-
-    public void setColorLinesPoint(int colorLinesPoint) {
-        this.colorLinesPoint = colorLinesPoint;
-    }
-
-    public int getColorText() {
-        return colorText;
-    }
-
-    public void setColorText(int colorText) {
-        this.colorText = colorText;
-    }
-
+    private float mTextSize = 15;
     private int colorText = Color.BLACK;
+    private int posYMax, posYMin, posYZero;
 
     public ThermometerView(Context context) {
         super(context);
@@ -89,46 +58,6 @@ public class ThermometerView extends View {
         mPaintCircle.setStyle(Paint.Style.FILL);
     }
 
-    public void setShowSubPoint(boolean show) {
-        this.showSubPoint = show;
-    }
-
-    public boolean isShowSubPoint() {
-        return showSubPoint;
-    }
-
-    public void setStrokeThermometerWidth(int width) {
-        this.STROKE_WIDTH = width;
-    }
-
-    public int getStrokeThermometerWidth() {
-        return STROKE_WIDTH;
-    }
-
-    public float getMaxTemp() {
-        return maxTemp;
-    }
-
-    public void setMaxTemp(float maxTemp) {
-        this.maxTemp = maxTemp;
-    }
-
-    public float getMinTemp() {
-        return minTemp;
-    }
-
-    public void setMinTemp(float minTemp) {
-        this.minTemp = minTemp;
-    }
-
-    public float getCurrentTemp() {
-        return curTemp;
-    }
-
-    public void setCurrentTemp(float curTemp) {
-        this.curTemp = curTemp;
-    }
-
     public void updateTemperature(float currentTemp, float maxTemp, float minTemp) {
         this.maxTemp = maxTemp;
         this.minTemp = minTemp;
@@ -149,8 +78,6 @@ public class ThermometerView extends View {
         drawLineValue(canvas);
     }
 
-    private int posYMax, posYMin, posYZero;
-
     private void drawLineValue(Canvas canvas) {
         Paint paintLine = new Paint();
         paintLine.setStrokeWidth(2);
@@ -159,9 +86,9 @@ public class ThermometerView extends View {
         Paint paintText = new Paint();
         paintText.setStrokeWidth(1);
         paintText.setColor(colorText);
-        paintText.setTextSize(15);
+        paintText.setTextSize(mTextSize);
         Paint paintSubText = new Paint(paintText);
-        paintSubText.setTextSize(12);
+        paintSubText.setTextSize(mTextSize-2);
 
         int width = getWidth();
         int height = getHeight();
@@ -179,21 +106,21 @@ public class ThermometerView extends View {
 
         //Max temp line
         canvas.drawLine(startX, posYMax, stopX, posYMax, paintLine);
-        canvas.drawText(String.valueOf(maxTemp), stopX, posYMax, paintText);
+        canvas.drawText(String.valueOf(Math.round(maxTemp)), stopX, posYMax, paintText);
         if (showSubPoint) {
             int middlePosMax = posYZero - posYMax;
             middlePosMax = posYMax + (middlePosMax / 2);
             canvas.drawLine(startX, middlePosMax, stopXsub, middlePosMax, paintLine);
-            canvas.drawText(String.valueOf(maxTemp/2), stopXsub, middlePosMax, paintSubText);
+            canvas.drawText(String.valueOf(Math.round(maxTemp/2)), stopXsub, middlePosMax, paintSubText);
         }
         //Min temp line
         canvas.drawLine(startX, posYMin, stopX, posYMin, paintLine);
-        canvas.drawText("-"+String.valueOf(minTemp), stopX, posYMin, paintText);
+        canvas.drawText("-"+String.valueOf(Math.round(minTemp)), stopX, posYMin, paintText);
         if (showSubPoint) {
             int middlePosMin = posYMin - posYZero;
             middlePosMin = posYMin - (middlePosMin / 2);
             canvas.drawLine(startX, middlePosMin, stopXsub, middlePosMin, paintLine);
-            canvas.drawText("-"+String.valueOf(minTemp/2), stopXsub, middlePosMin, paintSubText);
+            canvas.drawText("-"+String.valueOf(Math.round(minTemp/2)), stopXsub, middlePosMin, paintSubText);
         }
         //Zero temp line
         canvas.drawLine(startX, posYZero, stopX, posYZero, paintLine);
@@ -323,5 +250,85 @@ public class ThermometerView extends View {
         paintC.setColor(colorBackThermometer);
         canvas.drawCircle(width - (center), height - (center), radiusBack, paintC);
         canvas.drawCircle(width - (center), height - (center), radius, mPaintCircle);
+    }
+
+    public void setShowSubPoint(boolean show) {
+        this.showSubPoint = show;
+    }
+
+    public boolean isShowSubPoint() {
+        return showSubPoint;
+    }
+
+    public void setStrokeThermometerWidth(int width) {
+        this.STROKE_WIDTH = width;
+    }
+
+    public int getStrokeThermometerWidth() {
+        return STROKE_WIDTH;
+    }
+
+    public float getMaxTemp() {
+        return maxTemp;
+    }
+
+    public void setMaxTemp(float maxTemp) {
+        this.maxTemp = maxTemp;
+    }
+
+    public float getMinTemp() {
+        return minTemp;
+    }
+
+    public void setMinTemp(float minTemp) {
+        this.minTemp = minTemp;
+    }
+
+    public float getCurrentTemp() {
+        return curTemp;
+    }
+
+    public void setCurrentTemp(float curTemp) {
+        this.curTemp = curTemp;
+    }
+
+    public int getColorMercury() {
+        return colorMercury;
+    }
+
+    public void setColorMercury(int colorMercury) {
+        this.colorMercury = colorMercury;
+    }
+
+    public int getColorBackThermometer() {
+        return colorBackThermometer;
+    }
+
+    public void setColorBackThermometer(int colorBackThermometer) {
+        this.colorBackThermometer = colorBackThermometer;
+    }
+
+    public int getColorLinesPoint() {
+        return colorLinesPoint;
+    }
+
+    public void setColorLinesPoint(int colorLinesPoint) {
+        this.colorLinesPoint = colorLinesPoint;
+    }
+
+    public int getColorText() {
+        return colorText;
+    }
+
+    public void setColorText(int colorText) {
+        this.colorText = colorText;
+    }
+
+    public float getTextSize() {
+        return mTextSize;
+    }
+
+    public void setTextSize(float mTextSize) {
+        this.mTextSize = mTextSize;
     }
 }

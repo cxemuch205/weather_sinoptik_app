@@ -19,6 +19,8 @@ import ua.maker.sinopticua.utils.GPSTracker;
 import ua.maker.sinopticua.utils.Tools;
 import ua.maker.sinopticua.utils.UserDB;
 import ua.maker.sinopticua.utils.DataParser;
+import ua.setcom.widgets.view.ThermometerView;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -85,6 +87,7 @@ public class HomeActivity extends FragmentActivity{
 	private AlertDialog.Builder settingDialogBuilder;
 	private AlertDialog settingDialog;
 	private Button btnOkSettingDialog;
+    private ThermometerView thermometer;
 	private boolean isFirst = true;
 	
 	@SuppressLint("SimpleDateFormat")
@@ -112,8 +115,9 @@ public class HomeActivity extends FragmentActivity{
 		llWerningWind = (LinearLayout)findViewById(R.id.ll_werning_wind);
 		tvWind = (TextView)findViewById(R.id.tv_werning_wind);
 		pref = getSharedPreferences(App.PREF_APP, 0);
-		
-		listItemsWeather = new ArrayList<ItemWeather>();
+        thermometer = (ThermometerView) findViewById(R.id.v_thermometer);
+
+        listItemsWeather = new ArrayList<ItemWeather>();
 		listAutoCompliteTown = new ArrayList<ItemTown>();
 		
 		compliteAdapter = new TownCompleteAdapter(this, listAutoCompliteTown);
@@ -293,7 +297,7 @@ public class HomeActivity extends FragmentActivity{
 				}
 				tvNow.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_NOW_WEATHER)));
                 getActionBar().setTitle(Html.fromHtml(savedInstanceState.getString(App.SAVE_CITY_NAME)));
-				//tvTown.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_CITY_NAME)));
+				tvTown.setText(Html.fromHtml(savedInstanceState.getString(App.SAVE_CITY_NAME)));
 				if(savedInstanceState.containsKey(App.SAVE_WARNING_WIND)){
 					llWerningWind.setVisibility(LinearLayout.VISIBLE);
 					tvWind.setText(savedInstanceState.getString(App.SAVE_WARNING_WIND));
@@ -581,9 +585,13 @@ public class HomeActivity extends FragmentActivity{
 				String date = pref.getString(App.PREF_LAST_DATE_UPDATE_FULL, dateFullFirmat.format(new Date()));
 				tvLastDateUpdate.setText(getString(R.string.last_update_date)+" "+date);
 			}
-			tvNow.setText(/*getString(R.string.now_temp_on_street)+ " " + */Html.fromHtml(info.getWeatherToday()));
+            int cursorDegrees = info.getWeatherToday().indexOf("&");
+            String textDegrees = info.getWeatherToday().substring(0, cursorDegrees).replace("+","");
+            int degreesNow = Integer.parseInt(textDegrees);
+            thermometer.updateTemperature((float)degreesNow, 40, 30);
+            tvNow.setText(/*getString(R.string.now_temp_on_street)+ " " + */Html.fromHtml(info.getWeatherToday()));
             getActionBar().setTitle(Html.fromHtml(info.getTownName()));
-            //tvTown.setText(Html.fromHtml(info.getTownName()));
+            tvTown.setText(Html.fromHtml(info.getTownName()));
 			if(info.getWerningWind()){
 				llWerningWind.setVisibility(LinearLayout.VISIBLE);
 				tvWind.setText(info.getWindDescription());
