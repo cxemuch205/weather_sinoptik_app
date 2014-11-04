@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="ua.maker.sinopticua.HomeActivity"
-            android:logo="@drawable/sinoptic_logo">
+            android:logo="@drawable/sinoptic_logo"
+            android:theme="@style/MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
