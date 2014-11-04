@@ -222,7 +222,7 @@ public class ThermometerView extends View {
         }
 
         int stopX = width - center;
-        int stopY = height - (int)(((float)height / 100f) * 25f);
+        int stopY = height - center;
         int startX = stopX;
         int startY = height - (height - (int)(((float)height / 100f) * 10f));
 

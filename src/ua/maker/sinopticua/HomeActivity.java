@@ -21,6 +21,8 @@ import ua.maker.sinopticua.utils.UserDB;
 import ua.maker.sinopticua.utils.DataParser;
 import ua.setcom.widgets.view.ThermometerView;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
@@ -86,8 +88,9 @@ public class HomeActivity extends FragmentActivity{
 	private ProgressBar pbLoadLocation;
 	private AlertDialog.Builder settingDialogBuilder;
 	private AlertDialog settingDialog;
-	private Button btnOkSettingDialog;
+	private Button btnOkSettingDialog, btnUpdate;
     private ThermometerView thermometer;
+    private ObjectAnimator animLoadBtnUpdate;
 	private boolean isFirst = true;
 	
 	@SuppressLint("SimpleDateFormat")
@@ -113,9 +116,13 @@ public class HomeActivity extends FragmentActivity{
 		tvTown = (TextView)findViewById(R.id.tv_name_sity);
 		tvLastDateUpdate = (TextView)findViewById(R.id.tv_last_update);
 		llWerningWind = (LinearLayout)findViewById(R.id.ll_werning_wind);
-		tvWind = (TextView)findViewById(R.id.tv_werning_wind);
+        btnUpdate = (Button) findViewById(R.id.btn_update);
+        tvWind = (TextView)findViewById(R.id.tv_werning_wind);
 		pref = getSharedPreferences(App.PREF_APP, 0);
         thermometer = (ThermometerView) findViewById(R.id.v_thermometer);
+        animLoadBtnUpdate = ObjectAnimator.ofFloat(btnUpdate, "rotation", 0f, 360f);
+        animLoadBtnUpdate.setDuration(500);
+        animLoadBtnUpdate.setRepeatCount(ValueAnimator.INFINITE);
 
         listItemsWeather = new ArrayList<ItemWeather>();
 		listAutoCompliteTown = new ArrayList<ItemTown>();
@@ -124,6 +131,7 @@ public class HomeActivity extends FragmentActivity{
 		adapter = new WeatherAdapter(this, listItemsWeather);
 		lvWeathers.setAdapter(adapter);
 		lvWeathers.setOnItemClickListener(itemWeatherClickListener);
+        btnUpdate.setOnClickListener(clickUpdateBtnListener);
 		
 		db = new UserDB(HomeActivity.this);
 		listTown = new ArrayList<ItemTown>();
@@ -160,6 +168,18 @@ public class HomeActivity extends FragmentActivity{
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setTitle("");
 	}
+
+    private OnClickListener clickUpdateBtnListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(checkConnection(HomeActivity.this)) {
+                refreshWeather(URL);
+                animLoadBtnUpdate.start();
+            } else {
+                Toast.makeText(HomeActivity.this, getString(R.string.no_connections), Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
 	private OnClickListener clickGetLocationListener = new OnClickListener() {
 		
@@ -558,6 +578,7 @@ public class HomeActivity extends FragmentActivity{
 		        	activityWeakRef.get().pref.edit().putString(App.PREF_LAST_DATE_UPDATE_FULL,
 		        			activityWeakRef.get().dateFullFirmat.format(new Date())).commit();
 		        	if(activityWeakRef.get().pd != null) activityWeakRef.get().pd.dismiss();
+                    activityWeakRef.get().animLoadBtnUpdate.cancel();
 		        	activityWeakRef.get().pref.edit().putString(App.PREF_SITY_URL, activityWeakRef.get().URL).commit();
 		        	activityWeakRef.get().pref.edit().putString(App.PREF_SITY_NAME, activityWeakRef.get().cityName).commit();
 		        	activityWeakRef.get().setInfoWeather(response);
@@ -704,16 +725,6 @@ public class HomeActivity extends FragmentActivity{
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_refresh:
-			if(checkConnection(HomeActivity.this))
-			{
-				refreshWeather(URL);
-			}
-			else
-			{
-				Toast.makeText(this, getString(R.string.no_connections), Toast.LENGTH_SHORT).show();
-			}
-			break;
 		case R.id.action_setting:
 			settingDialog.show();
 			break;

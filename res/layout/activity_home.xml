@@ -8,53 +8,80 @@
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/gradient_weather_default">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:layout_gravity="left|bottom"
-            android:src="@drawable/weather_good_default"
-            android:scaleType="fitStart"
-            android:paddingTop="32dp" />
-
-        <TextView
-            android:id="@+id/tv_last_update"
-            android:layout_width="match_parent"
-            android:paddingLeft="16dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|top"
-            android:textSize="12dp"
-            android:textColor="#ffc9c9c9" />
+        android:layout_height="250dp">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="right|center_vertical">
 
-            <view
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                class="ua.setcom.widgets.view.ThermometerView"
-                android:id="@+id/v_thermometer"
-                android:paddingRight="8dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingTop="58dp"
+                android:layout_marginBottom="34dp"
+                android:background="@drawable/gradient_weather_default">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/iv_big_weather"
+                    android:layout_gravity="left|bottom"
+                    android:src="@drawable/weather_good_default"
+                    android:scaleType="fitStart"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="true"/>
+
+                <view
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    class="ua.setcom.widgets.view.ThermometerView"
+                    android:id="@+id/v_thermometer"
+                    android:paddingRight="8dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentTop="true" />
+
+                <TextView
+                    android:id="@+id/tv_now_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="52dp"
+                    android:paddingTop="8dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="+17"
+                    android:layout_toStartOf="@+id/v_thermometer"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/v_thermometer" />
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/tv_now_temp"
-                android:layout_width="wrap_content"
-                android:layout_height="52dp"
-                android:paddingTop="8dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="+17"
-                android:layout_toStartOf="@+id/v_thermometer"
-                android:gravity="center"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/v_thermometer" />
+                android:id="@+id/tv_last_update"
+                android:layout_width="match_parent"
+                android:paddingLeft="16dp"
+                android:layout_height="wrap_content"
+                android:textSize="13dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp"
+                android:textColor="#77000000"
+                android:text="dfsdf"
+                android:paddingRight="16dp"
+                android:background="#77c9c9c9"
+                android:gravity="left"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/btn_update"
+                android:background="@drawable/selector_btn_update"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="24dp"
+                android:layout_alignParentEnd="true" />
 
         </RelativeLayout>
 
@@ -80,7 +107,7 @@
         android:orientation="horizontal"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:paddingTop="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"

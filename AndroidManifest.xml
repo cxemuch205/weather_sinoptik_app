@@ -15,10 +15,11 @@
         android:name=".SinoptikApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name="ua.maker.sinopticua.HomeActivity"
             android:logo="@drawable/sinoptic_logo"
+            android:screenOrientation="sensorPortrait"
             android:theme="@style/MyTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,12 +29,11 @@
         </activity>
         <activity
             android:name="ua.maker.sinopticua.WeatherDetailActivity"
-            android:label="DetailActivity" >
-        </activity>
+            android:label="DetailActivity"></activity>
 
         <receiver
             android:name="ua.maker.sinopticua.widget.WidgetWeatherAppProvider"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
