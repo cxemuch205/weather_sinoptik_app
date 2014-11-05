@@ -134,11 +134,12 @@
         android:id="@+id/lv_weathers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="#00000000"
+        android:divider="#77c9c9c9"
+        android:dividerHeight="1dp"
         android:paddingTop="2dp"
         android:scrollbars="none"
         android:smoothScrollbar="false"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"></ListView>
+        android:layout_marginRight="8dp"/>
 
 </LinearLayout>
