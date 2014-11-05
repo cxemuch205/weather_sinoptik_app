@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="ua.maker.sinopticua.HomeActivity"
-            android:logo="@drawable/sinoptic_logo"
+            android:logo="@drawable/ic_launcher"
             android:screenOrientation="sensorPortrait"
             android:theme="@style/MyTheme">
             <intent-filter>
