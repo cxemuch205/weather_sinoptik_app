@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Sinoptic UA</string>
+    <string name="app_name">Погода в Украине</string>
     <string name="action_refresh">Обновить</string>
     <string name="info">Погода в Краматорске!</string>
     <string name="dialog_downld_page_msg">Загрузка данных&#8230;</string>

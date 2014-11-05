@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Sinoptic UA</string>
+    <string name="app_name">Погода в Україні</string>
     <string name="action_refresh">Оновити</string>
     <string name="dialog_downld_page_msg">Завантаження даних&#8230;</string>
     <string name="dialog_title_setting">Вибір міста:</string>
