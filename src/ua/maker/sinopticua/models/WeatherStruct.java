@@ -16,8 +16,9 @@ public class WeatherStruct {
 	private String townName = "";
 	private boolean werningWind = false;
 	private String windDescription = "";
+    private String weatherTodayImg = "";
 
-	public WeatherStruct() {
+    public WeatherStruct() {
 	};
 
 	public ItemWeather getWeatherMondey() {
@@ -131,4 +132,12 @@ public class WeatherStruct {
 			setWeatherSundey(data.get(6));
 		}		
 	}
+
+    public void setWeatherTodayImg(String weatherTodayImg) {
+        this.weatherTodayImg = weatherTodayImg;
+    }
+
+    public String getWeatherTodayImg() {
+        return weatherTodayImg;
+    }
 }

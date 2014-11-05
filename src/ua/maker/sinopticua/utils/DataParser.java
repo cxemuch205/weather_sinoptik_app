@@ -1080,11 +1080,29 @@ public class DataParser {
                 }
             }
 
+            //GET CURRENT WEATHER IMG
+            if (result.substring(i, (i + 22)).equals("<p class=\"today-time\">")) {
+                for (int j = (i + 22); j < (result.length() - 100); j++) {
+                    if (result.substring(j, (j + 35)).equals("<img width=\"188\" height=\"150\" src=\"")) {
+                        for (int t = (j + 35); t < (result.length() - 100); t++) {
+                            if (result.substring(t, (t + 5)).equals("\" alt")) {
+                                String urlImgTodayWeather = result.substring((j + 35), t);
+                                Log.d(TAG, "TODAY WEATHER IMG: " + urlImgTodayWeather);
+                                wRes.setWeatherTodayImg(urlImgTodayWeather);
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
+
             // GET CURRENT TEMP
             if (result.substring(i, (i + 22)).equals("<p class=\"today-temp\">")) {
                 for (int j = (i + 22); j < (result.length() - 100); j++) {
                     if (result.substring(j, (j + 4)).equals("</p>")) {
-                        wRes.setWeatherToday(result.substring((i + 22), (j)));
+                        String todayTemp = result.substring((i + 22), (j));
+                        wRes.setWeatherToday(todayTemp);
                         break;
                     }
                 }

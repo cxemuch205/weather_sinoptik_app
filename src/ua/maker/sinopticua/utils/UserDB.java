@@ -41,7 +41,8 @@ public class UserDB extends SQLiteOpenHelper {
 	public static final String FIELD_TOWN = "town_name";
 	public static final String FIELD_WERNING_WIND = "werning_wind";
 	public static final String FIELD_WIND_DESCRIPTION = "wind_descr";
-	
+	public static final String FIELD_TODAY_URL = "today_img_url";
+
 	private static final String SQL_CREATE_TABLE_TOWN = "CREATE TABLE " + TABLE_TOWN
 			+ " (" + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, "
 			+	FIELD_NAME + " TEXT, "
@@ -56,6 +57,7 @@ public class UserDB extends SQLiteOpenHelper {
 			+	FIELD_TEMP_MIN + " TEXT, "
 			+	FIELD_TEMP_MAX + " TEXT, "
 			+	FIELD_NOW_WEATHER + " TEXT, "
+			+	FIELD_TODAY_URL + " TEXT, "
 			+	FIELD_TOWN + " TEXT, "
 			+	FIELD_WEATHER_DESCRIPTIONS + " TEXT, "
 			+	FIELD_WEATHER_DESCRIPTIONS_URL + " TEXT, "
@@ -185,6 +187,7 @@ public class UserDB extends SQLiteOpenHelper {
 				cv.put(FIELD_WEATHER_DESCRIPTIONS, item.weatherName);
 				cv.put(FIELD_WEATHER_DESCRIPTIONS_URL, item.urlDetail);
 				cv.put(FIELD_WEATHER_IMG_URL, item.urlImage);
+				cv.put(FIELD_TODAY_URL, data.getWeatherTodayImg());
 				cv.put(FIELD_NOW_WEATHER, data.getWeatherToday());
 				cv.put(FIELD_TOWN, data.getTownName());
 				cv.put(FIELD_WERNING_WIND, String.valueOf(data.getWerningWind()));
@@ -223,6 +226,7 @@ public class UserDB extends SQLiteOpenHelper {
 				int townIndex = c.getColumnIndex(FIELD_TOWN);
 				int werningWindIndex = c.getColumnIndex(FIELD_WERNING_WIND);
 				int windDescrIndex = c.getColumnIndex(FIELD_WIND_DESCRIPTION);
+				int weatherTodayImgUrlIndex = c.getColumnIndex(FIELD_TODAY_URL);
 				do {
 					String dateFull = c.getString(dateFullIndex);
 					int dateDay = c.getInt(dateDayIndex);
@@ -237,7 +241,8 @@ public class UserDB extends SQLiteOpenHelper {
 					String town = c.getString(townIndex);
 					boolean warnWind = Boolean.parseBoolean(c.getString(werningWindIndex));
 					String windDEscr = c.getString(windDescrIndex);
-					
+					String todayUrlIng = c.getString(weatherTodayImgUrlIndex);
+
 					ItemWeather item = new ItemWeather();
 					item.dateFull = dateFull;
 					item.day = dateDay;
@@ -251,6 +256,7 @@ public class UserDB extends SQLiteOpenHelper {
 					
 					data.add(item);
 					result.setWeatherToday(nowWeather);
+					result.setWeatherTodayImg(todayUrlIng);
 					result.setTownName(town);
 					result.setWerningWind(warnWind);
 					result.setWindDescription(windDEscr);

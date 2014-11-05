@@ -16,6 +16,7 @@ import ua.maker.sinopticua.models.ItemTown;
 import ua.maker.sinopticua.models.ItemWeather;
 import ua.maker.sinopticua.models.WeatherStruct;
 import ua.maker.sinopticua.utils.GPSTracker;
+import ua.maker.sinopticua.utils.ImageCache;
 import ua.maker.sinopticua.utils.Tools;
 import ua.maker.sinopticua.utils.UserDB;
 import ua.maker.sinopticua.utils.DataParser;
@@ -53,6 +54,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -92,6 +94,7 @@ public class HomeActivity extends FragmentActivity{
     private ThermometerView thermometer;
     private ObjectAnimator animLoadBtnUpdate;
 	private boolean isFirst = true;
+    private ImageView ivBigWeather;
 	
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("D"),
@@ -118,8 +121,10 @@ public class HomeActivity extends FragmentActivity{
 		llWerningWind = (LinearLayout)findViewById(R.id.ll_werning_wind);
         btnUpdate = (Button) findViewById(R.id.btn_update);
         tvWind = (TextView)findViewById(R.id.tv_werning_wind);
-		pref = getSharedPreferences(App.PREF_APP, 0);
+        ivBigWeather = (ImageView) findViewById(R.id.iv_big_weather);
+        pref = getSharedPreferences(App.PREF_APP, 0);
         thermometer = (ThermometerView) findViewById(R.id.v_thermometer);
+        initThermometer();
         animLoadBtnUpdate = ObjectAnimator.ofFloat(btnUpdate, "rotation", 0f, 360f);
         animLoadBtnUpdate.setDuration(500);
         animLoadBtnUpdate.setRepeatCount(ValueAnimator.INFINITE);
@@ -149,6 +154,11 @@ public class HomeActivity extends FragmentActivity{
 		
 		Log.i(TAG, "isTaskPendingOrRunning: " + isTaskPendingOrRunning());
 	}
+
+    private void initThermometer() {
+        thermometer.setTextSize(22);
+        thermometer.setShowSubPoint(true);
+    }
 
     private void initTypefaces() {
         tvLastDateUpdate.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
@@ -614,6 +624,7 @@ public class HomeActivity extends FragmentActivity{
             tvNow.setText(/*getString(R.string.now_temp_on_street)+ " " + */Html.fromHtml(info.getWeatherToday()));
             getActionBar().setTitle(Html.fromHtml(info.getTownName()));
             tvTown.setText(Html.fromHtml(info.getTownName()));
+            //ImageCache.download(info.getWeatherTodayImg(), ivBigWeather);
 			if(info.getWerningWind()){
 				llWerningWind.setVisibility(LinearLayout.VISIBLE);
 				tvWind.setText(info.getWindDescription());
@@ -633,7 +644,8 @@ public class HomeActivity extends FragmentActivity{
 			db.insertDataCache(info);
 			pref.edit().putString(App.PREF_LAST_DATE_UPDATE, dateFormat.format(new Date())).commit();
 		} else {
-			settingDialog.show();
+            if(!settingDialog.isShowing())
+                settingDialog.show();
 			Toast.makeText(HomeActivity.this, getString(R.string.err_incorrect_city_name), Toast.LENGTH_SHORT).show();
 		}		
 	}
@@ -642,48 +654,53 @@ public class HomeActivity extends FragmentActivity{
 	protected void onResume() {
 		super.onResume();
 		Log.i(TAG, "onResume()");
-        pd = new ProgressDialog(this);
-        pd.setMessage(getString(R.string.dialog_downld_page_msg));
-        pd.setCanceledOnTouchOutside(false);
+        if (pd == null) {
+            pd = new ProgressDialog(this);
+            pd.setMessage(getString(R.string.dialog_downld_page_msg));
+            pd.setCanceledOnTouchOutside(false);
+        }
 
-        settingDialogBuilder = new AlertDialog.Builder(this);
-        settingDialogBuilder.setTitle(R.string.dialog_title_setting);
+        if (settingDialog == null) {
+            View viewDialog = getLayoutInflater().inflate(R.layout.setting_dialog_layout, null);
+            etUrl = (AutoCompleteTextView)viewDialog.findViewById(R.id.autoCompleteTextView_city);
+            llGetLocation = (LinearLayout)viewDialog.findViewById(R.id.ll_start_get_location);
+            pbLoadLocation = (ProgressBar)viewDialog.findViewById(R.id.pb_load_location);
+            tvLastSelectInfo = (TextView)viewDialog.findViewById(R.id.tv_info_last_towns);
+            lvTown = (ListView)viewDialog.findViewById(R.id.lv_list_last_towns);
+            lvTown.setAdapter(adapterTown);
+            lvTown.setOnItemClickListener(itemTownClickListener);
 
-        View viewDialog = getLayoutInflater().inflate(R.layout.setting_dialog_layout, null);
-        etUrl = (AutoCompleteTextView)viewDialog.findViewById(R.id.autoCompleteTextView_city);
-        llGetLocation = (LinearLayout)viewDialog.findViewById(R.id.ll_start_get_location);
-        pbLoadLocation = (ProgressBar)viewDialog.findViewById(R.id.pb_load_location);
-        tvLastSelectInfo = (TextView)viewDialog.findViewById(R.id.tv_info_last_towns);
-        lvTown = (ListView)viewDialog.findViewById(R.id.lv_list_last_towns);
-        lvTown.setAdapter(adapterTown);
-        lvTown.setOnItemClickListener(itemTownClickListener);
+            llGetLocation.setOnClickListener(clickGetLocationListener);
 
-        llGetLocation.setOnClickListener(clickGetLocationListener);
+            settingDialogBuilder = new AlertDialog.Builder(this);
+            settingDialogBuilder.setTitle(R.string.dialog_title_setting);
+            settingDialogBuilder.setView(viewDialog);
+            settingDialogBuilder.setPositiveButton(R.string.apply, clickBtnListener);
+            settingDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if(loadTownTask != null){
+                        loadTownTask.cancel(true);
+                    }
+                    dialog.cancel();
+                    if(isFirst){
+                        finish();
+                    }
+                }
+            });
+
+            settingDialog = settingDialogBuilder.create();
+            settingDialog.setCanceledOnTouchOutside(false);
+
+            etUrl.addTextChangedListener(textChangeListener);
+            etUrl.setOnItemClickListener(itemCompleteListener);
+        }
 
         updateInfosTvTown();
 
-        settingDialogBuilder.setView(viewDialog);
-        settingDialogBuilder.setPositiveButton(R.string.apply, clickBtnListener);
-        settingDialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(loadTownTask != null){
-                    loadTownTask.cancel(true);
-                }
-                dialog.cancel();
-                if(isFirst){
-                    finish();
-                }
-            }
-        });
-
-        settingDialog = settingDialogBuilder.create();
-        settingDialog.setCanceledOnTouchOutside(false);
-
-        etUrl.addTextChangedListener(textChangeListener);
-        etUrl.setOnItemClickListener(itemCompleteListener);
-        etUrl.setAdapter(compliteAdapter);
+        if(etUrl.getAdapter() == null && compliteAdapter != null)
+            etUrl.setAdapter(compliteAdapter);
 
         initTypefaces();
         if(pref.contains(App.PREF_SITY_URL)){
@@ -705,7 +722,8 @@ public class HomeActivity extends FragmentActivity{
             }
         }else{
             if(settingDialog != null){
-                settingDialog.show();
+                if(!settingDialog.isShowing())
+                    settingDialog.show();
                 btnOkSettingDialog = settingDialog.getButton(DialogInterface.BUTTON_POSITIVE);
                 btnOkSettingDialog.setVisibility(Button.GONE);
             }
@@ -728,7 +746,8 @@ public class HomeActivity extends FragmentActivity{
 		switch (item.getItemId()) {
             case android.R.id.home:
             case R.id.action_setting:
-                settingDialog.show();
+                if(!settingDialog.isShowing())
+                    settingDialog.show();
                 break;
         }
         return super.onOptionsItemSelected(item);
