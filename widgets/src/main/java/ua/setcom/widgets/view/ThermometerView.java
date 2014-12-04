@@ -1,12 +1,15 @@
 package ua.setcom.widgets.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 
 
 /**
@@ -15,6 +18,12 @@ import android.view.View;
 public class ThermometerView extends View {
 
     public static final String TAG = "ThermometerView";
+
+    public interface Key{
+        public static final String CURRENT_TEMP = "current_temp";
+        public static final String MAX_TEMP = "max_temp";
+        public static final String MIN_TEMP = "min_temp";
+    }
 
     private float maxTemp = 40f;
     private float minTemp = 25f;
@@ -65,6 +74,28 @@ public class ThermometerView extends View {
         invalidate();
     }
 
+    /**
+     * @param intentData - set 3 params currentTemp, maxTemp, minTemp
+     */
+    public void updateTemperature(Intent intentData) {
+        if (intentData != null
+                && intentData.getExtras() != null
+                && !intentData.getExtras().isEmpty()
+                && intentData.getExtras().containsKey(Key.CURRENT_TEMP)
+                && intentData.getExtras().containsKey(Key.MAX_TEMP)
+                && intentData.getExtras().containsKey(Key.MIN_TEMP)) {
+            Bundle data = intentData.getExtras();
+            float maxTemp = data.getFloat(Key.MAX_TEMP);
+            float minTemp = data.getFloat(Key.MIN_TEMP);
+            float currentTemp = data.getFloat(Key.CURRENT_TEMP);
+
+            this.maxTemp = maxTemp;
+            this.minTemp = minTemp;
+            this.curTemp = currentTemp;
+            invalidate();
+        }
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(getSuggestedMinimumWidth(), getSuggestedMinimumHeight());
@@ -76,6 +107,7 @@ public class ThermometerView extends View {
         drawBaseThermometerCircle(canvas);
         drawTemperatureValue(canvas);
         drawLineValue(canvas);
+        // TODO: make changes with animation
     }
 
     private void drawLineValue(Canvas canvas) {
@@ -127,6 +159,8 @@ public class ThermometerView extends View {
         canvas.drawText(String.valueOf(0), stopX, posYZero, paintText);
     }
 
+    private int startXLast = 0, startYLast = 0;
+
     private void drawTemperatureValue(Canvas canvas) {
         mPaintBar.setColor(colorMercury);
         int stroke = STROKE_WIDTH*2;
@@ -151,9 +185,25 @@ public class ThermometerView extends View {
         int startY = calculateTemperature(height - center - h);
         startY += h;
 
-        canvas.drawLine(startX, startY, stopX, stopY, mPaintBar);
         mPaintCircle.setColor(Color.RED);
+        canvas.drawLine(startX, startY, stopX, stopY, mPaintBar);
         canvas.drawCircle(startX, startY, (stroke / 2), mPaintCircle);
+
+        /*if (startXLast != 0 && startYLast != 0) {
+            if (startYLast > startY) {
+                for (int i = startYLast; i < startY; i--) {
+                    canvas.drawLine(startX, startY, stopX, stopY, mPaintBar);
+                    invalidate();
+                }
+            } else {
+                for (int i = startYLast; i < startY; i++) {
+                    canvas.drawLine(startX, startY, stopX, stopY, mPaintBar);
+                    invalidate();
+                }
+            }
+        }*/
+        startXLast = startX;
+        startYLast = startY;
     }
 
     private int calculateTemperature(int height) {
@@ -228,6 +278,11 @@ public class ThermometerView extends View {
 
         canvas.drawCircle(stopX, startY, (stroke / 2), mPaintCircle);
         canvas.drawLine(startX, startY, stopX, stopY, mPaintBar);
+
+        if (startXLast == 0 && startYLast == 0) {
+            startXLast = stopX;
+            startYLast = stopY;
+        }
     }
 
     private void drawBaseThermometerCircle(Canvas canvas) {

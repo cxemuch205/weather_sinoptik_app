@@ -34,4 +34,8 @@ public class App {
         public static final String ROBOTO_THIN = "Roboto-Thin";
     }
 
+    public interface Thermometer{
+        public static final float MAX = 40f;
+        public static final float MIN = 30f;
+    }
 }

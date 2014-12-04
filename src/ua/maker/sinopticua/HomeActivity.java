@@ -620,7 +620,7 @@ public class HomeActivity extends FragmentActivity{
             int cursorDegrees = info.getWeatherToday().indexOf("&");
             String textDegrees = info.getWeatherToday().substring(0, cursorDegrees).replace("+","");
             int degreesNow = Integer.parseInt(textDegrees);
-            thermometer.updateTemperature((float)degreesNow, 40, 30);
+            thermometer.updateTemperature((float)degreesNow, App.Thermometer.MAX, App.Thermometer.MIN);
             tvNow.setText(/*getString(R.string.now_temp_on_street)+ " " + */Html.fromHtml(info.getWeatherToday()));
             getActionBar().setTitle(Html.fromHtml(info.getTownName()));
             tvTown.setText(Html.fromHtml(info.getTownName()));

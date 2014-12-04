@@ -4,7 +4,7 @@
     <string name="app_name">Погода в Украине</string>
     <string name="action_refresh">Обновить</string>
     <string name="info">Погода в Краматорске!</string>
-    <string name="dialog_downld_page_msg">Загрузка данных&#8230;</string>
+    <string name="dialog_downld_page_msg">Загрузка данных…</string>
     <string name="dialog_title_setting">Выбор города:</string>
     <string name="setting_title">Настройки местоположения</string>
     <string name="apply">Применить</string>
@@ -19,5 +19,7 @@
     <string name="cant_get_current_location">Не удалось получить ваше текущее местоположение!</string>
     <string name="location_not_found">Местоположение не определено!</string>
     <string name="no_correct_name_town">Не корректный ввод!</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 </resources>

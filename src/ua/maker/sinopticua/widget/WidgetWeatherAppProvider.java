@@ -39,6 +39,8 @@ import android.widget.ProgressBar;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class WidgetWeatherAppProvider extends AppWidgetProvider {
 
 	private static final String TAG = "WidgetWeatherAppProvider";
@@ -73,19 +75,7 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 			
 			@Override
 			public void run() {
-				String defUrl;
-				if(Locale.getDefault().getLanguage().equals(App.LANG_UA)){
-					defUrl = App.DEFAULT_URL_UA;
-				} else {
-					defUrl = App.DEFAULT_URL_RU;
-				}
-				if (pref.contains(App.PREF_SITY_URL)) {					
-					url = pref.getString(App.PREF_SITY_URL, defUrl);
-				} else {
-					url = defUrl;
-				}
-
-				refreshWeather(url);				
+                refreshWeather(getWeatherUrl(mContext));
 			}
 		}, 0, PERIOD_UPDATE);	
 		for (int i = 0; i < appWidgetIds.length; i++) {
@@ -98,7 +88,7 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 	        appWidgetManager.updateAppWidget(appWidgetId, view);
 	    }
 	}
-	
+
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		super.onReceive(context, intent);
@@ -108,24 +98,26 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 		view = new RemoteViews(context.getPackageName(),
 				R.layout.widget_3x2_layout);
 		thisWidget = new ComponentName(context, WidgetWeatherAppProvider.class);
-		
-		if(ACTION_UPDATE.equals(intent.getAction())){
-			Log.i(TAG, "CLICK UPDATE - START");
-			String defUrl;
-			if(Locale.getDefault().getLanguage().equals(App.LANG_UA)){
-				defUrl = App.DEFAULT_URL_UA;
-			} else {
-				defUrl = App.DEFAULT_URL_RU;
-			}
-			if (pref.contains(App.PREF_SITY_URL)) {					
-				url = pref.getString(App.PREF_SITY_URL, defUrl);
-			} else {
-				url = defUrl;
-			}
 
-			refreshWeather(url);
-		}
+        refreshWeather(getWeatherUrl(context));
 	}
+
+    private String getWeatherUrl(Context context) {
+        String defUrl, url;
+        SharedPreferences pref = context.getSharedPreferences(App.PREF_APP, Context.MODE_PRIVATE);
+        if(Locale.getDefault().getLanguage().equals(App.LANG_UA)){
+            defUrl = App.DEFAULT_URL_UA;
+        } else {
+            defUrl = App.DEFAULT_URL_RU;
+        }
+        if (pref.contains(App.PREF_SITY_URL)) {
+            url = pref.getString(App.PREF_SITY_URL, defUrl);
+        } else {
+            url = defUrl;
+        }
+
+        return url;
+    }
 
 	protected PendingIntent getPendingSelfIntent(Context context, String action) {
         Intent intent = new Intent(context, getClass());

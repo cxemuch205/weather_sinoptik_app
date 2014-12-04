@@ -13,6 +13,7 @@ dependencies {
     compile 'com.android.support:cardview-v7:+'
     compile project(':widgets')
     compile 'com.android.support:appcompat-v7:21.0.0'
+    compile files('libs/picasso-2.4.0.jar')
 }
 
 android {
