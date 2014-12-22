@@ -23,4 +23,14 @@
         android:textColor="#fff"
         android:textSize="20sp" />
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pb_load"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/iv_thermometer"
+        android:layout_toStartOf="@+id/iv_thermometer"
+        android:paddingBottom="16dp" />
+
 </RelativeLayout>

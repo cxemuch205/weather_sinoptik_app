@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
@@ -143,9 +145,10 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
         protected void onPreExecute() {
             super.onPreExecute();
             Log.i(TAG, "onPreExecute()");
-            /*views.setViewVisibility(R.id.pb_widget, ProgressBar.VISIBLE);
-            views.setViewVisibility(R.id.iv_update, ImageView.GONE);
-            appWidgetManager.updateAppWidget(thisWidget, view);*/
+            try {
+                views.setViewVisibility(R.id.pb_load, ProgressBar.VISIBLE);
+                appWidgetManager.updateAppWidget(thisWidget, views);
+            } catch (Exception e) {}
         }
 
         @Override
@@ -179,6 +182,8 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
                 if (image != null) {
                     views.setImageViewBitmap(R.id.iv_thermometer, image);
                 }
+
+                views.setViewVisibility(R.id.pb_load, ProgressBar.GONE);
 
                 appWidgetManager.updateAppWidget(thisWidget, views);
             }
