@@ -1165,11 +1165,28 @@ public class DataParser {
 		try {
 			JSONObject objectAll = new JSONObject(json);
 			JSONArray data = objectAll.getJSONArray("results");
-			JSONObject townJson = data.getJSONObject(0);
-			JSONArray addressComp = townJson.getJSONArray("address_components");
-			JSONObject townNameJson = addressComp.getJSONObject(2);
-			String townName = townNameJson.getString("long_name");
-			result.setNameTown(townName);
+            for (int i = 0; i < data.length(); i++) {
+                JSONObject townJson = data.getJSONObject(i);
+                JSONArray addressComp = townJson.getJSONArray("address_components");
+                for (int j = 0; j < addressComp.length(); j++) {
+                    JSONObject townNameJson = addressComp.getJSONObject(j);
+                    if (!townNameJson.isNull("types")) {
+                        JSONArray types = townNameJson.getJSONArray("types");
+                        int countTypes = 0;
+                        for (int k = 0; k < types.length(); k++) {
+                            String type = types.getString(k);
+                            if (type.contentEquals("locality")
+                                    || type.contentEquals("political")) {
+                                countTypes++;
+                            }
+                        }
+                        if (countTypes == 2) {
+                            String townName = townNameJson.getString("long_name");
+                            result.setNameTown(townName);
+                        }
+                    }
+                }
+            }
 		} catch (JSONException e) {
 			e.printStackTrace();
             return null;
