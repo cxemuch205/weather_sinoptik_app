@@ -67,12 +67,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/weather_sinoptik_app-debug.apk" afterPath="$PROJECT_DIR$/weather_sinoptik_app-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_home.xml" afterPath="$PROJECT_DIR$/res/layout/activity_home.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/weather_sinoptik_app.iml" afterPath="$PROJECT_DIR$/weather_sinoptik_app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/widgets/widgets.iml" afterPath="$PROJECT_DIR$/widgets/widgets.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java" />
     </list>
     <ignored path="weather_sinoptik_app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -100,26 +95,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HomeActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="HomeActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="775" max-vertical-offset="12240">
-              <caret line="105" column="42" selection-start-line="105" selection-start-column="42" selection-end-line="105" selection-end-column="42" />
-              <folding />
+            <state vertical-scroll-proportion="0.71915394" vertical-offset="2862" max-vertical-offset="12420">
+              <caret line="255" column="16" selection-start-line="255" selection-start-column="16" selection-end-line="255" selection-end-column="16" />
+              <folding>
+                <element signature="e#7071#7105#0" expanded="true" />
+                <element signature="e#7219#7349#0" expanded="true" />
+                <element signature="e#7342#7343#0" expanded="true" />
+                <element signature="e#7797#7842#0" expanded="true" />
+                <element signature="e#9737#9775#0" expanded="true" />
+                <element signature="e#18295#18329#0" expanded="true" />
+                <element signature="e#21609#21671#0" expanded="true" />
+                <element signature="e#22071#22107#0" expanded="true" />
+                <element signature="e#22289#22325#0" expanded="true" />
+                <element signature="e#23879#23922#0" expanded="true" />
+                <element signature="e#24146#24188#0" expanded="true" />
+                <element signature="e#25133#25162#0" expanded="true" />
+                <element signature="e#25270#25284#0" expanded="true" />
+                <element signature="e#25356#25371#0" expanded="true" />
+                <element signature="e#26950#26984#0" expanded="true" />
+                <element signature="e#28310#28339#0" expanded="true" />
+              </folding>
             </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_home.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/res/layout/activity_home.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9183673" vertical-offset="1890" max-vertical-offset="2736">
-              <caret line="130" column="70" selection-start-line="130" selection-start-column="70" selection-end-line="130" selection-end-column="70" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer">
-            <state />
           </provider>
         </entry>
       </file>
@@ -1621,7 +1620,6 @@
         <option value="$PROJECT_DIR$/res/layout/widget_thermometer_app_provider.xml" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" />
-        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java" />
         <option value="$PROJECT_DIR$/widgets/src/main/java/ua/setcom/widgets/view/ThermometerView.java" />
         <option value="$PROJECT_DIR$/testapplication/build.gradle" />
         <option value="$PROJECT_DIR$/widgets/build.gradle" />
@@ -1630,6 +1628,7 @@
         <option value="$PROJECT_DIR$/widgets/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java" />
         <option value="$PROJECT_DIR$/res/layout/activity_home.xml" />
+        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java" />
       </list>
     </option>
   </component>
@@ -2149,7 +2148,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32994652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32918552" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39932126" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -2159,7 +2158,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32918552" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31900454" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37217194" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37217194" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32918552" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2206,7 +2205,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="14022">
           <caret line="648" column="118" selection-start-line="648" selection-start-column="118" selection-end-line="648" selection-end-column="118" />
-          <folding />
+          <folding>
+            <element signature="e#7071#7105#0" expanded="true" />
+            <element signature="e#7219#7349#0" expanded="true" />
+            <element signature="e#7342#7343#0" expanded="true" />
+            <element signature="e#7797#7842#0" expanded="true" />
+            <element signature="e#9737#9775#0" expanded="true" />
+            <element signature="e#18295#18329#0" expanded="true" />
+            <element signature="e#21609#21671#0" expanded="true" />
+            <element signature="e#22071#22107#0" expanded="true" />
+            <element signature="e#22289#22325#0" expanded="true" />
+            <element signature="e#23879#23922#0" expanded="true" />
+            <element signature="e#24146#24188#0" expanded="true" />
+            <element signature="e#25133#25162#0" expanded="true" />
+            <element signature="e#25270#25284#0" expanded="true" />
+            <element signature="e#25356#25371#0" expanded="true" />
+            <element signature="e#26950#26984#0" expanded="true" />
+            <element signature="e#28310#28339#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2579,23 +2595,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="775" max-vertical-offset="12240">
-          <caret line="105" column="42" selection-start-line="105" selection-start-column="42" selection-end-line="105" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_home.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9183673" vertical-offset="1890" max-vertical-offset="2736">
+        <state vertical-scroll-proportion="0.85227275" vertical-offset="1890" max-vertical-offset="2736">
           <caret line="130" column="70" selection-start-line="130" selection-start-column="70" selection-end-line="130" selection-end-column="70" />
           <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.71915394" vertical-offset="2862" max-vertical-offset="12420">
+          <caret line="255" column="16" selection-start-line="255" selection-start-column="16" selection-end-line="255" selection-end-column="16" />
+          <folding>
+            <element signature="e#7071#7105#0" expanded="true" />
+            <element signature="e#7219#7349#0" expanded="true" />
+            <element signature="e#7342#7343#0" expanded="true" />
+            <element signature="e#7797#7842#0" expanded="true" />
+            <element signature="e#9737#9775#0" expanded="true" />
+            <element signature="e#18295#18329#0" expanded="true" />
+            <element signature="e#21609#21671#0" expanded="true" />
+            <element signature="e#22071#22107#0" expanded="true" />
+            <element signature="e#22289#22325#0" expanded="true" />
+            <element signature="e#23879#23922#0" expanded="true" />
+            <element signature="e#24146#24188#0" expanded="true" />
+            <element signature="e#25133#25162#0" expanded="true" />
+            <element signature="e#25270#25284#0" expanded="true" />
+            <element signature="e#25356#25371#0" expanded="true" />
+            <element signature="e#26950#26984#0" expanded="true" />
+            <element signature="e#28310#28339#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

@@ -196,20 +196,24 @@ public class HomeActivity extends FragmentActivity{
 		
 		@Override
 		public void onClick(View v) {
-			GPSTracker tracker = new GPSTracker(HomeActivity.this);
-			if(tracker.canGetLocation()){
-				Log.d(TAG, "#### canGetLocation()");
-				double lat = 0, lon = 0;
-				lat = tracker.getLatitude();
-				lon = tracker.getLongitude();
-				new LoadCurrentLocationTask().execute(new Double[]{lat, lon});
-			}else{
-				Toast.makeText(HomeActivity.this, getString(R.string.cant_get_current_location), Toast.LENGTH_LONG).show();
-			}
-		}
-	};
-	
-	class LoadCurrentLocationTask extends AsyncTask<Double, Integer, ItemTown>{
+            getLocation(HomeActivity.this);
+        }
+    };
+
+    private void getLocation(Context context) {
+        GPSTracker tracker = new GPSTracker(context);
+        if(tracker.canGetLocation()){
+            Log.d(TAG, "#### canGetLocation()");
+            double lat = 0, lon = 0;
+            lat = tracker.getLatitude();
+            lon = tracker.getLongitude();
+            new LoadCurrentLocationTask().execute(new Double[]{lat, lon});
+        }else{
+            Toast.makeText(HomeActivity.this, getString(R.string.cant_get_current_location), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    class LoadCurrentLocationTask extends AsyncTask<Double, Integer, ItemTown>{
 		
 		@Override
 		protected void onPreExecute() {
@@ -246,8 +250,10 @@ public class HomeActivity extends FragmentActivity{
 		@Override
 		protected void onPostExecute(ItemTown result) {
 			super.onPostExecute(result);
-			pbLoadLocation.setVisibility(ProgressBar.GONE);
-			llGetLocation.setVisibility(LinearLayout.VISIBLE);
+            if(pbLoadLocation != null)
+			    pbLoadLocation.setVisibility(ProgressBar.GONE);
+            if(llGetLocation != null)
+			    llGetLocation.setVisibility(LinearLayout.VISIBLE);
             if (result != null) {
                 etUrl.setText(result.getNameTown());
                 cityName = result.getNameTown().substring(0, 3);
@@ -276,7 +282,7 @@ public class HomeActivity extends FragmentActivity{
 
             urlBuild.appendPath(town.getUrlEndTown());
 			
-			final String newURL = urlBuild.build().toString();//App.SITE_URL_RU+Uri.encode(listAutoCompliteTown.get(position).getUrlEndTown());
+			final String newURL = urlBuild.build().toString();
 			
 			Log.i(TAG, "URL: " + newURL);
             if(!URL.equals(newURL)
