@@ -1,22 +1,5 @@
 package ua.maker.sinopticua.widget;
 
-import java.io.IOException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import ua.maker.sinopticua.HomeActivity;
-import ua.maker.sinopticua.R;
-import ua.maker.sinopticua.constants.App;
-import ua.maker.sinopticua.models.ItemWeather;
-import ua.maker.sinopticua.models.WeatherStruct;
-import ua.maker.sinopticua.utils.Tools;
-import ua.maker.sinopticua.utils.DataParser;
-
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -30,16 +13,27 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
+import android.util.Patterns;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import java.io.IOException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import ua.maker.sinopticua.HomeActivity;
+import ua.maker.sinopticua.R;
+import ua.maker.sinopticua.constants.App;
+import ua.maker.sinopticua.models.ItemWeather;
+import ua.maker.sinopticua.models.WeatherStruct;
+import ua.maker.sinopticua.utils.DataParser;
+import ua.maker.sinopticua.utils.Tools;
 
 public class WidgetWeatherAppProvider extends AppWidgetProvider {
 
@@ -184,6 +178,11 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 						Html.fromHtml(weather.maxTemp));
 				view.setTextViewText(R.id.tv_name_weather, weather.weatherName);
 				String urlImage = weather.urlImage;
+                if (!Patterns.WEB_URL.matcher(urlImage).matches()) {
+                    urlImage = "https:" + urlImage;
+                } else {
+                    urlImage = weather.urlImage;
+                }
 				URL imageURL;
 				try {
 					imageURL = new URL(urlImage);

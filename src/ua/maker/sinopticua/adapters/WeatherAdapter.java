@@ -1,13 +1,5 @@
 package ua.maker.sinopticua.adapters;
 
-import java.util.List;
-
-import ua.maker.sinopticua.R;
-import ua.maker.sinopticua.constants.App;
-import ua.maker.sinopticua.models.ItemWeather;
-import ua.maker.sinopticua.utils.ImageCache;
-import ua.maker.sinopticua.utils.Tools;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -19,6 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.List;
+
+import ua.maker.sinopticua.R;
+import ua.maker.sinopticua.constants.App;
+import ua.maker.sinopticua.models.ItemWeather;
+import ua.maker.sinopticua.utils.ImageCache;
+import ua.maker.sinopticua.utils.Tools;
 
 public class WeatherAdapter extends ArrayAdapter<ItemWeather> {
 
@@ -74,6 +74,11 @@ public class WeatherAdapter extends ArrayAdapter<ItemWeather> {
 			holder.tvMonth.setTextColor(Color.BLACK);
 		}
 		String url = item.urlImage;
+        if (!Patterns.WEB_URL.matcher(url).matches()) {
+            url = "https:" + url;
+        } else {
+            url = item.urlImage;
+        }
         ImageCache.download(url, holder.ivWeatherImage);
 
 		return view;

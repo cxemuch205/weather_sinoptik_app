@@ -1,6 +1,5 @@
 package ua.maker.sinopticua.utils;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -33,7 +32,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import ua.maker.sinopticua.HomeActivity;
 import ua.maker.sinopticua.R;
 import ua.maker.sinopticua.SinoptikApplication;
 
@@ -43,7 +41,7 @@ import ua.maker.sinopticua.SinoptikApplication;
 public class ImageCache {
     private static ImageCache _this;
     private static final String LOG_TAG = "ImageCache";
-    private static final String CACHE_DIRECTORY = "mediaCloud/photos";
+    private static final String CACHE_DIRECTORY = "weather_uakraine/caches";
     public ImageCache()
     {
         _this = this;

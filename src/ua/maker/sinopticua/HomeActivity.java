@@ -1,27 +1,5 @@
 package ua.maker.sinopticua;
 
-import java.lang.ref.WeakReference;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import ua.maker.sinopticua.adapters.TownAdapter;
-import ua.maker.sinopticua.adapters.TownAdapter.onClearItemListener;
-import ua.maker.sinopticua.adapters.TownCompleteAdapter;
-import ua.maker.sinopticua.adapters.WeatherAdapter;
-import ua.maker.sinopticua.constants.App;
-import ua.maker.sinopticua.models.ItemTown;
-import ua.maker.sinopticua.models.ItemWeather;
-import ua.maker.sinopticua.models.WeatherStruct;
-import ua.maker.sinopticua.utils.GPSTracker;
-import ua.maker.sinopticua.utils.ImageCache;
-import ua.maker.sinopticua.utils.Tools;
-import ua.maker.sinopticua.utils.UserDB;
-import ua.maker.sinopticua.utils.DataParser;
-import ua.setcom.widgets.view.ThermometerView;
-
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
@@ -36,9 +14,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Build.VERSION;
 import android.os.Bundle;
-import android.os.AsyncTask.Status;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
@@ -60,6 +38,27 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import ua.maker.sinopticua.adapters.TownAdapter;
+import ua.maker.sinopticua.adapters.TownAdapter.onClearItemListener;
+import ua.maker.sinopticua.adapters.TownCompleteAdapter;
+import ua.maker.sinopticua.adapters.WeatherAdapter;
+import ua.maker.sinopticua.constants.App;
+import ua.maker.sinopticua.models.ItemTown;
+import ua.maker.sinopticua.models.ItemWeather;
+import ua.maker.sinopticua.models.WeatherStruct;
+import ua.maker.sinopticua.utils.DataParser;
+import ua.maker.sinopticua.utils.GPSTracker;
+import ua.maker.sinopticua.utils.Tools;
+import ua.maker.sinopticua.utils.UserDB;
+import ua.setcom.widgets.view.ThermometerView;
 
 @SuppressLint("DefaultLocale")
 public class HomeActivity extends FragmentActivity{
@@ -256,8 +255,10 @@ public class HomeActivity extends FragmentActivity{
 			    llGetLocation.setVisibility(LinearLayout.VISIBLE);
             if (result != null) {
                 etUrl.setText(result.getNameTown());
-                cityName = result.getNameTown().substring(0, 3);
-                updateListAuto(cityName);
+                if (result.getNameTown() != null) {
+                    cityName = result.getNameTown().substring(0, 3);
+                    updateListAuto(cityName);
+                }
                 etUrl.setSelection(etUrl.getText().toString().length() - 2, etUrl.getText().toString().length());
             } else {
                 Toast.makeText(HomeActivity.this, getString(R.string.location_not_found), Toast.LENGTH_SHORT).show();
@@ -727,11 +728,13 @@ public class HomeActivity extends FragmentActivity{
                     Toast.makeText(this, getString(R.string.no_connections), Toast.LENGTH_SHORT).show();
             }
         }else{
-            if(settingDialog != null){
-                if(!settingDialog.isShowing())
-                    settingDialog.show();
-                btnOkSettingDialog = settingDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                btnOkSettingDialog.setVisibility(Button.GONE);
+            if(settingDialog != null) {
+                try {
+                    if (!settingDialog.isShowing())
+                        settingDialog.show();
+                    btnOkSettingDialog = settingDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                    btnOkSettingDialog.setVisibility(Button.GONE);
+                } catch (Exception e) {}
             }
         }
 		/*if(adapter.isEmpty()){
