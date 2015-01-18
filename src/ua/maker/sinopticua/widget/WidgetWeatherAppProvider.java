@@ -39,7 +39,7 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 
 	private static final String TAG = "WidgetWeatherAppProvider";
 	private static final String ACTION_UPDATE = "action_update";
-	private static final int PERIOD_UPDATE = 60000;
+	private static final int PERIOD_UPDATE = 120000;
 	
 	private HttpTask task;
 	private RemoteViews view;
@@ -83,7 +83,7 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 	    }
 	}
 
-	@Override
+    @Override
 	public void onReceive(Context context, Intent intent) {
 		super.onReceive(context, intent);
 		pref = context.getSharedPreferences(App.PREF_APP, Context.MODE_PRIVATE);
@@ -166,28 +166,38 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 
                 view.setViewVisibility(R.id.pb_widget, ProgressBar.GONE);
 				view.setViewVisibility(R.id.iv_update, ImageView.VISIBLE);
-				view.setTextViewText(R.id.tv_town_name, Html.fromHtml(response.getTownName()));
+                if(response.getTownName() != null)
+				    view.setTextViewText(R.id.tv_town_name, Html.fromHtml(response.getTownName()));
 				view.setTextViewText(R.id.tv_info_last_update, dateUpdate);
 				view.setTextViewText(R.id.tv_day, String.valueOf(weather.day));
-				view.setTextViewText(R.id.tv_month, weather.month);
-				view.setTextViewText(R.id.tv_name_day, weather.dayName);
-				view.setTextViewText(R.id.tv_now_weather, Html.fromHtml(response.getWeatherToday()));
-				view.setTextViewText(R.id.tv_temp_min,
+                if(weather.month != null)
+				    view.setTextViewText(R.id.tv_month, weather.month);
+                if(weather.dayName != null)
+				    view.setTextViewText(R.id.tv_name_day, weather.dayName);
+                if(response.getWeatherToday() != null)
+                    view.setTextViewText(R.id.tv_now_weather, Html.fromHtml(response.getWeatherToday()));
+                if(weather.minTemp != null)
+				    view.setTextViewText(R.id.tv_temp_min,
 						Html.fromHtml(weather.minTemp));
-				view.setTextViewText(R.id.tv_temp_max,
+                if(weather.maxTemp != null)
+				    view.setTextViewText(R.id.tv_temp_max,
 						Html.fromHtml(weather.maxTemp));
-				view.setTextViewText(R.id.tv_name_weather, weather.weatherName);
+                if(weather.weatherName != null)
+                    view.setTextViewText(R.id.tv_name_weather, weather.weatherName);
+
 				String urlImage = weather.urlImage;
-                if (!Patterns.WEB_URL.matcher(urlImage).matches()) {
-                    urlImage = "https:" + urlImage;
-                } else {
-                    urlImage = weather.urlImage;
+                if (urlImage != null) {
+                    if (!Patterns.WEB_URL.matcher(urlImage).matches()) {
+                        urlImage = "https:" + urlImage;
+                    } else {
+                        urlImage = weather.urlImage;
+                    }
+                    URL imageURL;
+                    try {
+                        imageURL = new URL(urlImage);
+                        new LoadImage().execute(imageURL);
+                    } catch (Exception e) {}
                 }
-				URL imageURL;
-				try {
-					imageURL = new URL(urlImage);
-					new LoadImage().execute(imageURL);
-				} catch (Exception e) {}
 				
 				if (response.getWerningWind()) {
 					view.setViewVisibility(R.id.ll_werning_wind,

@@ -11,13 +11,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Html;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 
 import java.util.Locale;
 
@@ -174,8 +171,10 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
             if(response != null) {
                 Log.i(TAG, "onPostExecute()");
 
-                views.setTextViewText(R.id.tv_now_weather, Html.fromHtml(response.getWeatherToday()));
-                if (Html.fromHtml(response.getWeatherToday()).length() > 4) {
+                if (response.getWeatherToday() != null)
+                    views.setTextViewText(R.id.tv_now_weather, Html.fromHtml(response.getWeatherToday()));
+                if (response.getWeatherToday() != null
+                        && Html.fromHtml(response.getWeatherToday()).length() > 4) {
                     views.setFloat(R.id.tv_now_weather, "setTextSize", 18);
                 }
                 Bitmap image = getBitmapThermometer(response);
@@ -213,13 +212,15 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
     private Intent getDataForThermometer(WeatherStruct response) {
         Intent data = new Intent();
 
-        int cursorDegrees = response.getWeatherToday().indexOf("&");
-        String textDegrees = response.getWeatherToday().substring(0, cursorDegrees).replace("+","");
-        int degreesNow = Integer.parseInt(textDegrees);
+        try {
+            int cursorDegrees = response.getWeatherToday().indexOf("&");
+            String textDegrees = response.getWeatherToday().substring(0, cursorDegrees).replace("+","");
+            int degreesNow = Integer.parseInt(textDegrees);
 
-        data.putExtra(ThermometerView.Key.CURRENT_TEMP, (float)degreesNow);
-        data.putExtra(ThermometerView.Key.MAX_TEMP, App.Thermometer.MAX);
-        data.putExtra(ThermometerView.Key.MIN_TEMP, App.Thermometer.MIN);
+            data.putExtra(ThermometerView.Key.CURRENT_TEMP, (float)degreesNow);
+            data.putExtra(ThermometerView.Key.MAX_TEMP, App.Thermometer.MAX);
+            data.putExtra(ThermometerView.Key.MIN_TEMP, App.Thermometer.MIN);
+        } catch (Exception e) {}
 
         return data;
     }
