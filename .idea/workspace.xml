@@ -66,14 +66,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: ua.maker.sinopticua" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="">
-      <change type="DELETED" beforePath="E:\AndroidProject\weather_sinoptik_app\SinoptikUA-debug.apk" afterPath="" />
-      <change type="DELETED" beforePath="E:\AndroidProject\weather_sinoptik_app\weather_sinoptik_app-debug.apk" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manifest-merger-debug-report.txt" afterPath="$PROJECT_DIR$/manifest-merger-debug-report.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="" />
     <ignored path="weather_sinoptik_app.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -113,8 +106,8 @@
       <file leaf-file-name="WidgetThermometerAppProvider.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.015918959" vertical-offset="2522" max-vertical-offset="3604">
-              <caret line="173" column="16" selection-start-line="173" selection-start-column="16" selection-end-line="173" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.28654125" vertical-offset="2522" max-vertical-offset="3604">
+              <caret line="184" column="72" selection-start-line="184" selection-start-column="72" selection-end-line="184" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -2680,8 +2673,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.015918959" vertical-offset="2522" max-vertical-offset="3604">
-          <caret line="173" column="16" selection-start-line="173" selection-start-column="16" selection-end-line="173" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.28654125" vertical-offset="2522" max-vertical-offset="3604">
+          <caret line="184" column="72" selection-start-line="184" selection-start-column="72" selection-end-line="184" selection-end-column="72" />
           <folding />
         </state>
       </provider>
