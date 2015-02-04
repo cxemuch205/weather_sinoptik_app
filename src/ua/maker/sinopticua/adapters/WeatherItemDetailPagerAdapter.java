@@ -88,8 +88,6 @@ public class WeatherItemDetailPagerAdapter extends PagerAdapter {
         ImageCache.download(detail.imageWeather.get(1), holder.iv2Weather);
         holder.iv1WindDirection.setVisibility(ImageView.GONE);
         holder.iv2WindDirection.setVisibility(ImageView.GONE);
-        //ImageCache.download(detail.winds.get(0).imgDirection, holder.iv1WindDirection);
-        //ImageCache.download(detail.winds.get(1).imgDirection, holder.iv2WindDirection);
     }
 
     private static class ViewHolder {
