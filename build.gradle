@@ -12,8 +12,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
     compile 'com.android.support:cardview-v7:+'
     compile project(':widgets')
-    compile 'com.android.support:appcompat-v7:21.0.0'
+    compile 'com.android.support:appcompat-v7:21.0.3'
     compile files('libs/picasso-2.4.0.jar')
+    compile files('libs/jsoup-1.8.1.jar')
 }
 
 android {

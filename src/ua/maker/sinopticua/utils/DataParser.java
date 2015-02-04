@@ -1,16 +1,18 @@
 package ua.maker.sinopticua.utils;
 
-import java.util.ArrayList;
-import java.util.List;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ua.maker.sinopticua.models.ItemDetail;
 import ua.maker.sinopticua.models.ItemTown;
 import ua.maker.sinopticua.models.ItemWeather;
 import ua.maker.sinopticua.models.WeatherStruct;
-import android.util.Log;
 
 public class DataParser {
 	
