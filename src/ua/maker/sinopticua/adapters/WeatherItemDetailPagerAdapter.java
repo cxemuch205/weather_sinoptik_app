@@ -78,16 +78,18 @@ public class WeatherItemDetailPagerAdapter extends PagerAdapter {
         holder.tv2FellTemp.setText(detail.temperatureFell.get(1));
         holder.tv1Pressure.setText(detail.pressure.get(0));
         holder.tv2Pressure.setText(detail.pressure.get(1));
-        holder.tv1SpeedWind.setText(detail.winds.get(0).speed);
-        holder.tv2SpeedWind.setText(detail.winds.get(1).speed);
+        holder.tv1SpeedWind.setText(detail.winds.get(0).imgDirection);
+        holder.tv2SpeedWind.setText(detail.winds.get(1).imgDirection);
         holder.tv1Humidity.setText(detail.humidity.get(0));
         holder.tv2Humidity.setText(detail.humidity.get(1));
         holder.tv1ChanceOfPrecipitation.setText(detail.chanceOfPrecipitation.get(0));
         holder.tv2ChanceOfPrecipitation.setText(detail.chanceOfPrecipitation.get(1));
         ImageCache.download(detail.imageWeather.get(0), holder.iv1Weather);
         ImageCache.download(detail.imageWeather.get(1), holder.iv2Weather);
-        ImageCache.download(detail.winds.get(0).imgDirection, holder.iv1WindDirection);
-        ImageCache.download(detail.winds.get(1).imgDirection, holder.iv2WindDirection);
+        holder.iv1WindDirection.setVisibility(ImageView.GONE);
+        holder.iv2WindDirection.setVisibility(ImageView.GONE);
+        //ImageCache.download(detail.winds.get(0).imgDirection, holder.iv1WindDirection);
+        //ImageCache.download(detail.winds.get(1).imgDirection, holder.iv2WindDirection);
     }
 
     private static class ViewHolder {

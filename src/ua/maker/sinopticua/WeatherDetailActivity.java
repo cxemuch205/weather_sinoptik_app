@@ -18,6 +18,7 @@ import ua.maker.sinopticua.models.ItemDetail;
 import ua.maker.sinopticua.models.ItemWeather;
 import ua.maker.sinopticua.models.Wind;
 import ua.maker.sinopticua.utils.Tools;
+import ua.setcom.widgets.view.SlidingTabLayout;
 
 public class WeatherDetailActivity extends ActionBarActivity {
 	
@@ -26,6 +27,7 @@ public class WeatherDetailActivity extends ActionBarActivity {
 	private ItemWeather weather;
     private ViewPager viewPager;
     private WeatherItemDetailPagerAdapter weatherPagerAdapter;
+    private SlidingTabLayout tabSlidingTitle;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class WeatherDetailActivity extends ActionBarActivity {
 		setContentView(R.layout.detail_weather_layout);
 		weather = (ItemWeather) getIntent().getExtras().get(App.SAVE_ITEM_WEATHER);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
+        tabSlidingTitle = (SlidingTabLayout) findViewById(R.id.title_tab);
         if(weather != null && putHttp(weather))
             prepareLoadData();
     }
@@ -76,100 +79,109 @@ public class WeatherDetailActivity extends ActionBarActivity {
                 for (Element element : tdBody) {
                     Log.d(TAG, "body\t" + element.text());
                     if (iterator == 0) {
-                        listItemsDetail.get(count).dayTime.add(element.text());
-                        if (count % 2 == 0) {
-                            count++;
-                        }
-                        if (count == 4) {
-                            count = 0;
-                            iterator = 1;
-                        }
+                        try {
+                            String data = element.text();
+                            listItemsDetail.get(count).dayTime.add(data);
+                            if (listItemsDetail.get(count).dayTime.size() == 2) {
+                                count++;
+                            }
+                        } catch (Exception e) {}
                     }
 
                     if (iterator == 1) {
-                        listItemsDetail.get(count).imageWeather.add(element.getElementsByClass("imgWeather").attr("src"));
-                        if (count % 2 == 0) {
-                            count++;
-                        }
-                        if (count == 4) {
-                            count = 0;
-                            iterator = 2;
-                        }
+                        try {
+                            String data = element.child(0).getElementsByClass("weatherImg").attr("src");
+                            data = "https:" + data;
+                            listItemsDetail.get(count).imageWeather.add(data);
+                            if (listItemsDetail.get(count).imageWeather.size() == 2) {
+                                count++;
+                            }
+                        } catch (Exception e) {}
                     }
 
                     if (iterator == 2) {
-                        listItemsDetail.get(count).temperature.add(element.text());
-                        if (count % 2 == 0) {
-                            count++;
-                        }
-                        if (count == 4) {
-                            count = 0;
-                            iterator = 3;
-                        }
+                        try {
+                            String data = element.text();
+                            listItemsDetail.get(count).temperature.add(data);
+                            if (listItemsDetail.get(count).temperature.size() == 2) {
+                                count++;
+                            }
+                        } catch (Exception e) {}
                     }
 
                     if (iterator == 3) {
-                        listItemsDetail.get(count).temperatureFell.add(element.text());
-                        if (count % 2 == 0) {
-                            count++;
-                        }
-                        if (count == 4) {
-                            count = 0;
-                            iterator = 4;
-                        }
+                        try {
+                            String data = element.text();
+                            listItemsDetail.get(count).temperatureFell.add(data);
+                            if (listItemsDetail.get(count).temperatureFell.size() == 2) {
+                                count++;
+                            }
+                        } catch (Exception e) {}
                     }
 
                     if (iterator == 4) {
-                        listItemsDetail.get(count).pressure.add(element.text());
-                        if (count % 2 == 0) {
-                            count++;
-                        }
-                        if (count == 4) {
-                            count = 0;
-                            iterator = 5;
-                        }
+                        try {
+                            String data = element.text();
+                            listItemsDetail.get(count).pressure.add(data);
+                            if (listItemsDetail.get(count).pressure.size() == 2) {
+                                count++;
+                            }
+                        } catch (Exception e) {}
+                    }
+
+                    if (iterator == 5) {
+                        try {
+                            String data = element.text();
+                            listItemsDetail.get(count).humidity.add(data);
+                            if (listItemsDetail.get(count).humidity.size() == 2) {
+                                count++;
+                            }
+                        } catch (Exception e) {}
+                    }
+
+                    if (iterator == 6) {
+                        try {
+                            String data = element.text();
+                            String className = element.child(0).attr("data-tooltip");
+                            listItemsDetail.get(count).winds.add(new Wind(null,
+                                    data,
+                                    className));
+                            if (listItemsDetail.get(count).winds.size() == 2) {
+                                count++;
+                            }
+                        } catch (Exception e) {}
+                    }
+
+                    if (iterator == 7) {
+                        try {
+                            String data = element.text();
+                            listItemsDetail.get(count).chanceOfPrecipitation.add(data);
+                            if (listItemsDetail.get(count).chanceOfPrecipitation.size() == 2) {
+                                count++;
+                            }
+                        } catch (Exception e) {}
+                    }
+                    if (count == 4) {
+                        count = 0;
+                        iterator++;
                     }
                 }
-                Elements huniditys = tdBody.get(iterator).getAllElements();
-                if (huniditys != null) {
-                    for (Element e : huniditys) {
-                        listItemsDetail.get(count).humidity.add(e.text());
-                        if (count % 2 == 0) {
-                            count++;
-                        }
-                        if (count == 4) {
-                            count = 0;
-                        }
-                    }
-                }
-                Elements winds = tdBody.get(iterator).getAllElements();
-                if (winds != null) {
-                    for (Element e : winds) {
-                        listItemsDetail.get(count).winds.add(new Wind(null,
-                                e.getAllElements().get(0).text(),
-                                e.getAllElements().get(0).className()));
-                        if (count % 2 == 0) {
-                            count++;
-                        }
-                        if (count == 4) {
-                            count = 0;
-                        }
-                    }
-                }
-                iterator++;
-                Elements chanceOfPrecipitation = tdBody.get(iterator).children();
-                if (chanceOfPrecipitation != null) {
-                    for (Element e : chanceOfPrecipitation) {
-                        listItemsDetail.get(count).chanceOfPrecipitation.add(e.text());
-                        if (count % 2 == 0) {
-                            count++;
-                        }
-                        if (count == 4) {
-                            count = 0;
-                        }
-                    }
-                }
+
+                setupData(listItemsDetail);
             }
         }).start();
+    }
+
+    private void setupData(final ArrayList<ItemDetail> list) {
+        if (list != null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    weatherPagerAdapter = new WeatherItemDetailPagerAdapter(WeatherDetailActivity.this, list);
+                    viewPager.setAdapter(weatherPagerAdapter);
+                    tabSlidingTitle.setViewPager(viewPager);
+                }
+            });
+        }
     }
 }

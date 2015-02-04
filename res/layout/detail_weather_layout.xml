@@ -2,7 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:orientation="vertical">
+
+    <ua.setcom.widgets.view.SlidingTabLayout
+        android:id="@+id/title_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <view
         android:layout_width="wrap_content"
