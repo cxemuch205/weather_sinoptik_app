@@ -66,13 +66,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/item_tab.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/ImageCache.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/ImageCache.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/WeatherItemDetailPagerAdapter.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/WeatherItemDetailPagerAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/detail_weather_layout.xml" afterPath="$PROJECT_DIR$/res/layout/detail_weather_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/item_detail_weather.xml" afterPath="$PROJECT_DIR$/res/layout/item_detail_weather.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -105,27 +100,46 @@
       <file leaf-file-name="WeatherDetailActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="629" max-vertical-offset="2057">
-              <caret line="67" column="78" selection-start-line="67" selection-start-column="78" selection-end-line="67" selection-end-column="78" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="461" max-vertical-offset="2975">
+              <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1677#1704#0" expanded="true" />
-                <element signature="e#2114#2497#0" expanded="true" />
-                <element signature="e#2482#2483#0" expanded="true" />
-                <element signature="e#2658#2940#0" expanded="true" />
-                <element signature="e#2929#2930#0" expanded="true" />
-                <element signature="e#3067#3606#0" expanded="true" />
-                <element signature="e#3591#3592#0" expanded="true" />
+                <element signature="e#1962#1989#0" expanded="true" />
+                <element signature="e#2480#2527#0" expanded="true" />
+                <element signature="e#2586#3348#0" expanded="true" />
+                <element signature="e#3185#3232#0" expanded="true" />
+                <element signature="e#3333#3334#0" expanded="true" />
+                <element signature="e#3557#5013#0" expanded="true" />
+                <element signature="e#4186#4490#0" expanded="true" />
+                <element signature="e#4451#4452#0" expanded="true" />
+                <element signature="e#5002#5003#0" expanded="true" />
+                <element signature="e#5095#5377#0" expanded="true" />
+                <element signature="e#5366#5367#0" expanded="true" />
+                <element signature="e#5504#6043#0" expanded="true" />
+                <element signature="e#6028#6029#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataParser.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="detail_weather_layout.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/res/layout/detail_weather_layout.xml">
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1037">
+              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataParser.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32634032" vertical-offset="20562" max-vertical-offset="22780">
-              <caret line="1226" column="40" selection-start-line="1226" selection-start-column="40" selection-end-line="1226" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="22276" max-vertical-offset="22780">
+              <caret line="1207" column="0" selection-start-line="1207" selection-start-column="0" selection-end-line="1207" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#65217#65227#0" expanded="true" />
@@ -153,8 +167,8 @@
     </FindUsagesManager>
   </component>
   <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="C:\Users\Daniil\.android\debug.keystore" />
-    <option name="KEY_ALIAS" value="androiddebugkey" />
+    <option name="KEY_STORE_PATH" value="S:\Keys\sinoptik_debug.jks" />
+    <option name="KEY_ALIAS" value="Daniil" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -1624,13 +1638,13 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/res/layout/fragment_detail_weather.xml" />
         <option value="$PROJECT_DIR$/res/layout/item_tab.xml" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/res/layout/detail_weather_layout.xml" />
-        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/item_detail_weather.xml" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/WeatherItemDetailPagerAdapter.java" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/ImageCache.java" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/detail_weather_layout.xml" />
       </list>
     </option>
   </component>
@@ -2247,17 +2261,17 @@
     <property name="android.project.structure.last.selected" value="weather_sinoptik_app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$USER_HOME$/.android/debug.keystore" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="f2ec9732" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_21_x86" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="FullScreen" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="ExportApk.ApkPath" value="E:\AndroidProject\weather_sinoptik_app" />
+    <property name="ExportApk.ApkPath" value="S:\AndroidProjects\weather_sinoptik_app" />
     <property name="ExportApk.Flavors" value="" />
     <property name="ExportApk.BuildType" value="debug" />
-    <property name="SearchEverywhereHistoryKey" value="Image&#9;FILE&#9;file://S:/AndroidProjects/weather_sinoptik_app/src/ua/maker/sinopticua/utils/ImageCache.java&#10;strin&#9;FILE&#9;file://S:/AndroidProjects/weather_sinoptik_app/res/values/strings.xml" />
+    <property name="SearchEverywhereHistoryKey" value="str&#9;FILE&#9;file://S:/AndroidProjects/weather_sinoptik_app/res/values/strings.xml&#10;Image&#9;FILE&#9;file://S:/AndroidProjects/weather_sinoptik_app/src/ua/maker/sinopticua/utils/ImageCache.java&#10;strin&#9;FILE&#9;file://S:/AndroidProjects/weather_sinoptik_app/res/values/strings.xml" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.packageName">
@@ -2489,7 +2503,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32918552" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31813127" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31797752" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2507,7 +2521,7 @@
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37669683" sideWeight="0.5" order="15" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39775282" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39775282" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24973261" sideWeight="0.50091076" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2537,16 +2551,28 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/WeatherItemDetailPagerAdapter.java</url>
-          <line>132</line>
+          <url>file://$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java</url>
+          <line>78</line>
           <properties />
-          <option name="timeStamp" value="100" />
+          <option name="timeStamp" value="101" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java</url>
+          <line>81</line>
+          <properties />
+          <option name="timeStamp" value="102" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java</url>
+          <line>84</line>
+          <properties />
+          <option name="timeStamp" value="103" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="101" />
+      <option name="time" value="104" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -2900,42 +2926,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5510204" vertical-offset="0" max-vertical-offset="833">
-          <caret line="27" column="35" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/detail_weather_layout.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
-          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="884" max-vertical-offset="2057">
-          <caret line="67" column="78" selection-start-line="67" selection-start-column="78" selection-end-line="67" selection-end-column="78" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1677#1704#0" expanded="true" />
-            <element signature="e#2114#2497#0" expanded="true" />
-            <element signature="e#2482#2483#0" expanded="true" />
-            <element signature="e#2658#2940#0" expanded="true" />
-            <element signature="e#2929#2930#0" expanded="true" />
-            <element signature="e#3067#3606#0" expanded="true" />
-            <element signature="e#3591#3592#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/item_detail_weather.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35308343" vertical-offset="1238" max-vertical-offset="7395">
@@ -2965,14 +2955,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32634032" vertical-offset="20562" max-vertical-offset="22780">
-          <caret line="1226" column="40" selection-start-line="1226" selection-start-column="40" selection-end-line="1226" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="22276" max-vertical-offset="22780">
+          <caret line="1207" column="0" selection-start-line="1207" selection-start-column="0" selection-end-line="1207" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#65217#65227#0" expanded="true" />
             <element signature="e#67756#67768#0" expanded="true" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9814433" vertical-offset="0" max-vertical-offset="612">
+          <caret line="28" column="105" selection-start-line="28" selection-start-column="105" selection-end-line="28" selection-end-column="105" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="461" max-vertical-offset="2975">
+          <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1962#1989#0" expanded="true" />
+            <element signature="e#2480#2527#0" expanded="true" />
+            <element signature="e#2586#3348#0" expanded="true" />
+            <element signature="e#3185#3232#0" expanded="true" />
+            <element signature="e#3333#3334#0" expanded="true" />
+            <element signature="e#3557#5013#0" expanded="true" />
+            <element signature="e#4186#4490#0" expanded="true" />
+            <element signature="e#4451#4452#0" expanded="true" />
+            <element signature="e#5002#5003#0" expanded="true" />
+            <element signature="e#5095#5377#0" expanded="true" />
+            <element signature="e#5366#5367#0" expanded="true" />
+            <element signature="e#5504#6043#0" expanded="true" />
+            <element signature="e#6028#6029#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/detail_weather_layout.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1037">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
   </component>

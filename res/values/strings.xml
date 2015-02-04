@@ -26,5 +26,6 @@
     <string name="humidity_str">Влажность</string>
     <string name="wind_str">Ветер, м/сек</string>
     <string name="weather_maybe_str">Вероятность осадков, %</string>
+    <string name="err_downloading_detail_info">Ошибка загрузки детальной информации перезагрузка через %d</string>
 
 </resources>
