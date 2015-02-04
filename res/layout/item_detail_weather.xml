@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
@@ -13,42 +14,62 @@
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
         android:gravity="center"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:visibility="gone" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffafafaf">
+        android:layout_height="wrap_content">
 
-        <TextView
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_weight="2" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="2:00"
-            android:id="@+id/tv_1_time_day"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp" />
+            android:background="#ffafafaf"
+            android:layout_weight="1">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="5:00"
-            android:id="@+id/tv_2_time_day"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingBottom="2dp"
-            android:paddingTop="2dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="2:00"
+                android:id="@+id/tv_1_time_day"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="5:00"
+                android:id="@+id/tv_2_time_day"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -67,6 +88,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_1_image_weather"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,6 +110,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:paddingRight="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:gravity="right"
+                android:text="@string/temperature_str"
+                android:id="@+id/tv_temperature_str" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -117,6 +156,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:paddingRight="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:gravity="right"
+                android:text="@string/temperature_fell_str"
+                android:id="@+id/tv_temperature_fell_str" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -125,8 +181,8 @@
             android:id="@+id/tv_1_fell_temp"
             android:layout_weight="1"
             android:gravity="center"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:textStyle="bold"
             android:textColor="#000000" />
 
@@ -149,6 +205,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:paddingRight="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:gravity="right"
+                android:text="@string/pressure_str"
+                android:id="@+id/tv_pressure_str" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,8 +230,8 @@
             android:id="@+id/tv_1_pressure"
             android:layout_weight="1"
             android:gravity="center"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:textColor="#000000" />
 
         <TextView
@@ -180,6 +253,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:paddingRight="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:gravity="right"
+                android:text="@string/humidity_str"
+                android:id="@+id/tv_humidity_str" />
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -188,7 +278,9 @@
             android:id="@+id/tv_1_humidity"
             android:layout_weight="1"
             android:gravity="center"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -206,6 +298,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:paddingRight="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:gravity="right"
+                android:text="@string/wind_str"
+                android:id="@+id/tv_wind_str" />
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
@@ -230,11 +339,17 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="6.0"
                     android:id="@+id/tv_1_speed_weather"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingLeft="4dp"
+                    android:paddingBottom="4dp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_1_wind"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -257,7 +372,8 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="5.0"
                     android:id="@+id/tv_2_speed_weather"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:gravity="center" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -265,8 +381,27 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:minHeight="48dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:paddingRight="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/weather_maybe_str"
+                android:gravity="right"
+                android:id="@+id/tv_weather_maybe_str" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"

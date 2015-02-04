@@ -5,6 +5,9 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,7 @@ import ua.maker.sinopticua.models.ItemDetail;
 import ua.maker.sinopticua.models.ItemTown;
 import ua.maker.sinopticua.models.ItemWeather;
 import ua.maker.sinopticua.models.WeatherStruct;
+import ua.maker.sinopticua.models.Wind;
 
 public class DataParser {
 	
@@ -1195,4 +1199,136 @@ public class DataParser {
 		}
 		return result;
 	}
+
+    public static ArrayList<ItemDetail> parseDetailInfo(Document document) {
+        Elements table = document.getElementsByClass("weatherDetails");
+        Elements header = table.select("thead");
+        Elements body = table.select("tbody");
+
+        ArrayList<ItemDetail> listItemsDetail = new ArrayList<ItemDetail>();
+        for (int i = 0; i < 4; i++) {
+            listItemsDetail.add(new ItemDetail());
+        }
+        int count = 0;
+        Elements tdHeader = header.select("tr td");
+        for (Element element : tdHeader) {
+            Log.d(TAG, "header\t" + element.text());
+            listItemsDetail.get(count).dayStage = element.text();
+            count++;
+            if (count == 4) {
+                count = 0;
+                break;
+            }
+        }
+
+        int iterator = 0;
+        Elements tdBody = body.select("tr td");
+        int tdBodySize = tdBody.size();
+        for (Element element : tdBody) {
+            if (iterator == 0) {
+                try {
+                    String data = element.text();
+                    listItemsDetail.get(count).dayTime.add(data);
+                    if (listItemsDetail.get(count).dayTime.size() == 2
+                            || tdBodySize == 32) {
+                        count++;
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+            if (iterator == 1) {
+                try {
+                    String data = element.child(0).getElementsByClass("weatherImg").attr("src");
+                    data = "https:" + data;
+                    listItemsDetail.get(count).imageWeather.add(data);
+                    if (listItemsDetail.get(count).imageWeather.size() == 2
+                            || tdBodySize == 32) {
+                        count++;
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+            if (iterator == 2) {
+                try {
+                    String data = element.text();
+                    listItemsDetail.get(count).temperature.add(data);
+                    if (listItemsDetail.get(count).temperature.size() == 2
+                            || tdBodySize == 32) {
+                        count++;
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+            if (iterator == 3) {
+                try {
+                    String data = element.text();
+                    listItemsDetail.get(count).temperatureFell.add(data);
+                    if (listItemsDetail.get(count).temperatureFell.size() == 2
+                            || tdBodySize == 32) {
+                        count++;
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+            if (iterator == 4) {
+                try {
+                    String data = element.text();
+                    listItemsDetail.get(count).pressure.add(data);
+                    if (listItemsDetail.get(count).pressure.size() == 2
+                            || tdBodySize == 32) {
+                        count++;
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+            if (iterator == 5) {
+                try {
+                    String data = element.text();
+                    listItemsDetail.get(count).humidity.add(data);
+                    if (listItemsDetail.get(count).humidity.size() == 2
+                            || tdBodySize == 32) {
+                        count++;
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+            if (iterator == 6) {
+                try {
+                    String data = element.text();
+                    String className = element.child(0).attr("data-tooltip");
+                    listItemsDetail.get(count).winds.add(new Wind(null,
+                            data,
+                            className));
+                    if (listItemsDetail.get(count).winds.size() == 2
+                            || tdBodySize == 32) {
+                        count++;
+                    }
+                } catch (Exception e) {
+                }
+            }
+
+            if (iterator == 7) {
+                try {
+                    String data = element.text();
+                    listItemsDetail.get(count).chanceOfPrecipitation.add(data);
+                    if (listItemsDetail.get(count).chanceOfPrecipitation.size() == 2
+                            || tdBodySize == 32) {
+                        count++;
+                    }
+                } catch (Exception e) {
+                }
+            }
+            if (count == 4) {
+                count = 0;
+                iterator++;
+            }
+        }
+        return listItemsDetail;
+    }
 }

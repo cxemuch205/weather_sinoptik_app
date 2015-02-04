@@ -1,19 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
-    android:orientation="vertical">
+    android:background="#fff">
 
-    <ua.setcom.widgets.view.SlidingTabLayout
-        android:id="@+id/title_tab"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize"
+        android:background="#fff"
+        android:orientation="vertical">
 
-    <view
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ua.setcom.widgets.view.SlidingTabLayout
+                android:id="@+id/title_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <view
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="android.support.v4.view.ViewPager"
+            android:id="@+id/view_pager"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="4dp" />
+    </LinearLayout>
+
+    <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        class="android.support.v4.view.ViewPager"
-        android:id="@+id/view_pager"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+        android:id="@+id/pb_load"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

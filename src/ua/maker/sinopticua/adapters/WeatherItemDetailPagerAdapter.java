@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import ua.maker.sinopticua.R;
 import ua.maker.sinopticua.models.ItemDetail;
@@ -29,6 +31,11 @@ public class WeatherItemDetailPagerAdapter extends PagerAdapter {
         inflater = ((Activity) context).getLayoutInflater();
         this.context = context;
         this.data = data;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return data.get(position).dayStage.toUpperCase(Locale.getDefault());
     }
 
     @Override
@@ -63,6 +70,8 @@ public class WeatherItemDetailPagerAdapter extends PagerAdapter {
         holder.iv2Weather = (ImageView) view.findViewById(R.id.iv_2_image_weather);
         holder.iv1WindDirection = (ImageView) view.findViewById(R.id.iv_1_direction);
         holder.iv2WindDirection = (ImageView) view.findViewById(R.id.iv_2_direction);
+        holder.llWind = (LinearLayout) view.findViewById(R.id.ll_1_wind);
+        holder.llImage = (LinearLayout) view.findViewById(R.id.ll_1_image_weather);
 
         setInfoAdapter(holder, position);
     }
@@ -71,21 +80,65 @@ public class WeatherItemDetailPagerAdapter extends PagerAdapter {
         ItemDetail detail = data.get(position);
         holder.tvStageDay.setText(detail.dayStage);
         holder.tv1TimeDay.setText(detail.dayTime.get(0));
-        holder.tv2TimeDay.setText(detail.dayTime.get(1));
+        if (detail.dayTime.size() > 1) {
+            holder.tv2TimeDay.setVisibility(TextView.VISIBLE);
+            holder.tv2TimeDay.setText(detail.dayTime.get(1));
+        } else {
+            holder.tv2TimeDay.setVisibility(TextView.GONE);
+        }
         holder.tv1Temp.setText(detail.temperature.get(0));
-        holder.tv2Temp.setText(detail.temperature.get(1));
+        if (detail.temperature.size() > 1) {
+            holder.tv2Temp.setVisibility(TextView.VISIBLE);
+            holder.tv2Temp.setText(detail.temperature.get(1));
+        } else {
+            holder.tv2Temp.setVisibility(TextView.GONE);
+        }
         holder.tv1FellTemp.setText(detail.temperatureFell.get(0));
-        holder.tv2FellTemp.setText(detail.temperatureFell.get(1));
+        if (detail.temperatureFell.size() > 1) {
+            holder.tv2FellTemp.setVisibility(TextView.VISIBLE);
+            holder.tv2FellTemp.setText(detail.temperatureFell.get(1));
+        } else {
+            holder.tv2FellTemp.setVisibility(TextView.GONE);
+        }
         holder.tv1Pressure.setText(detail.pressure.get(0));
-        holder.tv2Pressure.setText(detail.pressure.get(1));
-        holder.tv1SpeedWind.setText(detail.winds.get(0).imgDirection);
-        holder.tv2SpeedWind.setText(detail.winds.get(1).imgDirection);
-        holder.tv1Humidity.setText(detail.humidity.get(0));
-        holder.tv2Humidity.setText(detail.humidity.get(1));
+        if (detail.pressure.size() > 1) {
+            holder.tv2Pressure.setVisibility(TextView.VISIBLE);
+            holder.tv2Pressure.setText(detail.pressure.get(1));
+        } else {
+            holder.tv2Pressure.setVisibility(TextView.GONE);
+        }
+        holder.tv1SpeedWind.setText(detail.winds.get(0).classNameImg);
+        if (detail.winds.size() > 1) {
+            holder.tv2SpeedWind.setVisibility(TextView.VISIBLE);
+            holder.llWind.setVisibility(LinearLayout.VISIBLE);
+            holder.tv2SpeedWind.setText(detail.winds.get(1).classNameImg);
+        } else {
+            holder.tv2SpeedWind.setVisibility(TextView.GONE);
+            holder.llWind.setVisibility(LinearLayout.GONE);
+        }
+        holder.tv1Humidity.setText(detail.humidity.get(0) + " %");
+        if (detail.humidity.size() > 1) {
+            holder.tv2Humidity.setVisibility(TextView.VISIBLE);
+            holder.tv2Humidity.setText(detail.humidity.get(1) + " %");
+        } else {
+            holder.tv2Humidity.setVisibility(TextView.GONE);
+        }
         holder.tv1ChanceOfPrecipitation.setText(detail.chanceOfPrecipitation.get(0));
-        holder.tv2ChanceOfPrecipitation.setText(detail.chanceOfPrecipitation.get(1));
+        if (detail.chanceOfPrecipitation.size() > 1) {
+            holder.tv2ChanceOfPrecipitation.setVisibility(TextView.VISIBLE);
+            holder.tv2ChanceOfPrecipitation.setText(detail.chanceOfPrecipitation.get(1));
+        } else {
+            holder.tv2ChanceOfPrecipitation.setVisibility(TextView.GONE);
+        }
         ImageCache.download(detail.imageWeather.get(0), holder.iv1Weather);
-        ImageCache.download(detail.imageWeather.get(1), holder.iv2Weather);
+        if (detail.imageWeather.size() > 1) {
+            holder.iv2Weather.setVisibility(ImageView.VISIBLE);
+            holder.llImage.setVisibility(LinearLayout.VISIBLE);
+            ImageCache.download(detail.imageWeather.get(1), holder.iv2Weather);
+        } else {
+            holder.iv2Weather.setVisibility(ImageView.GONE);
+            holder.llImage.setVisibility(LinearLayout.GONE);
+        }
         holder.iv1WindDirection.setVisibility(ImageView.GONE);
         holder.iv2WindDirection.setVisibility(ImageView.GONE);
     }
@@ -96,6 +149,7 @@ public class WeatherItemDetailPagerAdapter extends PagerAdapter {
                 tv1Pressure, tv2Pressure, tv1Humidity, tv2Humidity, tv1SpeedWind, tv2SpeedWind,
                 tv1ChanceOfPrecipitation, tv2ChanceOfPrecipitation;
         ImageView iv1Weather, iv2Weather, iv1WindDirection, iv2WindDirection;
+        LinearLayout llWind, llImage;
     }
 
     @Override

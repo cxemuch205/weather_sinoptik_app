@@ -19,8 +19,12 @@
     <string name="cant_get_current_location">Не удалось получить ваше текущее местоположение!</string>
     <string name="location_not_found">Местоположение не определено!</string>
     <string name="no_correct_name_town">Не корректный ввод!</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="weather">Погода</string>
+    <string name="temperature_str">Температура, C</string>
+    <string name="temperature_fell_str">чувствуется как</string>
+    <string name="pressure_str">Давление, мм</string>
+    <string name="humidity_str">Влажность</string>
+    <string name="wind_str">Ветер, м/сек</string>
+    <string name="weather_maybe_str">Вероятность осадков, %</string>
 
 </resources>

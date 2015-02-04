@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
@@ -278,10 +279,8 @@ public class ImageCache {
             byte[] img = null;
             Bitmap b = null;
             try {
-                int s_pos = url.lastIndexOf('/');//, url.lastIndexOf( '.', s_pos )
-                int fs_pos = url.indexOf('/');
-                final String file_id = url.substring( s_pos+1, url.indexOf('.', s_pos ) );
-                Log.d(">>>>>>>>>> FILE NAME <<<<<<<<<<<", url.substring( fs_pos, url.indexOf( '/', fs_pos+2 ) ) + " : " + file_id );
+                final String file_id = Uri.parse(url).getLastPathSegment();
+                Log.d(">>>>>>>>>> FILE NAME <<<<<<<<<<<", file_id );
                 b = loadFromCache( file_id );
                 if( b != null ) return b;
                 if( img == null ) img = downloadBitmap(url);
