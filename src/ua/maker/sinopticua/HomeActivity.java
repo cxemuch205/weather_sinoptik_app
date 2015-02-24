@@ -10,8 +10,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -182,7 +180,7 @@ public class HomeActivity extends FragmentActivity{
     private OnClickListener clickUpdateBtnListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(checkConnection(HomeActivity.this)) {
+            if(Tools.checkConnection(HomeActivity.this)) {
                 refreshWeather(URL);
                 animLoadBtnUpdate.start();
             } else {
@@ -492,7 +490,7 @@ public class HomeActivity extends FragmentActivity{
 		@Override
 		public void onClick(DialogInterface dialog, int index) {
 			if(etUrl.getText().toString().length() > 0){
-				if(checkConnection(HomeActivity.this))
+				if(Tools.checkConnection(HomeActivity.this))
 				{
 					Tools.hideKeyboard(getParent());
 					dialog.cancel();
@@ -548,16 +546,6 @@ public class HomeActivity extends FragmentActivity{
 			asyncTaskLoadWeatherData = new WeakReference<HomeActivity.HttpTask>(task);
 			task.execute(url);
 		}
-	}
-	
-	public static boolean checkConnection(Context ctx) {	
-		ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-		if ((netInfo != null) && (netInfo.isConnectedOrConnecting())) {
-			return true;
-		}
-		
-		return false;
 	}
 
 	static class HttpTask extends AsyncTask<String, Integer, WeatherStruct> {
@@ -649,7 +637,7 @@ public class HomeActivity extends FragmentActivity{
 			listItemsWeather.add(info.getWeatherSundey());
 			adapter.notifyDataSetChanged();
 			db.insertDataCache(info);
-			pref.edit().putString(App.PREF_LAST_DATE_UPDATE, dateFormat.format(new Date())).commit();
+			pref.edit().putString(App.PREF_LAST_DATE_UPDATE, dateFormat.format(new Date())).apply();
 		} else {
             if(!settingDialog.isShowing())
                 settingDialog.show();
@@ -718,13 +706,13 @@ public class HomeActivity extends FragmentActivity{
             String nowDate = dateFormat.format(new Date());
             String prefDate = pref.getString(App.PREF_LAST_DATE_UPDATE, "");
 
-            if(checkConnection(this) & (!nowDate.equals(prefDate) | prefDate.length() == 0))
+            if(Tools.checkConnection(this) & (!nowDate.equals(prefDate) | prefDate.length() == 0))
             {
                 if(listItemsWeather != null & listItemsWeather.size() == 0)
                     refreshWeather(URL);
             } else {
                 setInfoWeather(db.getCacheWeather());
-                if(!checkConnection(this))
+                if(!Tools.checkConnection(this))
                     Toast.makeText(this, getString(R.string.no_connections), Toast.LENGTH_SHORT).show();
             }
         }else{
@@ -737,11 +725,6 @@ public class HomeActivity extends FragmentActivity{
                 } catch (Exception e) {}
             }
         }
-		/*if(adapter.isEmpty()){
-			Log.i(TAG, "onResume - setAdapter");
-			adapter = new WeatherAdapter(HomeActivity.this, listItemsWeather, Tools.getImageFetcher(HomeActivity.this));
-			lvWeathers.setAdapter(adapter);
-		}*/
 	}
 
 	@Override

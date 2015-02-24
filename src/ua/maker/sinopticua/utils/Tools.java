@@ -1,5 +1,20 @@
 package ua.maker.sinopticua.utils;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
+import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,20 +30,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Hashtable;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import ua.maker.sinopticua.models.WeatherStruct;
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Typeface;
-import android.os.Build;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.inputmethod.InputMethodManager;
 
 public class Tools {
 	
@@ -199,6 +201,16 @@ public class Tools {
             }
             return fontsCache.get(name);
         }
+    }
+
+    public static boolean checkConnection(Context ctx) {
+        ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if ((netInfo != null) && (netInfo.isConnectedOrConnecting())) {
+            return true;
+        }
+
+        return false;
     }
 
     public static boolean hasFroyo() {
