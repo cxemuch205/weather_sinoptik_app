@@ -65,36 +65,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: ua.maker.sinopticua" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/ApplicationTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/interfaces/LocationGetListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/TestModels.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/TestParserHtml.java" />
-      <change type="DELETED" beforePath="S:\AndroidProjects\weather_sinoptik_app\.idea\libraries\appcompat_v7_21_0_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="S:\AndroidProjects\weather_sinoptik_app\.idea\libraries\cardview_v7_21_0_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="S:\AndroidProjects\weather_sinoptik_app\.idea\libraries\jsoup_1_8_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="S:\AndroidProjects\weather_sinoptik_app\.idea\libraries\picasso_2_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="S:\AndroidProjects\weather_sinoptik_app\.idea\libraries\support_annotations_21_0_3.xml" afterPath="" />
-      <change type="DELETED" beforePath="S:\AndroidProjects\weather_sinoptik_app\.idea\libraries\support_v4_21_0_3.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testapplication/src/main/java/ua/setcom/testapplication/TestMainActivity.java" afterPath="$PROJECT_DIR$/testapplication/src/main/java/ua/setcom/testapplication/TestMainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/widgets/src/main/java/ua/setcom/widgets/view/ThermometerView.java" afterPath="$PROJECT_DIR$/widgets/src/main/java/ua/setcom/widgets/view/ThermometerView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/Tools.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/Tools.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/UserDB.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/UserDB.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/models/WeatherStruct.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/models/WeatherStruct.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/models/Wind.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/models/Wind.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testapplication/src/main/res/layout/activity_test_main.xml" afterPath="$PROJECT_DIR$/testapplication/src/main/res/layout/activity_test_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testapplication/build.gradle" afterPath="$PROJECT_DIR$/testapplication/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testapplication/testapplication.iml" afterPath="$PROJECT_DIR$/testapplication/testapplication.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/weather_sinoptik_app.iml" afterPath="$PROJECT_DIR$/weather_sinoptik_app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/widgets/widgets.iml" afterPath="$PROJECT_DIR$/widgets/widgets.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="" />
     <ignored path="weather_sinoptik_app.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -2635,7 +2606,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="1" />
+    <frame x="-9" y="-9" width="1938" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
