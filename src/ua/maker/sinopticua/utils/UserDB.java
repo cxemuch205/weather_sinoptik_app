@@ -1,5 +1,12 @@
 package ua.maker.sinopticua.utils;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,12 +15,6 @@ import java.util.List;
 import ua.maker.sinopticua.models.ItemTown;
 import ua.maker.sinopticua.models.ItemWeather;
 import ua.maker.sinopticua.models.WeatherStruct;
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class UserDB extends SQLiteOpenHelper {
 	
@@ -39,7 +40,7 @@ public class UserDB extends SQLiteOpenHelper {
 	public static final String FIELD_WEATHER_IMG_URL = "img_weather_url";
 	public static final String FIELD_NOW_WEATHER = "now_weather";
 	public static final String FIELD_TOWN = "town_name";
-	public static final String FIELD_WERNING_WIND = "werning_wind";
+	public static final String FIELD_WARNING_WIND = "warning_wind";
 	public static final String FIELD_WIND_DESCRIPTION = "wind_descr";
 	public static final String FIELD_TODAY_URL = "today_img_url";
 
@@ -61,7 +62,7 @@ public class UserDB extends SQLiteOpenHelper {
 			+	FIELD_TOWN + " TEXT, "
 			+	FIELD_WEATHER_DESCRIPTIONS + " TEXT, "
 			+	FIELD_WEATHER_DESCRIPTIONS_URL + " TEXT, "
-			+	FIELD_WERNING_WIND + " TEXT, "
+			+ FIELD_WARNING_WIND + " TEXT, "
 			+	FIELD_WIND_DESCRIPTION + " TEXT, "
 			+	FIELD_WEATHER_IMG_URL + " TEXT);";
 	
@@ -190,7 +191,7 @@ public class UserDB extends SQLiteOpenHelper {
 				cv.put(FIELD_TODAY_URL, data.getWeatherTodayImg());
 				cv.put(FIELD_NOW_WEATHER, data.getWeatherToday());
 				cv.put(FIELD_TOWN, data.getTownName());
-				cv.put(FIELD_WERNING_WIND, String.valueOf(data.getWerningWind()));
+				cv.put(FIELD_WARNING_WIND, String.valueOf(data.getWarningWind()));
 				cv.put(FIELD_WIND_DESCRIPTION, data.getWindDescription());
 				
 				db.insert(TABLE_CACHE_WEATHER, null, cv);				
@@ -224,7 +225,7 @@ public class UserDB extends SQLiteOpenHelper {
 				int weatherImgUrlIndex = c.getColumnIndex(FIELD_WEATHER_IMG_URL);
 				int nowWeatherIndex = c.getColumnIndex(FIELD_NOW_WEATHER);
 				int townIndex = c.getColumnIndex(FIELD_TOWN);
-				int werningWindIndex = c.getColumnIndex(FIELD_WERNING_WIND);
+				int werningWindIndex = c.getColumnIndex(FIELD_WARNING_WIND);
 				int windDescrIndex = c.getColumnIndex(FIELD_WIND_DESCRIPTION);
 				int weatherTodayImgUrlIndex = c.getColumnIndex(FIELD_TODAY_URL);
 				do {
@@ -258,7 +259,7 @@ public class UserDB extends SQLiteOpenHelper {
 					result.setWeatherToday(nowWeather);
 					result.setWeatherTodayImg(todayUrlIng);
 					result.setTownName(town);
-					result.setWerningWind(warnWind);
+					result.setWarningWind(warnWind);
 					result.setWindDescription(windDEscr);
 				} while (c.moveToNext());
 			}

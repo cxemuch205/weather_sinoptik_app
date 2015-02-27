@@ -159,7 +159,7 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 		@Override
 		protected void onPostExecute(WeatherStruct response) {
 			if(response != null){
-				ItemWeather weather = response.getWeatherMondey();
+				ItemWeather weather = response.getWeatherMonday();
 				Log.i(TAG, "onPostExecute()");
 				String dateUpdate = dateFormat.format(new Date());
 				pref.edit().putString(App.PREF_LAST_WIDGET_UPDATE, dateUpdate).commit();
@@ -199,7 +199,7 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
                     } catch (Exception e) {}
                 }
 				
-				if (response.getWerningWind()) {
+				if (response.getWarningWind()) {
 					view.setViewVisibility(R.id.ll_werning_wind,
 							LinearLayout.VISIBLE);
 					view.setTextViewText(R.id.tv_werning_wind,

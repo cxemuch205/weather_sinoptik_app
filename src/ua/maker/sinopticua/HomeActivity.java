@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -49,11 +48,11 @@ import ua.maker.sinopticua.adapters.TownAdapter.onClearItemListener;
 import ua.maker.sinopticua.adapters.TownCompleteAdapter;
 import ua.maker.sinopticua.adapters.WeatherAdapter;
 import ua.maker.sinopticua.constants.App;
+import ua.maker.sinopticua.interfaces.LocationGetListener;
 import ua.maker.sinopticua.models.ItemTown;
 import ua.maker.sinopticua.models.ItemWeather;
 import ua.maker.sinopticua.models.WeatherStruct;
 import ua.maker.sinopticua.utils.DataParser;
-import ua.maker.sinopticua.utils.GPSTracker;
 import ua.maker.sinopticua.utils.Tools;
 import ua.maker.sinopticua.utils.UserDB;
 import ua.setcom.widgets.view.ThermometerView;
@@ -153,8 +152,9 @@ public class HomeActivity extends FragmentActivity{
 	}
 
     private void initThermometer() {
-        thermometer.setTextSize(22);
+        thermometer.setTextSize(21);
         thermometer.setShowSubPoint(true);
+        thermometer.initMaxMin(App.Thermometer.MAX, App.Thermometer.MIN);
     }
 
     private void initTypefaces() {
@@ -172,9 +172,11 @@ public class HomeActivity extends FragmentActivity{
         ActionBar actionBar = getActionBar();
 		//actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.action_white_drawable));
         //actionBar.setIcon(R.drawable.sinoptic_logo);
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setTitle("");
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(false);
+            actionBar.setTitle("");
+        }
 	}
 
     private OnClickListener clickUpdateBtnListener = new OnClickListener() {
@@ -193,22 +195,21 @@ public class HomeActivity extends FragmentActivity{
 		
 		@Override
 		public void onClick(View v) {
-            getLocation(HomeActivity.this);
+            Tools.getLocation(HomeActivity.this, new LocationGetListener() {
+                @Override
+                public void onCanGetLocation(double lat, double lon) {
+                    new LoadCurrentLocationTask().execute(new Double[]{lat, lon});
+                }
+
+                @Override
+                public void onNoCanGetLocation() {
+
+                }
+            });
         }
     };
 
-    private void getLocation(Context context) {
-        GPSTracker tracker = new GPSTracker(context);
-        if(tracker.canGetLocation()){
-            Log.d(TAG, "#### canGetLocation()");
-            double lat = 0, lon = 0;
-            lat = tracker.getLatitude();
-            lon = tracker.getLongitude();
-            new LoadCurrentLocationTask().execute(new Double[]{lat, lon});
-        }else{
-            Toast.makeText(HomeActivity.this, getString(R.string.cant_get_current_location), Toast.LENGTH_LONG).show();
-        }
-    }
+
 
     class LoadCurrentLocationTask extends AsyncTask<Double, Integer, ItemTown>{
 		
@@ -605,9 +606,9 @@ public class HomeActivity extends FragmentActivity{
 	public void setInfoWeather(WeatherStruct info){
 		if(Tools.isCorrectDataWeather(info)){
 			currentWeather = info;
-			if(info.getWeatherMondey().dateFull != null
-                    && info.getWeatherMondey().dateFull.length() > 0){
-				tvLastDateUpdate.setText(getString(R.string.last_update_date)+" "+info.getWeatherMondey().dateFull);
+			if(info.getWeatherMonday().dateFull != null
+                    && info.getWeatherMonday().dateFull.length() > 0){
+				tvLastDateUpdate.setText(getString(R.string.last_update_date)+" "+info.getWeatherMonday().dateFull);
 			} else {
 				String date = pref.getString(App.PREF_LAST_DATE_UPDATE_FULL, dateFullFirmat.format(new Date()));
 				tvLastDateUpdate.setText(getString(R.string.last_update_date)+" "+date);
@@ -615,12 +616,12 @@ public class HomeActivity extends FragmentActivity{
             int cursorDegrees = info.getWeatherToday().indexOf("&");
             String textDegrees = info.getWeatherToday().substring(0, cursorDegrees).replace("+","");
             int degreesNow = Integer.parseInt(textDegrees);
-            thermometer.updateTemperature((float)degreesNow, App.Thermometer.MAX, App.Thermometer.MIN);
+            thermometer.updateTemperature((float)degreesNow);
             tvNow.setText(/*getString(R.string.now_temp_on_street)+ " " + */Html.fromHtml(info.getWeatherToday()));
             getActionBar().setTitle(Html.fromHtml(info.getTownName()));
             tvTown.setText(Html.fromHtml(info.getTownName()));
             //ImageCache.download(info.getWeatherTodayImg(), ivBigWeather);
-			if(info.getWerningWind()){
+			if(info.getWarningWind()){
 				llWerningWind.setVisibility(LinearLayout.VISIBLE);
 				tvWind.setText(info.getWindDescription());
 			}else{
@@ -628,13 +629,13 @@ public class HomeActivity extends FragmentActivity{
 			}
 			
 			listItemsWeather.clear();
-			listItemsWeather.add(info.getWeatherMondey());
+			listItemsWeather.add(info.getWeatherMonday());
 			listItemsWeather.add(info.getWeatherTuesday());
 			listItemsWeather.add(info.getWeatherWednesday());
 			listItemsWeather.add(info.getWeatherThursday());
 			listItemsWeather.add(info.getWeatherFriday());
 			listItemsWeather.add(info.getWeatherSaturday());
-			listItemsWeather.add(info.getWeatherSundey());
+			listItemsWeather.add(info.getWeatherSunday());
 			adapter.notifyDataSetChanged();
 			db.insertDataCache(info);
 			pref.edit().putString(App.PREF_LAST_DATE_UPDATE, dateFormat.format(new Date())).apply();

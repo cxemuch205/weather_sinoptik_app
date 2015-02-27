@@ -11,9 +11,6 @@ public class Wind implements Serializable {
     public String classNameImg;
     public String speed;
 
-    public Wind() {
-    }
-
     public Wind(String img, String speed, String classNameImg) {
         this.imgDirection = img;
         this.speed = speed;

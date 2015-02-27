@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -30,6 +31,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Hashtable;
 
+import ua.maker.sinopticua.R;
+import ua.maker.sinopticua.interfaces.LocationGetListener;
 import ua.maker.sinopticua.models.WeatherStruct;
 
 public class Tools {
@@ -139,10 +142,10 @@ public class Tools {
         if (info == null) {
             return false;
         }
-        if (info.getWeatherMondey().maxTemp.length() == 0
-                | info.getWeatherMondey().minTemp.length() == 0
-                | info.getWeatherMondey().month.length() == 0
-                | info.getWeatherMondey().weatherName.length() == 0) {
+        if (info.getWeatherMonday().maxTemp.length() == 0
+                | info.getWeatherMonday().minTemp.length() == 0
+                | info.getWeatherMonday().month.length() == 0
+                | info.getWeatherMonday().weatherName.length() == 0) {
             return false;
         }
         if (info.getWeatherTuesday().maxTemp.length() == 0
@@ -175,10 +178,10 @@ public class Tools {
                 | info.getWeatherSaturday().weatherName.length() == 0) {
             return false;
         }
-        if (info.getWeatherSundey().maxTemp.length() == 0
-                | info.getWeatherSundey().minTemp.length() == 0
-                | info.getWeatherSundey().month.length() == 0
-                | info.getWeatherSundey().weatherName.length() == 0) {
+        if (info.getWeatherSunday().maxTemp.length() == 0
+                | info.getWeatherSunday().minTemp.length() == 0
+                | info.getWeatherSunday().month.length() == 0
+                | info.getWeatherSunday().weatherName.length() == 0) {
             return false;
         }
         return true;
@@ -239,4 +242,19 @@ public class Tools {
         return Build.VERSION.SDK_INT >= 19;
     }
 
+    public static void getLocation(Context context, LocationGetListener listener) {
+        GPSTracker tracker = new GPSTracker(context);
+        if(tracker.canGetLocation()){
+            Log.d(TAG, "#### canGetLocation()");
+            double lat = 0, lon = 0;
+            lat = tracker.getLatitude();
+            lon = tracker.getLongitude();
+            if (listener != null) {
+                listener.onCanGetLocation(lat, lon);
+            }
+            //new LoadCurrentLocationTask().execute(new Double[]{lat, lon});
+        }else{
+            Toast.makeText(context, context.getString(R.string.cant_get_current_location), Toast.LENGTH_LONG).show();
+        }
+    }
 }

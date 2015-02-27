@@ -5,28 +5,28 @@ import java.util.List;
 
 public class WeatherStruct {
 
-	private ItemWeather weatherMondey = new ItemWeather();
+	private ItemWeather weatherMonday = new ItemWeather();
 	private ItemWeather weatherTuesday = new ItemWeather();
 	private ItemWeather weatherWednesday = new ItemWeather();
 	private ItemWeather weatherThursday = new ItemWeather();
 	private ItemWeather weatherFriday = new ItemWeather();
 	private ItemWeather weatherSaturday = new ItemWeather();
-	private ItemWeather weatherSundey = new ItemWeather();
+	private ItemWeather weatherSunday = new ItemWeather();
 	private String weatherToday = "";
 	private String townName = "";
-	private boolean werningWind = false;
+	private boolean warningWind = false;
 	private String windDescription = "";
     private String weatherTodayImg = "";
 
     public WeatherStruct() {
 	};
 
-	public ItemWeather getWeatherMondey() {
-		return weatherMondey;
+	public ItemWeather getWeatherMonday() {
+		return weatherMonday;
 	}
 
-	public void setWeatherMondey(ItemWeather weatherMondey) {
-		this.weatherMondey = weatherMondey;
+	public void setWeatherMonday(ItemWeather weatherMonday) {
+		this.weatherMonday = weatherMonday;
 	}
 
 	public ItemWeather getWeatherTuesday() {
@@ -69,12 +69,12 @@ public class WeatherStruct {
 		this.weatherSaturday = weatherSaturday;
 	}
 
-	public ItemWeather getWeatherSundey() {
-		return weatherSundey;
+	public ItemWeather getWeatherSunday() {
+		return weatherSunday;
 	}
 
-	public void setWeatherSundey(ItemWeather weatherSundey) {
-		this.weatherSundey = weatherSundey;
+	public void setWeatherSunday(ItemWeather weatherSunday) {
+		this.weatherSunday = weatherSunday;
 	}
 
 	public String getWeatherToday() {
@@ -93,12 +93,12 @@ public class WeatherStruct {
 		this.townName = townName;
 	}
 
-	public boolean getWerningWind() {
-		return werningWind;
+	public boolean getWarningWind() {
+		return warningWind;
 	}
 
-	public void setWerningWind(boolean werningWind) {
-		this.werningWind = werningWind;
+	public void setWarningWind(boolean warningWind) {
+		this.warningWind = warningWind;
 	}
 
 	public String getWindDescription() {
@@ -111,25 +111,25 @@ public class WeatherStruct {
 	
 	public List<ItemWeather> getAllWeathers(){
 		List<ItemWeather> listWeather = new ArrayList<ItemWeather>();
-		listWeather.add(getWeatherMondey());
+		listWeather.add(getWeatherMonday());
 		listWeather.add(getWeatherTuesday());
 		listWeather.add(getWeatherWednesday());
 		listWeather.add(getWeatherThursday());
 		listWeather.add(getWeatherFriday());
 		listWeather.add(getWeatherSaturday());
-		listWeather.add(getWeatherSundey());
+		listWeather.add(getWeatherSunday());
 		return listWeather;
 	}
 	
 	public void setAllWeathers(List<ItemWeather> data){
-		if(data.size() > 0){
-			setWeatherMondey(data.get(0));
+		if(data.size() > 6){
+			setWeatherMonday(data.get(0));
 			setWeatherTuesday(data.get(1));
 			setWeatherWednesday(data.get(2));
 			setWeatherThursday(data.get(3));
 			setWeatherFriday(data.get(4));
 			setWeatherSaturday(data.get(5));
-			setWeatherSundey(data.get(6));
+			setWeatherSunday(data.get(6));
 		}		
 	}
 

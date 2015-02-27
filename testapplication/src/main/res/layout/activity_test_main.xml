@@ -8,29 +8,35 @@
 
     <view
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         class="ua.setcom.widgets.view.ThermometerView"
         android:id="@+id/v_termometer"
+        android:minHeight="350dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/sb_temp" />
 
     <view
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         class="ua.setcom.widgets.view.ThermometerView"
         android:id="@+id/v_thermometer2"
+        android:minHeight="350dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/sb_temp" />
 
     <view
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         class="ua.setcom.widgets.view.ThermometerView"
         android:id="@+id/v_thermometer3"
+        android:minHeight="350dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/sb_temp" />
 
     <SeekBar
         android:layout_width="wrap_content"

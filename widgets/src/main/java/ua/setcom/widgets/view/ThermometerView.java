@@ -2,14 +2,15 @@ package ua.setcom.widgets.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
 
 
 /**
@@ -43,6 +44,9 @@ public class ThermometerView extends View {
     private int colorText = Color.BLACK;
     private int posYMax, posYMin, posYZero;
 
+    public static float maxWidth = 0;
+    private static DisplayMetrics _displayMetrics;
+
     public ThermometerView(Context context) {
         super(context);
         init();
@@ -65,6 +69,29 @@ public class ThermometerView extends View {
         mPaintBar.setStyle(Paint.Style.STROKE);
         mPaintCircle = new Paint();
         mPaintCircle.setStyle(Paint.Style.FILL);
+        measureScreen();
+    }
+
+    public void measureScreen() {
+        _displayMetrics = Resources.getSystem().getDisplayMetrics();
+        maxWidth = _displayMetrics.widthPixels;
+        if( _displayMetrics.heightPixels > maxWidth ) {
+            maxWidth = _displayMetrics.heightPixels;
+        }
+    }
+
+    public static int getScaledSize(float size) {
+        return Math.round(size * ( maxWidth / 1920 ));
+    }
+
+    public void updateTemperature(float currentTemp) {
+        this.curTemp = currentTemp;
+        invalidate();
+    }
+
+    public void initMaxMin(float maxTemp, float minTemp) {
+        setMaxTemp(maxTemp);
+        setMinTemp(minTemp);
     }
 
     public void updateTemperature(float currentTemp, float maxTemp, float minTemp) {
@@ -89,9 +116,7 @@ public class ThermometerView extends View {
             float minTemp = data.getFloat(Key.MIN_TEMP);
             float currentTemp = data.getFloat(Key.CURRENT_TEMP);
 
-            this.maxTemp = maxTemp;
-            this.minTemp = minTemp;
-            this.curTemp = currentTemp;
+            updateTemperature(currentTemp, maxTemp, minTemp);
             invalidate();
         }
     }
@@ -118,9 +143,9 @@ public class ThermometerView extends View {
         Paint paintText = new Paint();
         paintText.setStrokeWidth(1);
         paintText.setColor(colorText);
-        paintText.setTextSize(mTextSize);
+        paintText.setTextSize(getScaledSize(mTextSize));
         Paint paintSubText = new Paint(paintText);
-        paintSubText.setTextSize(mTextSize-2);
+        paintSubText.setTextSize(getScaledSize(mTextSize-2));
 
         int width = getWidth();
         int height = getHeight();
@@ -225,11 +250,11 @@ public class ThermometerView extends View {
         posYZero = h2 + posYMax;
 
         if(curTemp < (minTemp * (-1))) {
-            Log.e(TAG, String.format("CURRENT TEMPERATURE[%d] < MIN TEMPERATURE[%d]", curTemp, minTemp));
+            Log.e(TAG, String.format("CURRENT TEMPERATURE[%f] < MIN TEMPERATURE[%f]", curTemp, minTemp));
             return height - posYMax;
         }
         if (curTemp > maxTemp) {
-            Log.e(TAG, String.format("CURRENT TEMPERATURE[%d] > MAX TEMPERATURE[%d]", curTemp, maxTemp));
+            Log.e(TAG, String.format("CURRENT TEMPERATURE[%f] > MAX TEMPERATURE[%f]", curTemp, maxTemp));
             return 0;
         }
 

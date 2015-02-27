@@ -209,7 +209,7 @@ public class DataParser {
                                 & imgUrlCount == 1
                                 & detailUrlCount == 1) {
                             Log.d(TAG, "ItemWeather 1 SUCCESS");
-                            wRes.setWeatherMondey(itemWeater);
+                            wRes.setWeatherMonday(itemWeater);
                             D = false;
                             M = false;
                             MI = false;
@@ -1073,7 +1073,7 @@ public class DataParser {
                                 & imgUrlCount == 7
                                 & detailUrlCount == 7) {
                             Log.d(TAG, "ItemWeather 7 SUCCESS");
-                            wRes.setWeatherSundey(itemWeater);
+                            wRes.setWeatherSunday(itemWeater);
                             D = false;
                             M = false;
                             MI = false;
@@ -1122,7 +1122,7 @@ public class DataParser {
                             if (result.substring(t, (t + 6)).equals("</div>")) {
                                 String descrWind = result.substring((j + 89), t);
                                 wRes.setWindDescription(descrWind);
-                                wRes.setWerningWind(true);
+                                wRes.setWarningWind(true);
                                 break;
                             }
                         }

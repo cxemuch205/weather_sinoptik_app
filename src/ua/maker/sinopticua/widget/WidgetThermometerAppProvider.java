@@ -200,7 +200,7 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
             HEIGHT = newHeight * 2 + newHeight / 2;
 
         ThermometerView thermometer = new ThermometerView(mContext);
-        thermometer.setTextSize(24f);
+        thermometer.setTextSize(22f);
         thermometer.setShowSubPoint(true);
         thermometer.measure(WIDTH, HEIGHT);
         thermometer.layout(0, 0, WIDTH, HEIGHT);
