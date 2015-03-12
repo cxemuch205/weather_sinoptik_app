@@ -1,5 +1,6 @@
 package ua.maker.sinopticua.widget;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -31,13 +32,15 @@ import ua.maker.sinopticua.HomeActivity;
 import ua.maker.sinopticua.R;
 import ua.maker.sinopticua.constants.App;
 import ua.maker.sinopticua.models.ItemWeather;
+import ua.maker.sinopticua.models.PageHTML;
 import ua.maker.sinopticua.models.WeatherStruct;
 import ua.maker.sinopticua.utils.DataParser;
 import ua.maker.sinopticua.utils.Tools;
+import ua.maker.sinopticua.utils.UserDB;
 
 public class WidgetWeatherAppProvider extends AppWidgetProvider {
 
-	private static final String TAG = "WidgetWeatherAppProvider";
+	private static final String TAG = "WidgetWeatherBig";
 	private static final String ACTION_UPDATE = "action_update";
 	private static final int PERIOD_UPDATE = 120000;
 	
@@ -47,9 +50,13 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 	private AppWidgetManager appWidgetManager;
 	private SharedPreferences pref;
 	private String url = "";
+    private UserDB db;
 	private Context mContext;
 	private Timer timerWidget = new Timer();
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyy kk:mm");
+
+    @SuppressLint("SimpleDateFormat")
+    private SimpleDateFormat
+            dateFormat = new SimpleDateFormat("dd/MMM/yyyy kk:mm");
 
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
@@ -58,6 +65,7 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 		Log.i(TAG, "onUpdate()");
 		this.appWidgetManager = appWidgetManager;
 		this.mContext = context;
+        db = new UserDB(context);
 
         view = new RemoteViews(context.getPackageName(),
                 R.layout.widget_3x2_layout);
@@ -153,16 +161,22 @@ public class WidgetWeatherAppProvider extends AppWidgetProvider {
 			} while (isGet == false);
 			Log.i(TAG, "Response length: " + response.length());
 			DataParser parser = DataParser.getInstance();
+            db.insertHTML(new PageHTML(response));
 			return parser.parserHTML(response);
 		}
 
 		@Override
 		protected void onPostExecute(WeatherStruct response) {
 			if(response != null){
+                if (pref == null) {
+                    pref = mContext.getSharedPreferences(App.PREF_APP, 0);
+                }
+                pref.edit().putString(App.PREF_LAST_DATE_UPDATE_FULL,
+                        dateFormat.format(new Date())).apply();
 				ItemWeather weather = response.getWeatherMonday();
 				Log.i(TAG, "onPostExecute()");
 				String dateUpdate = dateFormat.format(new Date());
-				pref.edit().putString(App.PREF_LAST_WIDGET_UPDATE, dateUpdate).commit();
+				pref.edit().putString(App.PREF_LAST_WIDGET_UPDATE, dateUpdate).apply();
 
                 view.setViewVisibility(R.id.pb_widget, ProgressBar.GONE);
 				view.setViewVisibility(R.id.iv_update, ImageView.VISIBLE);

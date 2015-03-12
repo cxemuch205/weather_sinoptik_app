@@ -1,5 +1,6 @@
 package ua.maker.sinopticua.widget;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -16,14 +17,18 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.RemoteViews;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import ua.maker.sinopticua.HomeActivity;
 import ua.maker.sinopticua.R;
 import ua.maker.sinopticua.constants.App;
+import ua.maker.sinopticua.models.PageHTML;
 import ua.maker.sinopticua.models.WeatherStruct;
 import ua.maker.sinopticua.utils.DataParser;
 import ua.maker.sinopticua.utils.Tools;
+import ua.maker.sinopticua.utils.UserDB;
 import ua.setcom.widgets.view.ThermometerView;
 
 /**
@@ -31,21 +36,29 @@ import ua.setcom.widgets.view.ThermometerView;
  */
 public class WidgetThermometerAppProvider extends AppWidgetProvider {
 
-    public static final String TAG = "WidgetThermometerAppProvider";
+    public static final String TAG = "WidgetThermometer";
     private static final String ACTION_UPDATE = "action_update";
 
     private HttpTask task;
     private RemoteViews views;
     private ComponentName thisWidget;
     private AppWidgetManager appWidgetManager;
+    private UserDB db;
     private Context mContext;
     private int appWidgetId = 0;
+    private SharedPreferences pref;
+
+    @SuppressLint("SimpleDateFormat")
+    private SimpleDateFormat
+            dateFullFirmat = new SimpleDateFormat("dd/MMM/yyyy kk:mm");
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
         this.appWidgetManager = appWidgetManager;
         mContext = context;
+        db = new UserDB(context);
+        pref = context.getSharedPreferences(App.PREF_APP, 0);
         views = new RemoteViews(context.getPackageName(),
                 R.layout.widget_thermometer_app_provider);
 
@@ -163,6 +176,10 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
             } while (isGet == false);
             Log.i(TAG, "Response length: " + response.length());
             DataParser parser = DataParser.getInstance();
+            if (db == null) {
+                db = new UserDB(mContext);
+            }
+            db.insertHTML(new PageHTML(response));
             return parser.parserHTML(response);
         }
 
@@ -170,6 +187,11 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
         protected void onPostExecute(WeatherStruct response) {
             if(response != null) {
                 Log.i(TAG, "onPostExecute()");
+                if (pref == null) {
+                    pref = mContext.getSharedPreferences(App.PREF_APP, 0);
+                }
+                pref.edit().putString(App.PREF_LAST_DATE_UPDATE_FULL,
+                        dateFullFirmat.format(new Date())).apply();
 
                 if (response.getWeatherToday() != null)
                     views.setTextViewText(R.id.tv_now_weather, Html.fromHtml(response.getWeatherToday()));
@@ -189,7 +211,7 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
         }
     }
 
-    public static int WIDTH = 125, HEIGHT = 500;
+    public static int WIDTH = 125, HEIGHT = 550;
 
     private Bitmap getBitmapThermometer(WeatherStruct response) {
 

@@ -65,7 +65,20 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: ua.maker.sinopticua" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="" />
+    <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/models/PageHTML.java" />
+      <change type="DELETED" beforePath="S:\AndroidProjects\weather_sinoptik_app\res\values-v21\styles.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/widgets/src/main/java/ua/setcom/widgets/view/ThermometerView.java" afterPath="$PROJECT_DIR$/widgets/src/main/java/ua/setcom/widgets/view/ThermometerView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/UserDB.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/UserDB.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/widget_thermometer_app_provider.xml" afterPath="$PROJECT_DIR$/res/layout/widget_thermometer_app_provider.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="weather_sinoptik_app.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -92,34 +105,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="WeatherDetailActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java">
+      <file leaf-file-name="WidgetThermometerAppProvider.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.6516588" vertical-offset="1468" max-vertical-offset="2312">
-              <caret line="80" column="82" selection-start-line="80" selection-start-column="82" selection-end-line="80" selection-end-column="82" />
+            <state vertical-scroll-proportion="0.37380952" vertical-offset="2899" max-vertical-offset="3893">
+              <caret line="218" column="44" selection-start-line="218" selection-start-column="44" selection-end-line="218" selection-end-column="44" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HomeActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1245" max-vertical-offset="11509">
-              <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Tools.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/utils/Tools.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3032" max-vertical-offset="3927">
-              <caret line="254" column="76" selection-start-line="254" selection-start-column="14" selection-end-line="254" selection-end-column="76" />
-              <folding>
-                <element signature="e#9197#9250#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -157,16 +148,16 @@
           <value>
             <list>
               <ExternalProjectPojo>
+                <option name="name" value=":widgets" />
+                <option name="path" value="$PROJECT_DIR$/widgets" />
+              </ExternalProjectPojo>
+              <ExternalProjectPojo>
                 <option name="name" value=":testapplication" />
                 <option name="path" value="$PROJECT_DIR$/testapplication" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
                 <option name="name" value="weather_sinoptik_app" />
                 <option name="path" value="$PROJECT_DIR$" />
-              </ExternalProjectPojo>
-              <ExternalProjectPojo>
-                <option name="name" value=":widgets" />
-                <option name="path" value="$PROJECT_DIR$/widgets" />
               </ExternalProjectPojo>
             </list>
           </value>
@@ -1619,7 +1610,7 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/cardview-v7/21.0.3/cardview-v7-21.0.3.aar" />
+                            <option value="S:/AndroidData/AndroidSDK/extras/android/m2repository/com/android/support/cardview-v7/21.0.3/cardview-v7-21.0.3.aar" />
                             <option value="$MODULE_DIR$/libs/jsoup-1.8.1.jar" />
                             <option value="$MODULE_DIR$/libs/picasso-2.4.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.1.0/gradle-1.1.0-sources.jar" />
@@ -1703,7 +1694,7 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/cardview-v7/21.0.3/cardview-v7-21.0.3.aar" />
+                            <option value="S:/AndroidData/AndroidSDK/extras/android/m2repository/com/android/support/cardview-v7/21.0.3/cardview-v7-21.0.3.aar" />
                             <option value="$MODULE_DIR$/libs/jsoup-1.8.1.jar" />
                             <option value="$MODULE_DIR$/libs/picasso-2.4.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.1.0/gradle-1.1.0-sources.jar" />
@@ -1776,9 +1767,9 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.4/commons-codec-1.4-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/21.0.3/appcompat-v7-21.0.3.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/21.0.3/support-v4-21.0.3.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar" />
+                            <option value="S:/AndroidData/AndroidSDK/extras/android/m2repository/com/android/support/appcompat-v7/21.0.3/appcompat-v7-21.0.3.aar" />
+                            <option value="S:/AndroidData/AndroidSDK/extras/android/m2repository/com/android/support/support-v4/21.0.3/support-v4-21.0.3.aar" />
+                            <option value="S:/AndroidData/AndroidSDK/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar" />
                           </list>
                         </option>
                         <option name="path" value="$PROJECT_DIR$/testapplication" />
@@ -1790,7 +1781,7 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/cardview-v7/21.0.3/cardview-v7-21.0.3.aar" />
+                            <option value="S:/AndroidData/AndroidSDK/extras/android/m2repository/com/android/support/cardview-v7/21.0.3/cardview-v7-21.0.3.aar" />
                             <option value="$MODULE_DIR$/libs/jsoup-1.8.1.jar" />
                             <option value="$MODULE_DIR$/libs/picasso-2.4.0.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/com/android/tools/build/gradle/1.1.0/gradle-1.1.0-sources.jar" />
@@ -1863,9 +1854,9 @@
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.4/commons-codec-1.4-sources.jar" />
                             <option value="$APPLICATION_HOME_DIR$/gradle/m2repository/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/appcompat-v7/21.0.3/appcompat-v7-21.0.3.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-v4/21.0.3/support-v4-21.0.3.aar" />
-                            <option value="$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar" />
+                            <option value="S:/AndroidData/AndroidSDK/extras/android/m2repository/com/android/support/appcompat-v7/21.0.3/appcompat-v7-21.0.3.aar" />
+                            <option value="S:/AndroidData/AndroidSDK/extras/android/m2repository/com/android/support/support-v4/21.0.3/support-v4-21.0.3.aar" />
+                            <option value="S:/AndroidData/AndroidSDK/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar" />
                           </list>
                         </option>
                         <option name="path" value="$PROJECT_DIR$/widgets" />
@@ -1943,7 +1934,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/res/values-uk/strings.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
@@ -1962,9 +1952,7 @@
         <option value="$PROJECT_DIR$/widgets/build/intermediates/bundles/release/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/widgets/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_home.xml" />
-        <option value="$PROJECT_DIR$/res/layout/widget_thermometer_app_provider.xml" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/WeatherAdapter.java" />
-        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/fragments/DetailWeatherFragment.java" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/models/ItemDetail.java" />
         <option value="$PROJECT_DIR$/widgets/src/main/java/ua/setcom/widgets/view/SlidingTabLayout.java" />
@@ -1975,15 +1963,11 @@
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/ImageCache.java" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/DataParser.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/detail_weather_layout.xml" />
-        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/UserDB.java" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/models/Wind.java" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/models/WeatherStruct.java" />
         <option value="$PROJECT_DIR$/testapplication/src/main/res/layout/activity_test_main.xml" />
         <option value="$PROJECT_DIR$/testapplication/src/main/java/ua/setcom/testapplication/TestMainActivity.java" />
-        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" />
-        <option value="$PROJECT_DIR$/widgets/src/main/java/ua/setcom/widgets/view/ThermometerView.java" />
         <option value="$PROJECT_DIR$/testapplication/build.gradle" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/test/ApplicationTest.java" />
@@ -1993,7 +1977,14 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/interfaces/LocationGetListener.java" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/Tools.java" />
+        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/utils/UserDB.java" />
+        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java" />
         <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java" />
+        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/models/PageHTML.java" />
+        <option value="$PROJECT_DIR$/widgets/src/main/java/ua/setcom/widgets/view/ThermometerView.java" />
+        <option value="$PROJECT_DIR$/res/layout/widget_thermometer_app_provider.xml" />
+        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java" />
+        <option value="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" />
       </list>
     </option>
   </component>
@@ -2032,7 +2023,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -2155,12 +2146,48 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weather_sinoptik_app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weather_sinoptik_app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="sinopticua" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weather_sinoptik_app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="weather_sinoptik_app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sinopticua" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="widget" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2221,81 +2248,13 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="sinopticua" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="interfaces" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="weather_sinoptik_app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="weather_sinoptik_app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="weather_sinoptik_app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testapplication" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="weather_sinoptik_app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testapplication" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testapplication" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="weather_sinoptik_app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testapplication" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="testapplication" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2305,7 +2264,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.lastSelected" value="appearance" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -2417,10 +2376,7 @@
       </option>
       <envs />
       <patterns />
-      <method>
-        <option name="Make" enabled="true" />
-        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-      </method>
+      <method />
     </configuration>
     <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="" />
@@ -2611,19 +2567,20 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32918552" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31729668" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39101124" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3219178" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32187858" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32762557" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39041096" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38946164" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32918552" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24919957" sideWeight="0.49908924" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24919786" sideWeight="0.49908924" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37669683" sideWeight="0.5" order="15" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994652" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2634,7 +2591,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3173516" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -2661,19 +2617,19 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java</url>
-          <line>78</line>
+          <line>81</line>
           <properties />
           <option name="timeStamp" value="101" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java</url>
-          <line>81</line>
+          <line>84</line>
           <properties />
           <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java</url>
-          <line>84</line>
+          <line>87</line>
           <properties />
           <option name="timeStamp" value="103" />
         </line-breakpoint>
@@ -2685,34 +2641,24 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/res/layout-land/widget_3x2_layout.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7734694" vertical-offset="2591" max-vertical-offset="3852">
-          <caret line="165" column="35" selection-start-line="165" selection-start-column="35" selection-end-line="165" selection-end-column="35" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/res/layout-sw600dp/widget_3x2_layout.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout-sw600dp/widget_3x2_layout.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.51632655" vertical-offset="2051" max-vertical-offset="3762">
           <caret line="128" column="44" selection-start-line="128" selection-start-column="44" selection-end-line="128" selection-end-column="44" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout-sw600dp-land/widget_3x2_layout.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout-sw600dp-land/widget_3x2_layout.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33265308" vertical-offset="2681" max-vertical-offset="3744">
           <caret line="158" column="44" selection-start-line="158" selection-start-column="44" selection-end-line="158" selection-end-column="44" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/widgets/.gitignore">
@@ -2731,51 +2677,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.85227275" vertical-offset="1890" max-vertical-offset="2736">
           <caret line="130" column="70" selection-start-line="130" selection-start-column="70" selection-end-line="130" selection-end-column="70" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/widget_thermometer_app_provider.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="18" max-vertical-offset="738">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/WeatherAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="1598">
           <caret line="80" column="9" selection-start-line="75" selection-start-column="8" selection-end-line="80" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7072331" vertical-offset="2172" max-vertical-offset="3672">
-          <caret line="201" column="29" selection-start-line="201" selection-start-column="29" selection-end-line="201" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-21/android/app/Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="88773" max-vertical-offset="101796">
-          <caret line="5451" column="0" selection-start-line="5451" selection-start-column="0" selection-end-line="5451" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-21/com/android/internal/os/RuntimeInit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="526" max-vertical-offset="6664">
-          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -2787,13 +2701,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/item_tab.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values-uk/strings.xml">
@@ -2805,13 +2719,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/item_detail_weather.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.35308343" vertical-offset="1238" max-vertical-offset="7395">
           <caret line="90" column="47" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="47" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
@@ -2823,20 +2737,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/detail_weather_layout.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="272" max-vertical-offset="1037">
           <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/adapters/WeatherItemDetailPagerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1556" max-vertical-offset="2652">
           <caret line="139" column="60" selection-start-line="139" selection-start-column="60" selection-end-line="139" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2844,7 +2757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.8199053" vertical-offset="2448" max-vertical-offset="3332">
           <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2856,13 +2768,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testapplication/src/main/res/layout/activity_test_main.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1105">
           <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/constants/App.java">
@@ -2870,21 +2782,6 @@
         <state vertical-scroll-proportion="1.0" vertical-offset="144" max-vertical-offset="799">
           <caret line="38" column="34" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/widgets/src/main/java/ua/setcom/widgets/view/ThermometerView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73904383" vertical-offset="1431" max-vertical-offset="6290">
-          <caret line="118" column="61" selection-start-line="118" selection-start-column="61" selection-end-line="118" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2618483" vertical-offset="2046" max-vertical-offset="3604">
-          <caret line="207" column="34" selection-start-line="207" selection-start-column="34" selection-end-line="207" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -2909,14 +2806,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/utils/UserDB.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52988046" vertical-offset="3610" max-vertical-offset="4454">
-          <caret line="242" column="0" selection-start-line="242" selection-start-column="0" selection-end-line="242" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/models/ItemWeather.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18127961" vertical-offset="0" max-vertical-offset="844">
@@ -2936,9 +2825,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5499398" vertical-offset="12514" max-vertical-offset="13345">
           <caret line="763" column="5" selection-start-line="763" selection-start-column="5" selection-end-line="763" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2988,7 +2874,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.087677725" vertical-offset="992" max-vertical-offset="1836">
           <caret line="75" column="57" selection-start-line="75" selection-start-column="57" selection-end-line="75" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2996,7 +2881,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21445498" vertical-offset="74" max-vertical-offset="1003">
           <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3004,7 +2888,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44312796" vertical-offset="0" max-vertical-offset="844">
           <caret line="22" column="53" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3012,7 +2895,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08056872" vertical-offset="272" max-vertical-offset="1139">
           <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3020,7 +2902,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
           <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3028,9 +2909,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3032" max-vertical-offset="3927">
           <caret line="254" column="76" selection-start-line="254" selection-start-column="14" selection-end-line="254" selection-end-column="76" />
-          <folding>
-            <element signature="e#9197#9250#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3038,20 +2917,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.52369666" vertical-offset="0" max-vertical-offset="2788">
           <caret line="1202" column="40" selection-start-line="1202" selection-start-column="40" selection-end-line="1202" selection-end-column="40" />
-          <folding>
-            <element signature="method#parserHTML#0;class#DataParser#0" expanded="false" />
-            <element signature="method#parserTowns#0;class#DataParser#0" expanded="false" />
-            <element signature="method#parserGetLocation#0;class#DataParser#0" expanded="false" />
-            <element signature="method#parseDetailInfo#0;class#DataParser#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8258294" vertical-offset="0" max-vertical-offset="1037">
-          <caret line="41" column="57" selection-start-line="41" selection-start-column="57" selection-end-line="41" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3059,7 +2924,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22156398" vertical-offset="0" max-vertical-offset="7973">
           <caret line="45" column="11" selection-start-line="45" selection-start-column="11" selection-end-line="45" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3067,7 +2931,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08056872" vertical-offset="0" max-vertical-offset="844">
           <caret line="4" column="28" selection-start-line="4" selection-start-column="28" selection-end-line="4" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3075,9 +2938,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22156398" vertical-offset="0" max-vertical-offset="844">
           <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
-          <folding>
-            <element signature="e#339#347#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3085,22 +2945,91 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44312796" vertical-offset="0" max-vertical-offset="844">
           <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/models/PageHTML.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39253998" vertical-offset="0" max-vertical-offset="563">
+          <caret line="13" column="23" selection-start-line="13" selection-start-column="23" selection-end-line="13" selection-end-column="23" />
+          <folding>
+            <element signature="e#298#299#0" expanded="true" />
+            <element signature="e#330#331#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.068" vertical-offset="0" max-vertical-offset="510">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java">
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1245" max-vertical-offset="11509">
-          <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.218" vertical-offset="180" max-vertical-offset="1037">
+          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/WeatherDetailActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6516588" vertical-offset="1468" max-vertical-offset="2312">
-          <caret line="80" column="82" selection-start-line="80" selection-start-column="82" selection-end-line="80" selection-end-column="82" />
+        <state vertical-scroll-proportion="0.25833333" vertical-offset="4" max-vertical-offset="2346">
+          <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/widgets/src/main/java/ua/setcom/widgets/view/ThermometerView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4857143" vertical-offset="153" max-vertical-offset="6375">
+          <caret line="43" column="32" selection-start-line="43" selection-start-column="32" selection-end-line="43" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/widget_thermometer_app_provider.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="578" max-vertical-offset="697">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/utils/UserDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.332" vertical-offset="4356" max-vertical-offset="5253">
+          <caret line="281" column="16" selection-start-line="281" selection-start-column="16" selection-end-line="281" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/HomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8118" max-vertical-offset="11594">
+          <caret line="586" column="0" selection-start-line="586" selection-start-column="0" selection-end-line="586" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetWeatherAppProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1914" max-vertical-offset="3859">
+          <caret line="169" column="33" selection-start-line="169" selection-start-column="33" selection-end-line="169" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37380952" vertical-offset="2899" max-vertical-offset="3893">
+          <caret line="218" column="44" selection-start-line="218" selection-start-column="44" selection-end-line="218" selection-end-column="44" />
           <folding />
         </state>
       </provider>

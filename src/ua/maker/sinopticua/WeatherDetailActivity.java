@@ -24,6 +24,7 @@ import ua.maker.sinopticua.models.ItemDetail;
 import ua.maker.sinopticua.models.ItemWeather;
 import ua.maker.sinopticua.utils.DataParser;
 import ua.maker.sinopticua.utils.Tools;
+import ua.maker.sinopticua.utils.UserDB;
 import ua.setcom.widgets.view.SlidingTabLayout;
 
 public class WeatherDetailActivity extends ActionBarActivity {
@@ -37,12 +38,14 @@ public class WeatherDetailActivity extends ActionBarActivity {
     private SlidingTabLayout tabSlidingTitle;
     private ProgressBar pb;
     private TextView tvMessage;
+    private UserDB db;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.detail_weather_layout);
-		weather = (ItemWeather) getIntent().getExtras().get(App.SAVE_ITEM_WEATHER);
+        db = new UserDB(this);
+        weather = (ItemWeather) getIntent().getExtras().get(App.SAVE_ITEM_WEATHER);
         setTitleActionBar(Uri.parse(weather.urlDetail).getLastPathSegment());
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         tabSlidingTitle = (SlidingTabLayout) findViewById(R.id.title_tab);

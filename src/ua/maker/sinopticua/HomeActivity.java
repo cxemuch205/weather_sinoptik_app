@@ -51,6 +51,7 @@ import ua.maker.sinopticua.constants.App;
 import ua.maker.sinopticua.interfaces.LocationGetListener;
 import ua.maker.sinopticua.models.ItemTown;
 import ua.maker.sinopticua.models.ItemWeather;
+import ua.maker.sinopticua.models.PageHTML;
 import ua.maker.sinopticua.models.WeatherStruct;
 import ua.maker.sinopticua.utils.DataParser;
 import ua.maker.sinopticua.utils.Tools;
@@ -91,7 +92,7 @@ public class HomeActivity extends FragmentActivity{
     private ObjectAnimator animLoadBtnUpdate;
 	private boolean isFirst = true;
     private ImageView ivBigWeather;
-	
+
 	@SuppressLint("SimpleDateFormat")
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("D"),
 							 dateFullFirmat = new SimpleDateFormat("dd/MMM/yyyy kk:mm");
@@ -164,7 +165,6 @@ public class HomeActivity extends FragmentActivity{
         tvTown.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
         etUrl.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_LIGHT));
         tvWind.setTypeface(Tools.getFont(this, App.MTypeface.ROBOTO_MEDIUM));
-
     }
 
     @SuppressLint("NewApi")
@@ -575,6 +575,7 @@ public class HomeActivity extends FragmentActivity{
 	        if(BuildConfig.DEBUG)
 	        	Tools.logToFile(response, "log_http_task");	        
 	        DataParser parser = DataParser.getInstance();
+            activityWeakRef.get().db.insertHTML(new PageHTML(response));
 	        return parser.parserHTML(response);
 	    }
 
@@ -583,7 +584,7 @@ public class HomeActivity extends FragmentActivity{
 	    	if(activityWeakRef.get() != null && response != null){
 	    		try {
 		        	activityWeakRef.get().pref.edit().putString(App.PREF_LAST_DATE_UPDATE_FULL,
-		        			activityWeakRef.get().dateFullFirmat.format(new Date())).commit();
+		        			activityWeakRef.get().dateFullFirmat.format(new Date())).apply();
 		        	if(activityWeakRef.get().pd != null) activityWeakRef.get().pd.dismiss();
                     activityWeakRef.get().animLoadBtnUpdate.cancel();
 		        	activityWeakRef.get().pref.edit().putString(App.PREF_SITY_URL, activityWeakRef.get().URL).commit();
@@ -707,13 +708,18 @@ public class HomeActivity extends FragmentActivity{
             String nowDate = dateFormat.format(new Date());
             String prefDate = pref.getString(App.PREF_LAST_DATE_UPDATE, "");
 
-            if(Tools.checkConnection(this) & (!nowDate.equals(prefDate) | prefDate.length() == 0))
+            if(Tools.checkConnection(this) && (!nowDate.equals(prefDate) | prefDate.length() == 0))
             {
-                if(listItemsWeather != null & listItemsWeather.size() == 0)
+                if(listItemsWeather != null && listItemsWeather.size() == 0)
                     refreshWeather(URL);
             } else {
-                setInfoWeather(db.getCacheWeather());
-                if(!Tools.checkConnection(this))
+                WeatherStruct weather = DataParser.getInstance().parserHTML(db.getHTML().html);
+                if (weather == null) {
+                    setInfoWeather(db.getCacheWeather());
+                } else {
+                    setInfoWeather(weather);
+                }
+                if (!Tools.checkConnection(this))
                     Toast.makeText(this, getString(R.string.no_connections), Toast.LENGTH_SHORT).show();
             }
         }else{

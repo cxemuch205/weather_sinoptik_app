@@ -14,6 +14,7 @@ import java.util.List;
 
 import ua.maker.sinopticua.models.ItemTown;
 import ua.maker.sinopticua.models.ItemWeather;
+import ua.maker.sinopticua.models.PageHTML;
 import ua.maker.sinopticua.models.WeatherStruct;
 
 public class UserDB extends SQLiteOpenHelper {
@@ -25,9 +26,12 @@ public class UserDB extends SQLiteOpenHelper {
 	
 	public static final String TABLE_TOWN = "town_select";
 	public static final String TABLE_CACHE_WEATHER = "weather_cache";
-	
+	public static final String TABLE_HTML_CACHE = "html_cache";
+
 	public static final String FIELD_ID = "_id";
 	public static final String FIELD_NAME = "name";
+	public static final String FIELD_DATA = "data_html";
+	public static final String FIELD_DATE = "date_long";
 	public static final String FIELD_URL = "url";
 	public static final String FIELD_DATE_FULL = "date_full";
 	public static final String FIELD_DATE_DAY = "date_day";
@@ -51,22 +55,28 @@ public class UserDB extends SQLiteOpenHelper {
 	
 	private static final String SQL_CREATE_TABLE_CACHE_WEATHER = "CREATE TABLE " + TABLE_CACHE_WEATHER
 			+ " (" + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, "
-			+	FIELD_DATE_FULL + " TEXT, "
-			+	FIELD_DATE_DAY + " INTEGER, "
-			+	FIELD_DATE_MONTH + " TEXT, "
-			+	FIELD_DATE_DAY_NAME + " TEXT, "
-			+	FIELD_TEMP_MIN + " TEXT, "
-			+	FIELD_TEMP_MAX + " TEXT, "
-			+	FIELD_NOW_WEATHER + " TEXT, "
-			+	FIELD_TODAY_URL + " TEXT, "
-			+	FIELD_TOWN + " TEXT, "
-			+	FIELD_WEATHER_DESCRIPTIONS + " TEXT, "
-			+	FIELD_WEATHER_DESCRIPTIONS_URL + " TEXT, "
-			+ FIELD_WARNING_WIND + " TEXT, "
-			+	FIELD_WIND_DESCRIPTION + " TEXT, "
-			+	FIELD_WEATHER_IMG_URL + " TEXT);";
-	
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy kk:mm");
+			+	FIELD_DATE_FULL + " TEXT,                                            "
+			+	FIELD_DATE_DAY + " INTEGER,                                          "
+			+	FIELD_DATE_MONTH + " TEXT,                                           "
+			+	FIELD_DATE_DAY_NAME + " TEXT,                                        "
+			+	FIELD_TEMP_MIN + " TEXT,                                             "
+			+	FIELD_TEMP_MAX + " TEXT,                                             "
+			+	FIELD_NOW_WEATHER + " TEXT,                                          "
+			+	FIELD_TODAY_URL + " TEXT,                                            "
+			+	FIELD_TOWN + " TEXT,                                                 "
+			+	FIELD_WEATHER_DESCRIPTIONS + " TEXT,                                 "
+			+	FIELD_WEATHER_DESCRIPTIONS_URL + " TEXT,                             "
+			+ FIELD_WARNING_WIND + " TEXT,                                           "
+			+	FIELD_WIND_DESCRIPTION + " TEXT,                                     "
+			+	FIELD_WEATHER_IMG_URL + " TEXT);                                     ";
+
+    //TODO: make table for caching html site, for all interfaces get info
+    private static final String SQL_CREATE_TABLE_CACHE_HTML = "CREATE TABLE " + TABLE_HTML_CACHE + " ("
+            + FIELD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, "
+            + FIELD_DATA + " TEXT,                                            "
+            + FIELD_DATE + " TEXT);                                           ";
+
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/yyyy kk:mm");
 	
 	
 	private Context mContext;
@@ -82,6 +92,7 @@ public class UserDB extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(SQL_CREATE_TABLE_TOWN);
 		db.execSQL(SQL_CREATE_TABLE_CACHE_WEATHER);
+		db.execSQL(SQL_CREATE_TABLE_CACHE_HTML);
 	}
 
 	@Override
@@ -267,4 +278,43 @@ public class UserDB extends SQLiteOpenHelper {
 		}
 		return result;
 	}
+
+    public void insertHTML(PageHTML pageHTML) {
+        if (db.isOpen() && pageHTML != null) {
+            deleteAllRowsByTable(TABLE_HTML_CACHE);
+            ContentValues cv = new ContentValues();
+
+            cv.put(FIELD_DATA, pageHTML.html);
+            cv.put(FIELD_DATE, String.valueOf(System.currentTimeMillis()));
+
+            pageHTML.idDB = db.insert(TABLE_HTML_CACHE, null, cv);
+        }
+    }
+
+    private void deleteAllRowsByTable(String tableName) {
+        db.delete(tableName, null, null);
+    }
+
+    public PageHTML getHTML() {
+        PageHTML result = new PageHTML();
+        if (db.isOpen()) {
+            Cursor c = db.rawQuery("SELECT * FROM '" + TABLE_HTML_CACHE + "'", null);
+            if (c.moveToFirst()) {
+                int indexIdDB = c.getColumnIndex(FIELD_ID);
+                int indexData = c.getColumnIndex(FIELD_DATA);
+                int indexDate = c.getColumnIndex(FIELD_DATE);
+                do {
+                    long id = c.getLong(indexIdDB);
+                    String html = c.getString(indexData);
+                    String dateMillis = c.getString(indexDate);
+
+                    result.idDB = id;
+                    result.html = html;
+                    result.timeInsertMillis = Long.parseLong(dateMillis);
+
+                } while (c.moveToNext());
+            }
+        }
+        return result;
+    }
 }

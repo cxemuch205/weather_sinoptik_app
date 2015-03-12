@@ -38,6 +38,7 @@ public class ThermometerView extends View {
     private Paint mPaintBar, mPaintCircle;
     private boolean showSubPoint = false;
     private int colorMercury = Color.RED;
+    private int colorMercuryCold = Color.BLUE;
     private int colorBackThermometer = Color.WHITE;
     private int colorLinesPoint = Color.BLACK;
     private float mTextSize = 15;
@@ -187,7 +188,11 @@ public class ThermometerView extends View {
     private int startXLast = 0, startYLast = 0;
 
     private void drawTemperatureValue(Canvas canvas) {
-        mPaintBar.setColor(colorMercury);
+        if (curTemp < 0) {
+            mPaintBar.setColor(colorMercuryCold);
+        } else {
+            mPaintBar.setColor(colorMercury);
+        }
         int stroke = STROKE_WIDTH*2;
         mPaintBar.setStrokeWidth(stroke);
 
