@@ -316,7 +316,12 @@ public class ThermometerView extends View {
     }
 
     private void drawBaseThermometerCircle(Canvas canvas) {
-        mPaintCircle.setColor(colorMercury);
+        if (curTemp < 0) {
+            mPaintCircle.setColor(colorMercuryCold);
+        } else {
+            mPaintCircle.setColor(colorMercury);
+        }
+
         int width = getWidth();
         int height = getHeight();
         int radius, radiusBack, center;
