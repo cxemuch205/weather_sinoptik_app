@@ -27,5 +27,10 @@
     <string name="wind_str">Ветер, м/сек</string>
     <string name="weather_maybe_str">Вероятность осадков, %</string>
     <string name="err_downloading_detail_info">Ошибка загрузки детальной информации перезагрузка через %d</string>
+    <string name="title_activity_widget_config">WidgetConfigActivity</string>
+
+    <string name="color_text">Цвет текста:</string>
+    <string name="press_color_to_apply">Нажмите для выбора</string>
+    <string name="dialog_color_picker">Выбор цвета</string>
 
 </resources>

@@ -14,7 +14,8 @@ public class App {
 	public static final String PREF_LAST_DATE_UPDATE = "last_update";
 	public static final String PREF_LAST_WIDGET_UPDATE = "last_widget_update";
 	public static final String PREF_LAST_DATE_UPDATE_FULL = "last_full_update";
-	
+	public static final String PREF_TEXT_WIDGET_COLOR = "color_on_widget_text";
+
 	public static final String DEFAULT_URL_RU = "http://sinoptik.ua/%D0%BF%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0-%D0%BA%D0%B8%D0%B5%D0%B2";
 	public static final String DEFAULT_URL_UA = "http://ua.sinoptik.ua/%D0%BF%D0%BE%D0%B3%D0%BE%D0%B4%D0%B0-%D0%BA%D0%B8%D1%97%D0%B2";
 	

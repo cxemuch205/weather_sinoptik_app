@@ -7,6 +7,7 @@
     android:updatePeriodMillis="60000"
     android:previewImage="@drawable/preview_thermometer"
     android:initialLayout="@layout/widget_thermometer_app_provider"
+    android:configure="ua.maker.sinopticua.WidgetConfigActivity"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen|keyguard"
-    android:initialKeyguardLayout="@layout/widget_thermometer_app_provider"/>
+    android:initialKeyguardLayout="@layout/widget_thermometer_app_provider" />

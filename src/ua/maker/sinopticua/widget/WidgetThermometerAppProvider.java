@@ -39,7 +39,7 @@ import ua.setcom.widgets.view.ThermometerView;
 public class WidgetThermometerAppProvider extends AppWidgetProvider {
 
     public static final String TAG = "WidgetThermometer";
-    private static final String ACTION_UPDATE = "action_update";
+    public static final String ACTION_UPDATE = "action_update";
 
     private HttpTask task;
     private RemoteViews views;
@@ -55,7 +55,17 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
             dateFullFirmat = new SimpleDateFormat("dd/MMM/yyyy kk:mm");
 
     @Override
+    public void onDeleted(Context context, int[] appWidgetIds) {
+        Log.i(TAG, "onDeleted");
+        super.onDeleted(context, appWidgetIds);
+        SharedPreferences prefs = context.getSharedPreferences(App.PREF_APP, 0);
+
+        prefs.edit().remove(App.PREF_TEXT_WIDGET_COLOR).apply();
+    }
+
+    @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        Log.i(TAG, "onUpdate [" + String.valueOf(appWidgetIds) + "]");
         // There may be multiple widgets active, so update all of them
         this.appWidgetManager = appWidgetManager;
         mContext = context;
@@ -75,6 +85,8 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
             views.setOnClickPendingIntent(R.id.rl_root, pendingIntent);
             views.setOnClickPendingIntent(R.id.iv_thermometer, getPendingSelfIntent(context, ACTION_UPDATE));
+            views.setFloat(R.id.tv_now_weather, "setTextSize", SinoptikApplication.getScaledSize(18f));
+            views.setInt(R.id.tv_now_weather, "setTextColor", pref.getInt(App.PREF_TEXT_WIDGET_COLOR, Color.WHITE));
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
         refreshWeather(getWeatherUrl(context));
@@ -88,6 +100,7 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.i(TAG, "onReceive [" + (intent!=null?intent.getExtras().toString():"") + "]");
         super.onReceive(context, intent);
         mContext = context;
         this.appWidgetManager = AppWidgetManager.getInstance(context);
@@ -96,7 +109,7 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
 
         thisWidget = new ComponentName(context, WidgetThermometerAppProvider.class);
 
-        if(ACTION_UPDATE.equals(intent.getAction())){
+        if (ACTION_UPDATE.equals(intent.getAction())) {
             Log.i(TAG, "CLICK UPDATE - START");
             refreshWeather(getWeatherUrl(context));
         }
@@ -104,6 +117,7 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
 
     @Override
     public void onAppWidgetOptionsChanged(Context context, AppWidgetManager appWidgetManager, int appWidgetId, Bundle newOptions) {
+        Log.i(TAG, "onAppWidgetOptionsChanged[" + appWidgetId + "]");
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions);
         this.mContext = context;
         this.appWidgetId = appWidgetId;
@@ -118,18 +132,20 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
 
     @Override
     public void onEnabled(Context context) {
+        Log.i(TAG, "onEnabled");
         // Enter relevant functionality for when the first widget is created
     }
 
     @Override
     public void onDisabled(Context context) {
+        Log.i(TAG, "onDisabled");
         // Enter relevant functionality for when the last widget is disabled
     }
 
     private String getWeatherUrl(Context context) {
         String defUrl, url;
         SharedPreferences pref = context.getSharedPreferences(App.PREF_APP, Context.MODE_PRIVATE);
-        if(Locale.getDefault().getLanguage().equals(App.LANG_UA)){
+        if (Locale.getDefault().getLanguage().equals(App.LANG_UA)) {
             defUrl = App.DEFAULT_URL_UA;
         } else {
             defUrl = App.DEFAULT_URL_RU;
@@ -160,7 +176,8 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
             try {
                 views.setViewVisibility(R.id.pb_load, ProgressBar.VISIBLE);
                 appWidgetManager.updateAppWidget(thisWidget, views);
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
         }
 
         @Override
@@ -170,8 +187,8 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
             boolean isGet = false;
             do {
                 response = Tools.getWebPage(urls[0]);
-                if(response != null){
-                    if(response.length() != 0){
+                if (response != null) {
+                    if (response.length() != 0) {
                         isGet = true;
                     }
                 }
@@ -187,7 +204,7 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
 
         @Override
         protected void onPostExecute(WeatherStruct response) {
-            if(response != null) {
+            if (response != null) {
                 Log.i(TAG, "onPostExecute()");
                 if (pref == null) {
                     pref = mContext.getSharedPreferences(App.PREF_APP, 0);
@@ -195,11 +212,11 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
                 pref.edit().putString(App.PREF_LAST_DATE_UPDATE_FULL,
                         dateFullFirmat.format(new Date())).apply();
 
-                if (response.getWeatherToday() != null)
-                    views.setTextViewText(R.id.tv_now_weather, Html.fromHtml(response.getWeatherToday()));
                 if (response.getWeatherToday() != null
-                        && Html.fromHtml(response.getWeatherToday()).length() > 4) {
+                        && Html.fromHtml(response.getWeatherToday()).length() > 0) {
+                    views.setTextViewText(R.id.tv_now_weather, Html.fromHtml(response.getWeatherToday()));
                     views.setFloat(R.id.tv_now_weather, "setTextSize", SinoptikApplication.getScaledSize(18f));
+                    views.setInt(R.id.tv_now_weather, "setTextColor", pref.getInt(App.PREF_TEXT_WIDGET_COLOR, Color.WHITE));
                 }
                 Bitmap image = getBitmapThermometer(response);
                 if (image != null) {
@@ -220,12 +237,12 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
         int newHeight = appWidgetManager.getAppWidgetOptions(appWidgetId)
                 .getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT);
 
-        if(HEIGHT < newHeight)
+        if (HEIGHT < newHeight)
             HEIGHT = newHeight * 2 + newHeight / 2;
 
         ThermometerView thermometer = new ThermometerView(mContext);
         thermometer.setTextSize(SinoptikApplication.getScaledSize(22f));
-        thermometer.setColorText(Color.WHITE);
+        thermometer.setColorText(pref.getInt(App.PREF_TEXT_WIDGET_COLOR, Color.WHITE));
         thermometer.setShowSubPoint(true);
         thermometer.measure(WIDTH, HEIGHT);
         thermometer.layout(0, 0, WIDTH, HEIGHT);
@@ -239,13 +256,14 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
 
         try {
             int cursorDegrees = response.getWeatherToday().indexOf("&");
-            String textDegrees = response.getWeatherToday().substring(0, cursorDegrees).replace("+","");
+            String textDegrees = response.getWeatherToday().substring(0, cursorDegrees).replace("+", "");
             int degreesNow = Integer.parseInt(textDegrees);
 
-            data.putExtra(ThermometerView.Key.CURRENT_TEMP, (float)degreesNow);
+            data.putExtra(ThermometerView.Key.CURRENT_TEMP, (float) degreesNow);
             data.putExtra(ThermometerView.Key.MAX_TEMP, App.Thermometer.MAX);
             data.putExtra(ThermometerView.Key.MIN_TEMP, App.Thermometer.MIN);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
         return data;
     }
