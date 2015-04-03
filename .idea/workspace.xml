@@ -72,20 +72,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/Views/AlphaPatternDrawable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/Views/ColorPickerDialog.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/Views/ColorPickerPanelView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/Views/ColorPickerPreference.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/Views/ColorPickerView.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/WidgetConfigActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/activity_widget_config.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/dialog_color_picker.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/values-w820dp/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/constants/App.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/constants/App.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/xml/widget_thermometer_app_provider_info.xml" afterPath="$PROJECT_DIR$/res/xml/widget_thermometer_app_provider_info.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="weather_sinoptik_app.iws" />
@@ -117,8 +104,8 @@
       <file leaf-file-name="WidgetThermometerAppProvider.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.8747017" vertical-offset="3378" max-vertical-offset="4216">
-              <caret line="88" column="116" selection-start-line="88" selection-start-column="116" selection-end-line="88" selection-end-column="116" />
+            <state vertical-scroll-proportion="0.20047733" vertical-offset="1039" max-vertical-offset="4216">
+              <caret line="102" column="29" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -2738,7 +2725,7 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32146958" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32762557" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272101" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3834673" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32918552" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -3211,8 +3198,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.8747017" vertical-offset="3378" max-vertical-offset="4216">
-          <caret line="88" column="116" selection-start-line="88" selection-start-column="116" selection-end-line="88" selection-end-column="116" />
+        <state vertical-scroll-proportion="0.20047733" vertical-offset="1039" max-vertical-offset="4216">
+          <caret line="102" column="29" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
           <folding />
         </state>
       </provider>

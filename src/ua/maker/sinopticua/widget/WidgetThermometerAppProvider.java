@@ -65,7 +65,7 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        Log.i(TAG, "onUpdate [" + String.valueOf(appWidgetIds) + "]");
+        Log.i(TAG, "onUpdate ");
         // There may be multiple widgets active, so update all of them
         this.appWidgetManager = appWidgetManager;
         mContext = context;
@@ -100,7 +100,7 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(TAG, "onReceive [" + (intent!=null?intent.getExtras().toString():"") + "]");
+        Log.i(TAG, "onReceive");
         super.onReceive(context, intent);
         mContext = context;
         this.appWidgetManager = AppWidgetManager.getInstance(context);
