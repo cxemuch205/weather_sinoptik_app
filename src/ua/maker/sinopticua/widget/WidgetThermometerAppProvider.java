@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import java.util.Locale;
 
 import ua.maker.sinopticua.HomeActivity;
 import ua.maker.sinopticua.R;
+import ua.maker.sinopticua.SinoptikApplication;
 import ua.maker.sinopticua.constants.App;
 import ua.maker.sinopticua.models.PageHTML;
 import ua.maker.sinopticua.models.WeatherStruct;
@@ -197,7 +199,7 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
                     views.setTextViewText(R.id.tv_now_weather, Html.fromHtml(response.getWeatherToday()));
                 if (response.getWeatherToday() != null
                         && Html.fromHtml(response.getWeatherToday()).length() > 4) {
-                    views.setFloat(R.id.tv_now_weather, "setTextSize", 18);
+                    views.setFloat(R.id.tv_now_weather, "setTextSize", SinoptikApplication.getScaledSize(18f));
                 }
                 Bitmap image = getBitmapThermometer(response);
                 if (image != null) {
@@ -222,7 +224,8 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
             HEIGHT = newHeight * 2 + newHeight / 2;
 
         ThermometerView thermometer = new ThermometerView(mContext);
-        thermometer.setTextSize(22f);
+        thermometer.setTextSize(SinoptikApplication.getScaledSize(22f));
+        thermometer.setColorText(Color.WHITE);
         thermometer.setShowSubPoint(true);
         thermometer.measure(WIDTH, HEIGHT);
         thermometer.layout(0, 0, WIDTH, HEIGHT);
