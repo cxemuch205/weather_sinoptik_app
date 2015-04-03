@@ -215,7 +215,11 @@ public class ThermometerView extends View {
         int startY = calculateTemperature(height - center - h);
         startY += h;
 
-        mPaintCircle.setColor(Color.RED);
+        if (curTemp < 0) {
+            mPaintCircle.setColor(colorMercuryCold);
+        } else {
+            mPaintCircle.setColor(colorMercury);
+        }
         canvas.drawLine(startX, startY, stopX, stopY, mPaintBar);
         canvas.drawCircle(startX, startY, (stroke / 2), mPaintCircle);
 
