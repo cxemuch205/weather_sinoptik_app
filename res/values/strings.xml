@@ -32,5 +32,8 @@
     <string name="color_text">Цвет текста:</string>
     <string name="press_color_to_apply">Нажмите для выбора</string>
     <string name="dialog_color_picker">Выбор цвета</string>
+    <string name="min_value">Мин. знач. шкалы:</string>
+    <string name="max_value">Мкс. знач. шкалы:</string>
+    <string name="enable_sub_point">Включить промежуточные значения на шкале.</string>
 
 </resources>

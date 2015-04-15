@@ -243,7 +243,7 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
         ThermometerView thermometer = new ThermometerView(mContext);
         thermometer.setTextSize(SinoptikApplication.getScaledSize(22f));
         thermometer.setColorText(pref.getInt(App.PREF_TEXT_WIDGET_COLOR, Color.WHITE));
-        thermometer.setShowSubPoint(true);
+        thermometer.setShowSubPoint(pref.getBoolean(App.PREF_ENABLE_SUB_POINT, true));
         thermometer.measure(WIDTH, HEIGHT);
         thermometer.layout(0, 0, WIDTH, HEIGHT);
         thermometer.setDrawingCacheEnabled(true);
@@ -260,8 +260,8 @@ public class WidgetThermometerAppProvider extends AppWidgetProvider {
             int degreesNow = Integer.parseInt(textDegrees);
 
             data.putExtra(ThermometerView.Key.CURRENT_TEMP, (float) degreesNow);
-            data.putExtra(ThermometerView.Key.MAX_TEMP, App.Thermometer.MAX);
-            data.putExtra(ThermometerView.Key.MIN_TEMP, App.Thermometer.MIN);
+            data.putExtra(ThermometerView.Key.MAX_TEMP, (float)pref.getInt(App.PREF_MAX_VALUE_THERMOMETER, (int)App.Thermometer.MAX));
+            data.putExtra(ThermometerView.Key.MIN_TEMP, (float)pref.getInt(App.PREF_MIN_VALUE_THERMOMETER, (int)App.Thermometer.MIN));
         } catch (Exception e) {
         }
 
