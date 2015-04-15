@@ -71,14 +71,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: ua.maker.sinopticua" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/constants/App.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/constants/App.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/WidgetConfigActivity.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/WidgetConfigActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" afterPath="$PROJECT_DIR$/src/ua/maker/sinopticua/widget/WidgetThermometerAppProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_widget_config.xml" afterPath="$PROJECT_DIR$/res/layout/activity_widget_config.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="e24f9256-93d1-4087-bec7-fda9807631ab" name="Default" comment="" />
     <ignored path="weather_sinoptik_app.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
