@@ -62,6 +62,9 @@ public class WidgetConfigActivity extends ActionBarActivity {
         prefs = getSharedPreferences(App.PREF_APP, Context.MODE_PRIVATE);
 
         cpvTextColor.setColor(prefs.getInt(App.PREF_TEXT_WIDGET_COLOR, Color.BLACK));
+        etMaxValue.setText(String.valueOf(prefs.getInt(App.PREF_MAX_VALUE_THERMOMETER, (int) App.Thermometer.MAX)));
+        etMinValue.setText(String.valueOf(prefs.getInt(App.PREF_MIN_VALUE_THERMOMETER, (int)App.Thermometer.MIN)));
+        cbEnableSubPoint.setChecked(prefs.getBoolean(App.PREF_ENABLE_SUB_POINT, true));
 
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
